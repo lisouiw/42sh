@@ -1,0 +1,7 @@
+objs/*
+libft/objs/*
+a.out
+42sh
+42sh.dSYM
+42sh.dSYM/*
+libft/libft.a
