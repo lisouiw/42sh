@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:17:26 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 17:50:59 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/05 19:13:54 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	end_pipe(t_cmd **ex, t_exec **s, int pp)
 {
 	int		status;
 
-	signal(SIGCHLD, SIG_DFL);
 	if (pp == 0)
 	{
-		waitpid(-1, &status, 0);
+		signal(SIGCHLD, SIG_DFL);
+		waitpid(0, &status, WNOHANG);
 		(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
-		wait(NULL);
+		printf("%i\n",wait(NULL));
 	}
 	close((*s)->p[1]);
 	dup2(1, (*s)->out);
@@ -47,21 +47,23 @@ int		pipe_on(t_cmd *ex)
 	return (0);
 }
 
-void	pipe_exec(t_exec *s, t_cmd **ex, t_env *env, int pp)
+void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 {
-	dup2(s->in, 0);
+	dup2((*s)->in, 0);
 	if (pp)
-		dup2(s->p[1], 1);
-	close(s->p[0]);
+	{
+		dup2((*s)->p[1], 1);
+	}
+	close((*s)->p[0]);
 	if ((*ex)->type >= 6 && (*ex)->type <= 11)
 	{
-		redirection_no_cmd(ex, &env, &(*s));
+		redirection_no_cmd(ex, &env, *s);
 		exit(0);
 	}
 	else if ((*ex)->next->type >= 6 && (*ex)->next->type <= 11)
-		redirection(ex, &env, &(*s));
+		redirection(ex, &env, *s);
 	else if ((*ex)->type == 0)
-		env = exec_fct_nf(ft_strsplit((*ex)->cmd, ' '), env, ex, s);
+		env = exec_fct_nf(ft_strsplit((*ex)->cmd, ' '), env, ex, *s);
 }
 
 t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
@@ -73,7 +75,6 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 	i = 0;
 	pp = 1;
 	s->in = 0;
-	signal(SIGCHLD, SIG_DFL);
 	while (pp == 1)
 	{
 		s->out = dup(1);
@@ -86,9 +87,10 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 		else if ((pid = fork()) == -1)
 			exit(-1);
 		else if (pid == 0)
-			pipe_exec(s, ex, env, pp);
+			pipe_exec(&s, ex, env, pp);
 		else
 			end_pipe(&(*ex), &s, pp);
 	}
+	wait(NULL);
 	return (env);
 }

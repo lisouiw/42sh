@@ -1,5 +1,5 @@
 
-NAME = 21sh
+NAME = 42sh
 
 CC = gcc
 

@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 17:27:01 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/05 16:47:00 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ int					give_paste_in(t_edit **ed);
 char				*keep_paste(t_edit **ed, char *s);
 void				end_pipe(t_cmd **ex, t_exec **s, int pp);
 int					pipe_on(t_cmd *ex);
-void				pipe_exec(t_exec *s, t_cmd **ex, t_env *env, int pp);
+// void				pipe_exec(t_exec *s, t_cmd **ex, t_env *env, int pp);
 t_env				*pipe_fct(t_exec *s, t_cmd **ex, t_env *env);
 int					ft_put(int c);
 void				my_tputs(t_edit *ed, t_froz *g_fz);
@@ -274,4 +274,18 @@ t_env				*launchcmd(t_cmd *ex, t_env *env);
 t_froz				*init_fz(t_froz *fz);
 void				free_init_fz(t_froz *fz);
 
+
+
+
+
+void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp);
+
+
+
+
+void	sig_int4(int sig);
+
+void    print_here(t_froz *fz);
+void    print_ex(t_cmd *ex);
+void    print_ex_up(t_cmd *ex);
 #endif

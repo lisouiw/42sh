@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:31:51 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 16:09:26 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/05 16:42:43 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void	ecriture_info(t_env *lst)
 		return ;
 	while (lst->next != NULL)
 	{
-		ft_putstr(lst->name);
-		ft_putendl(lst->ctn);
+		ft_putstr_fd(lst->name, 1);
+		ft_putendl_fd(lst->ctn, 1);
 		lst = lst->next;
 	}
-	ft_putstr(lst->name);
-	ft_putendl(lst->ctn);
+	ft_putstr_fd(lst->name, 1);
+	ft_putendl_fd(lst->ctn, 1);
 }
 
 int		white_space(char *s)

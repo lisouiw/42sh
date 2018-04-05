@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:27:15 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 17:16:44 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/05 18:45:57 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,26 @@ void	sig_int(int sig)
 	if (WIFSIGNALED(status) && WEXITSTATUS(status) == 0)
 		write(1, "\n", 1);
 	else
-		exit(0);
+	{
+		write(1, "\r", 1);
+		init();
+		free_list(&g_env);
+		free_for_exit();
+		tputs(tgetstr("ce", NULL), 0, ft_put);
+		exit(1);
+	}
 	sig = 0;
 }
+
+void	sig_int4(int sig)
+{
+	sig =0;
+	// wait(0);
+	// kill(0, SIGINT);
+	printf("coucou %d\n", wait(NULL));
+	// sig_int4(wait(NULL));
+}
+
 
 void	sig_int3(int sig)
 {
