@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:22:04 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/06 15:44:54 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/06 15:49:48 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ int		parsing_dup_out(char *s, int n)
 	size_t	len;
 	int		fd;
 
-		// printf("%s && %i\n", s,n);
 	if ((len = isnumber_len(s)) + 1 == ft_strlen(s) && s[len] == '-')
 	{
 		s[len] = '\0';
-
-		// printf("%s && %i && %zu\n", s,n, len);
 		if (len > 0)
 		{
 			dup2(ft_atoi(s), n);
@@ -46,6 +43,7 @@ int		parsing_dup_in(char *s, int n)
 	if ((len = isnumber_len(s)) + 1 == ft_strlen(s) && s[len] == '-')
 	{
 		s[len] = '\0';
+		close(ft_atoi(s));
 		dup2(n, ft_atoi(s));
 		close(ft_atoi(s));
 	}
