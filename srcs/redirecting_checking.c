@@ -6,23 +6,22 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:22:04 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/03 23:01:20 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/06 15:19:58 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-int		parsing_dup_out(char *s, int n, t_cmd *ex)
+int		parsing_dup_out(char *s, int n)
 {
 	size_t	len;
 	int		fd;
 
-	if (ex)
-		;
 	if ((len = isnumber_len(s)) + 1 == ft_strlen(s) && s[len] == '-')
 	{
 		s[len] = '\0';
-		dup2(ft_atoi(s), n);
+		if (ft_strcmp(s, "\0") == 0)
+			dup2(ft_atoi(s), n);
 		close(n);
 	}
 	else
@@ -33,15 +32,14 @@ int		parsing_dup_out(char *s, int n, t_cmd *ex)
 	return (1);
 }
 
-int		parsing_dup_in(char *s, int n, t_cmd *ex)
+int		parsing_dup_in(char *s, int n)
 {
 	size_t	len;
 
-	if (ex)
-		;
 	if ((len = isnumber_len(s)) + 1 == ft_strlen(s) && s[len] == '-')
 	{
 		s[len] = '\0';
+		close(ft_atoi(s));
 		dup2(n, ft_atoi(s));
 		close(ft_atoi(s));
 	}
@@ -62,9 +60,9 @@ int		redirection_check_create(t_cmd *ex)
 		else if ((ex)->type == 7 && redirection_file_check(ex) == 0)
 			return (0);
 		else if (ex->type == 10)
-			aggregation_out(ft_strsplit(ex->cmd, ' '), ex);
+			aggregation_out(ft_strsplit(ex->cmd, ' '));
 		else if (ex->type == 11)
-			aggregation_in(ft_strsplit(ex->cmd, ' '), ex);
+			aggregation_in(ft_strsplit(ex->cmd, ' '));
 		ex = (ex)->next;
 	}
 	return (1);

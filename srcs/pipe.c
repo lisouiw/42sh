@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:17:26 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/05 19:13:54 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/06 14:40:31 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ void	end_pipe(t_cmd **ex, t_exec **s, int pp)
 		signal(SIGCHLD, SIG_DFL);
 		waitpid(0, &status, WNOHANG);
 		(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
-		printf("%i\n",wait(NULL));
 	}
 	close((*s)->p[1]);
 	dup2(1, (*s)->out);
-	dup2(0, (*s)->in);
+	// dup2(0, (*s)->in);
 	while ((*ex)->type != 3 && (*ex)->type != 4 && (*ex)->type != 5
 		&& (*ex)->type != 13 && (*ex)->type != 42)
 		*ex = (*ex)->next;

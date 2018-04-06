@@ -47,4 +47,4 @@ void    print_ex_up(t_cmd *ex)
     }
     printf("[%s]->[%i][%i]\n", ex->cmd, ex->type, ex->start);
     printf("----------------------------------\n");
-}%
+}

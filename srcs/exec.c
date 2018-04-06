@@ -6,17 +6,21 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:59:51 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/05 16:35:28 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/06 13:42:53 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
+
+
+//refaire bien les builtin et rajouter les s->ok  pour les 2 fct exec
 
 t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 {
 	if (ft_strcmp("echo", cut[0]) == 0)
 	{
 		print_tab(cut, 0);
+		s->ok = 1;
 		exit(0);
 	}
 	else if (ft_strcmp("env", cut[0]) == 0)
@@ -27,6 +31,7 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 	else if (ft_strcmp("setenv", cut[0]) == 0)
 	{
 		b_setenv(cut, env);
+		s->ok = 1;
 		exit(0);
 	}
 	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
@@ -54,11 +59,17 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 {
 	if (ft_strcmp("echo", cut[0]) == 0)
+	{
 		print_tab(cut, 0);
+		s->ok = 1;
+	}
 	else if (ft_strcmp("env", cut[0]) == 0)
 		builtin_env(cut, env, s);
 	else if (ft_strcmp("setenv", cut[0]) == 0)
+	{
 		b_setenv(cut, env);
+		s->ok = 1;
+	}
 	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
 		b_unset(cut, &env, 0);
 	else if (ft_strcmp("cd", cut[0]) == 0)

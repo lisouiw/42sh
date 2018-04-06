@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:09:16 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 15:32:14 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/06 14:22:39 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ int		parsing_op(char *s, t_cmd **ex, t_env *env, t_froz *fz)
 {
 	int		i;
 
+if(env)
+	;
+
 	i = 0;
 	while (s[i] && s[i] == ' ')
 		++i;
-	s = quote_variable(s, NULL, env);
+	// s = quote_variable(s, NULL, env);
 	*ex = separate_cmd(s, i, i, *ex);
+	// print_ex_up(*ex);
 	i = parse_type(ex);
 	*ex = parse_op_int(*ex, s);
 	if ((i = parse_synthaxe(*ex)) != 0)
@@ -29,7 +33,10 @@ int		parsing_op(char *s, t_cmd **ex, t_env *env, t_froz *fz)
 		return (i);
 	}
 	join_redirecting(ex);
+	
 	join_ex(ex);
+	print_ex_up(*ex);
+	
 	free(s);
 	return (add_delim(fz, *ex));
 }

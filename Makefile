@@ -15,7 +15,7 @@ parsing_varq.c parsing_varq_fct.c parsing_varq_tools.c \
 parsing_varq_rpl.c signal.c cd.c heredoc.c aggregation.c \
 error.c env2.c treatmt_here.c separate_cmd.c free2.c init2.c \
 join.c	parse_synthaxe.c tools2.c free_cut.c histo.c \
-add_doc_delim.c
+add_doc_delim.c print_outils.c
 
 SRC_N = $(addprefix $(SRCDIR)/, $(SRCS))
 

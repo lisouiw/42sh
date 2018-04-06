@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/05 16:47:00 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/06 15:08:45 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ struct s_edit		*g_ed;
 int					add_delim(t_froz *g_fz, t_cmd *ex);
 void				add_doc_s(t_froz *g_fz, char *s);
 int					add_doc(t_froz *g_fz, char *s);
-void				aggregation_out(char **t, t_cmd *ex);
-void				aggregation_in(char **t, t_cmd *ex);
+void				aggregation_out(char **t);
+void				aggregation_in(char **t);
 void				cd_prev(t_env **env, char *buf);
 void				cd_home(t_env **env, char *buf);
 void				cd_name(t_env **env, char *cd, char *user, char *buf);
@@ -226,8 +226,8 @@ void				save_init(t_edit *ed);
 void				put_prompt_init(t_froz **g_fz);
 void				put_prompt(t_froz *g_fz);
 int					giv_last(t_froz *g_fz);
-int					parsing_dup_out(char *s, int n, t_cmd *ex);
-int					parsing_dup_in(char *s, int n, t_cmd *ex);
+int					parsing_dup_out(char *s, int n);
+int					parsing_dup_in(char *s, int n);
 int					redirection_check_create(t_cmd *ex);
 void				redirection_file_create(t_cmd *ex);
 int					redirection_file_check(t_cmd *ex);
