@@ -6,23 +6,39 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:09:16 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/06 14:22:39 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/09 11:38:40 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-int		parsing_op(char *s, t_cmd **ex, t_env *env, t_froz *fz)
+char	*replace_nwl_spc(char *s)
 {
 	int		i;
+	int		q;
 
-if(env)
-	;
+	q = 0;
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] == 39 && q != 2)
+			q = (q == 1) ? 0 : 1;
+		else if (s[i] == 34 && q != 1)
+			q = (q == 2) ? 0 : 2;
+		else if (s[i] == '\n' && q == 0)
+			s[i] = ' ';
+	}
+	return (s);
+}
+
+int		parsing_op(char *s, t_cmd **ex, t_froz *fz)
+{
+	int		i;
 
 	i = 0;
 	while (s[i] && s[i] == ' ')
 		++i;
-	// s = quote_variable(s, NULL, env);
+	s = replace_nwl_spc(s);
 	*ex = separate_cmd(s, i, i, *ex);
 	// print_ex_up(*ex);
 	i = parse_type(ex);
@@ -33,10 +49,8 @@ if(env)
 		return (i);
 	}
 	join_redirecting(ex);
-	
 	join_ex(ex);
 	print_ex_up(*ex);
-	
 	free(s);
 	return (add_delim(fz, *ex));
 }
@@ -58,7 +72,7 @@ int		parsing_quote(char *s)
 	return (i);
 }
 
-int		parsing(t_edit *ed, t_froz *fz, t_cmd **ex, t_env *env)
+int		parsing(t_edit *ed, t_froz *fz, t_cmd **ex)
 {
 	*ex = init_ex(NULL);
 	if (fz->mode[3] == 6)
@@ -72,7 +86,7 @@ int		parsing(t_edit *ed, t_froz *fz, t_cmd **ex, t_env *env)
 		free_all_ex(ex);
 		return (0);
 	}
-	else if ((fz->mode[3] = parsing_op(ft_strdup(fz->cmd), ex, env, fz)))
+	else if ((fz->mode[3] = parsing_op(ft_strdup(fz->cmd), ex, fz)))
 	{
 		free_all_ex(&(*ex));
 		if (!(fz->mode[3] >= 0 && fz->mode[3] <= 6))

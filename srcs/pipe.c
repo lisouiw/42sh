@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:17:26 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/06 14:40:31 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/09 11:22:58 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 	else if ((*ex)->next->type >= 6 && (*ex)->next->type <= 11)
 		redirection(ex, &env, *s);
 	else if ((*ex)->type == 0)
-		env = exec_fct_nf(ft_strsplit((*ex)->cmd, ' '), env, ex, *s);
+		env = exec_fct_nf(ft_strsplit((*ex)->cmd, ' '), env, ex, *s);  //pasrsing_bonus
 }
 
 t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)

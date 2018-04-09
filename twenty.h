@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/06 15:08:45 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/09 11:38:59 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,22 +193,22 @@ t_cmd				*parse_pipe_or(t_cmd *ex);
 t_cmd				*giv_type(t_cmd *ex, char *s);
 t_cmd				*parse_op_int(t_cmd *ex, char *s);
 int					parse_type(t_cmd **ex);
-t_varq				*varq_simple_quote(char *s, int *i, t_varq *v);
-t_varq				*varq_double_quote(char *s, int *i, t_varq *v, t_env *env);
-t_varq				*varq_env(char *s, int *i, t_varq *v, t_env *env);
-int					move_to_put_varq(char *s, int i, int o);
-char				*change_w_varq(char *s, t_varq *v, int i, char *nw);
-char				*search_var_env(char *sub, t_env *env);
-char				*translate_dquote(char *s, t_env *env);
-void				free_varq(t_varq *v);
-t_varq				*add_struct_varq(char *s, t_varq *v);
-t_varq				*add_varq(char *s, int *i, t_varq *v, t_env *env);
-t_varq				*add_varq_loop(char *s, t_varq *v, t_env *env);
+// t_varq				*varq_simple_quote(char *s, int *i, t_varq *v);
+// t_varq				*varq_double_quote(char *s, int *i, t_varq *v, t_env *env);
+// t_varq				*varq_env(char *s, int *i, t_varq *v, t_env *env);
+// int					move_to_put_varq(char *s, int i, int o);
+// char				*change_w_varq(char *s, t_varq *v, int i, char *nw);
+// char				*search_var_env(char *sub, t_env *env);
+// char				*translate_dquote(char *s, t_env *env);
+// void				free_varq(t_varq *v);
+// t_varq				*add_struct_varq(char *s, t_varq *v);
+// t_varq				*add_varq(char *s, int *i, t_varq *v, t_env *env);
+// t_varq				*add_varq_loop(char *s, t_varq *v, t_env *env);
 char				*replace_nwl_spc(char *s);
-char				*quote_variable(char *s, t_varq *v, t_env *env);
-int					parsing_op(char *s, t_cmd **ex, t_env *env, t_froz *g_fz);
+// char				*quote_variable(char *s, t_varq *v, t_env *env);
+int					parsing_op(char *s, t_cmd **ex, t_froz *g_fz);
 int					parsing_quote(char *s);
-int					parsing(t_edit *ed, t_froz *g_fz, t_cmd **ex, t_env *env);
+int					parsing(t_edit *ed, t_froz *g_fz, t_cmd **ex);
 t_edit				*paste(t_edit *ed, t_froz **g_fz);
 t_edit				*copy(t_edit *ed, t_froz **g_fz);
 void				cut(t_edit **ed, t_froz **g_fz);
@@ -259,10 +259,8 @@ t_edit				*touch(t_edit **ed, t_froz **g_fz, t_his **hs);
 t_edit				*extern_touch(t_edit *ed, t_froz **g_fz, t_his **hs);
 t_edit				*giv_position(t_edit *ed, int i);
 t_edit				*left_right(t_edit *ed, t_froz *g_fz);
-int					parsing_op_here(char *s, t_cmd **ex, t_env *env,
-						t_froz *g_fz);
-int					parsing_here(t_edit *ed, t_froz *g_fz, t_cmd **ex,
-						t_env *env);
+int					parsing_op_here(char *s, t_cmd **ex, t_froz *g_fz);
+int					parsing_here(t_edit *ed, t_froz *g_fz, t_cmd **ex);
 t_env				*treat_cmd_here(t_env *env, t_edit **cmd, t_his **hs,
 						t_froz **g_fz);
 t_env				*treat_cmd(t_env *env, t_edit **cmd, t_his **hs,

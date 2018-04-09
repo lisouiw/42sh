@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:36:32 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/06 19:11:22 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/09 11:39:15 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_env	*treat_cmd(t_env *env, t_edit **cmd, t_his **hs, t_froz **fz)
 	if ((*fz)->mode[3] != 6 && ((*cmd)->c[0] == '\0' || (if_only_i(ed_str(*cmd,
 		NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))) && (*fz)->cmd == NULL)
 		return (env);
-	else if (parsing(*cmd, *fz, &ex, env) == 1)
+	else if (parsing(*cmd, *fz, &ex) == 1)
 	{
 		add_his(hs, NULL, *fz);
 		env = launchcmd(ex, env);
@@ -62,23 +62,11 @@ void	add_his(t_his **hs, t_his *nw, t_froz *fz)
 	*hs = (*hs)->next;
 }
 
-void	redirection_no_cmd(t_cmd **ex, t_env **env, t_exec *s)
-{
-	s->in = dup(0);
-	s->out = dup(1);
-	if (redirection_check_create(*ex))
-		redirecting_exec(ex, env, NULL, s);
-	dup2(s->out, 1);
-	dup2(s->in, 0);
-	while ((*ex)->type >= 6 && (*ex)->type <= 11)
-		*ex = (*ex)->next;
-}
-
 t_env	*exec_fct_re(t_cmd **ex, t_env *env, t_exec *s)
 {
 	char	**arr;
 
-	arr = ft_strsplit((*ex)->cmd, ' ');
+	arr = ft_strsplit((*ex)->cmd, ' ');  //pasrsing_bonus
 	env = exec_fct(arr, env, s);
 	free_tab(arr);
 	*ex = (*ex)->next;

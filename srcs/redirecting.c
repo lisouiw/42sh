@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:25:25 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 11:42:40 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/09 11:22:37 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	redirection(t_cmd **ex, t_env **env, t_exec *s)
 {
 	char	**arr;
 
-	arr = ft_strsplit((*ex)->cmd, ' ');
+	arr = ft_strsplit((*ex)->cmd, ' '); //pasrsing_bonus
 	*ex = (*ex)->next;
 	if (redirection_check_create(*ex))
 		redirecting_exec(ex, env, arr, s);
@@ -38,7 +38,7 @@ void	redirection_fork(t_cmd **ex, t_env **env, t_exec *s)
 
 	s->in = dup(0);
 	s->out = dup(1);
-	arr = ft_strsplit((*ex)->cmd, ' ');
+	arr = ft_strsplit((*ex)->cmd, ' '); //pasrsing_bonus
 	*ex = (*ex)->next;
 	if ((pid = fork()) == -1)
 		exit(EXIT_FAILURE);
@@ -55,6 +55,19 @@ void	redirection_fork(t_cmd **ex, t_env **env, t_exec *s)
 		s->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
 	}
 	free_tab(arr);
+	while ((*ex)->type >= 6 && (*ex)->type <= 11)
+		*ex = (*ex)->next;
+}
+
+void	redirection_no_cmd(t_cmd **ex, t_env **env, t_exec *s)
+{
+	s->in = dup(0);
+	s->out = dup(1);
+	 //pasrsing_bonus
+	if (redirection_check_create(*ex))
+		redirecting_exec(ex, env, NULL, s);
+	dup2(s->out, 1);
+	dup2(s->in, 0);
 	while ((*ex)->type >= 6 && (*ex)->type <= 11)
 		*ex = (*ex)->next;
 }

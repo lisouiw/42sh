@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:08:03 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 13:20:17 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/09 11:35:38 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,24 @@ t_varq	*add_varq_loop(char *s, t_varq *v, t_env *env)
 	return (v);
 }
 
-char	*replace_nwl_spc(char *s)
-{
-	int		i;
-	int		q;
+// char	*replace_nwl_spc(char *s)
+// {
+// 	int		i;
+// 	int		q;
 
-	q = 0;
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == 39 && q != 2)
-			q = (q == 1) ? 0 : 1;
-		else if (s[i] == 34 && q != 1)
-			q = (q == 2) ? 0 : 2;
-		else if (s[i] == '\n' && q == 0)
-			s[i] = ' ';
-	}
-	return (s);
-}
+// 	q = 0;
+// 	i = -1;
+// 	while (s[++i])
+// 	{
+// 		if (s[i] == 39 && q != 2)
+// 			q = (q == 1) ? 0 : 1;
+// 		else if (s[i] == 34 && q != 1)
+// 			q = (q == 2) ? 0 : 2;
+// 		else if (s[i] == '\n' && q == 0)
+// 			s[i] = ' ';
+// 	}
+// 	return (s);
+// }
 
 char	*quote_variable(char *s, t_varq *v, t_env *env)
 {
