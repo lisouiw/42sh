@@ -6,7 +6,7 @@
 #    By: ltran <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/12 16:38:09 by ltran             #+#    #+#              #
-#    Updated: 2017/06/23 16:05:02 by ltran            ###   ########.fr        #
+#    Updated: 2018/04/10 16:13:30 by mallard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #
@@ -29,7 +29,7 @@ SRCS_N =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_strjoin_free.c \
 			ft_putstr_col.c ft_put_rainbow.c ft_lstnew.c ft_lstdelone.c \
 			ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lign_len.c \
-			ft_column_len.c ft_isspace.c get_next_line.c
+			ft_column_len.c ft_isspace.c get_next_line.c ft_ltoa.c ft_llen.c
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRCS_N))
 
