@@ -6,26 +6,34 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 01:49:32 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/02 14:23:20 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/10 17:05:08 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../twenty.h"
 
-void	error_op(int error, char *var, long int x)
+void	error_str(char *error, char *var)
+{
+	ft_putstr_fd("42sh: ", 2);
+	ft_putstr_fd(error, 2);
+	ft_putendl_fd(var, 2);
+}
+
+void	error_op(int error, char *var, long int x, t_op *op)
 {
 	if (error == 1)
-		ft_fprintf(2, "42sh: bad math expression: operator expected at `%s'\n", var);
+		error_str("bad math expression: operator expected at", var);
 	else if (error == 2)
-		ft_fprintf(2, "42sh: bad math expression: lvalue required\n");
+		ft_putstr_fd("42sh: bad math expression: lvalue required\n", 2);
 	else if (error == 3)
-		ft_fprintf(2, "42sh: bad math expression: operand expected at end of string\n");
+		ft_putstr_fd("42sh: bad math expression: operand expected at end of string\n", 2);
 	else if (error == 4)
-		ft_fprintf(2, "42sh: bad math expression: operand expected at `%s'\n", var);
+		error_str("bad math expression: operand expected at", var);
 	else if (error == 5)
-		ft_fprintf(2, "42sh: division by zero\n");
+		ft_putstr_fd("42sh: division by zero\n", 2);
 	else if (error == 6)
-		ft_fprintf(2, "number truncated after 11 digits: %ld\n", x);
+		printf("number truncated after 19 digits: %ld\n", x);
+		op->priority = -1;
 }
 
 long	ft_atol(const char *str)
@@ -62,7 +70,7 @@ int		ft_isnumber(int c)
 	return (c >= '0' && c <= '9') ? 1 : 0;
 }
 
-int		ft_isspace(int c)
+int		ft_space(int c)
 {
 	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || \
 			c == '\r' ||c == ' ') ? 1 : 0;
@@ -110,7 +118,7 @@ int		check_var(char *var, int *error)
 	op = 0;
 	while (var[i])
 	{
-		if (!ft_isop(var[i]) && !ft_isnumber(var[i]) && !ft_isspace(var[i]) \
+		if (!ft_isop(var[i]) && !ft_isnumber(var[i]) && !ft_space(var[i]) \
 				&& var[i] != '(' && var[i] != ')')
 		{
 			*error = 1;
@@ -204,8 +212,8 @@ int     add_op(t_op **op, char *tmp, int *i, int vip)
 
 	a = (ft_isop(tmp[*i])) ? *i + 1: *i;
 	x = ft_atol(tmp + *i);
-	if (ft_llen(x) > 11)
-		error_op(6, NULL, x);
+	if (ft_llen(x) > 19)
+		error_op(6, NULL, x, *op);
 	while (tmp[a] && !ft_isop(tmp[a]))
 		a++;
 	if (tmp[a] == '*' && tmp[a + 1] == '*')
@@ -305,10 +313,9 @@ int     op_priority(t_op *op, int priority)
 	return (0);
 }
 
-int		calculator(char *var, t_token *tok)
+t_op		*calculator(char *var)
 {
 	int		i;
-	char	*tmp;
 	int		error;
 	t_op	*op;
 	int		vip;
@@ -318,32 +325,33 @@ int		calculator(char *var, t_token *tok)
 	i = check_var(var, &error);
 	if (i != -1)
 	{
-		error_op(error, var + i, 0);
-		return (-1);
+		error_op(error, var + i, 0, op);
+		return (op);
 	}
 	if (var[0] == '\0')
-		tok->str = ft_strnjoinfree(tok->str, "0", 1);
+		return (0);
 	else
 	{
+		op = NULL;
 		op = op_list(var, 0);
 		if (op == NULL)
-			return (-1);
+		{
+			op = op_new(0, '-', -1);
+			return (op);
+		}
 		vip = check_priority(op);
 		error = check_list(&op);
 		if (error != 0)
 		{
-			error_op(error, var, 0);
-			return (-1);
+			error_op(error, var, 0, op);
+			return (op);
 		}
 		while (vip >= 0)
 		{
 			op_priority(op, vip);
 			vip--;
 		}
-		tmp = ft_strjoin(tok->str, ft_ltoa(op->x));
-		free(tok->str);
-		tok->str = tmp;
-		return (ft_intlen(op->x));
+		return (op);
 	}
-	return (0);
+	return (NULL);
 }

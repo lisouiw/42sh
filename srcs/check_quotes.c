@@ -6,31 +6,47 @@
 /*   By: ybensimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 04:40:31 by ybensimo          #+#    #+#             */
-/*   Updated: 2018/02/21 02:32:47 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/11 17:06:23 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../twenty.h"
 
-void		cat_lines(t_sh *sh, int n)
+static char *get_var(char *str, char c, int *j)
 {
-	char	*tmp;
+	char    *var;
+	int     i;
+	int     safe;
 
-	if (n == 2)
+	i = 0;
+	if ((var = ft_memalloc(ft_strlen(str))) == NULL)
+		exit(1);
+	if (c == 0)
 	{
-		sh->curline[sh->linelen - 1] = '\0';
-		tmp = ft_sprintf("%s%s", sh->completeline, sh->curline);
+		while (str[i] && str[i] != ' ' && str[i] != '\v' && str[i] != '\t')
+		{
+			var[i] = str[i];
+			i++;
+		}
+		var[i] = '\0';
 	}
-	else if (n == 1)
-		tmp = ft_sprintf("%s%s\n", sh->completeline, sh->curline);
 	else
-		tmp = ft_sprintf("%s%s", sh->completeline, sh->curline);
-	free(sh->completeline);
-	sh->completeline = tmp;
-	free(sh->curline);
-	sh->curline = NULL;
-	//	sh->completeline = ft_strdup(tmp);
-	//	free(tmp);
+	{
+		i++;
+		safe = 0;
+		if (str[i] && str[i] != c)
+		{
+			while (str[i] && str[i] != c)
+			{
+				var[safe++] = str[i];
+				i++;
+			}
+			var[safe] = '\0';
+		}
+
+	}
+	*j = i;
+	return (var);
 }
 
 static int	insert(char *curline, int i)
@@ -75,136 +91,126 @@ static int	insert(char *curline, int i)
 	return (0);
 }
 
-static int	loopy_loop(t_sh *sh)
+int		check_quote(char *cmd, char c, int i)
 {
-	int		i;
 	int		j;
 
-	i = 0;
-	while (sh->curline[i])
+	j = i + 1;
+	while (cmd[i] && cmd[i] != c)
+		i++;
+	if (!cmd[i])
 	{
-		if (sh->curline[i] == '$' && !sh->isinsquote)
+		ft_putstr_fd("42sh: lacking closing )\n", 2);
+		return (-1);
+	}
+	if (insert(cmd, j) == -1)
+	{
+		ft_putstr_fd("42sh: ", 2);
+		ft_putstr_fd(cmd + j - 2, 2);
+		ft_putstr_fd(": bad substitution\n", 2);
+		return (-1);
+	}
+	return (i);
+}
+
+char	*find_variable(char *var, t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	var = ft_strjoin(var, "=");
+	while (tmp->next)
+	{
+		if (!ft_strcmp(var, tmp->name))
+			return (tmp->ctn);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+char	*charsub(char *var, char **cmd, int i, int j)
+{
+	char		*tmp;
+
+	tmp = ft_strsub(*cmd, 0, i);
+	tmp = ft_strjoin(tmp, var);
+	tmp = ft_strjoin(tmp, ft_strsub(*cmd, j, ft_strlen(tmp) - j));
+	return (tmp);
+}
+
+int		pls(t_env *env, char **cmd, int i, char c)
+{
+	int		k;
+	char	*var;
+	int		j;
+
+	if (c != ' ')
+	{
+		i++;
+		if ((k = check_quote(*cmd, c, i)) == -1)
+			return (-1);
+	}
+	var = get_var(*cmd + i, c, &j);
+	var = find_variable(var, env);
+	if (!var)
+	{
+		ft_putstr_fd("42sh: bad substitution\n", 2);
+		return (-1);
+	}
+	j = (c == ' ') ? j + i : j;
+	*cmd = charsub(var, cmd, i, j);
+	return (k);
+}
+
+int	loopy_loop(char **str, t_env *env)
+{
+	int		i;
+	int		squote;
+	int		dquote;
+	int		j;
+	t_op	*op;
+	char	*var;
+	char	*cmd;
+
+	cmd = *str;
+	i = 0;
+	squote = 0;
+	dquote = 0;
+	j = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '\'')
+			squote = (squote == 1) ? 0 : 1;
+		else if (cmd[i] == '"')
+			dquote = (dquote == 1) ? 0 : 1;
+		if (cmd[i] == '$' && !squote)
 		{
-			if (sh->curline[i + 1] && sh->curline[i + 1] == '{')
+			if (cmd[i + 1] && cmd[i + 1] == '[')
 			{
-				j = i + 1;
-				while (sh->curline[i] && sh->curline[i] != '}')
-					i++;
-				if (!sh->curline[i])
-				{
-					ft_fprintf(2, "42sh: lacking closing }\n");
-					clean_lines(sh);
+				if (check_quote(cmd, ']', i) == -1)
 					return (-1);
-				}
-				if (insert(sh->curline, j) == -1)
-				{
-					ft_fprintf(2, "42sh: %s: bad substitution\n", sh->curline + j - 1);
-					clean_lines(sh);
-					return (-1);
-				}
+				var = get_var(cmd + 1, ']', &j);
+				op = calculator(var);
+				if (op->priority != -1)
+					charsub(ft_ltoa(op->x), &cmd, i, j);
 			}
-			else if (sh->curline[i + 1] && sh->curline[i + 1] == '(')
-			{
-				j = i + 1;
-				while (sh->curline[i] && sh->curline[i] != ')')
-					i++;
-				if (!sh->curline[i])
-				{
-					ft_fprintf(2, "42sh: lacking closing )\n");
-					clean_lines(sh);
-					return (-1);
-				}
-				if (insert(sh->curline, j) == -1)
-				{
-					ft_fprintf(2, "42sh: %s: bad substitution\n", sh->curline + j - 2);
-					clean_lines(sh);
-					return (-1);
-				}
-			}
-			else if (sh->curline[i + 1] && sh->curline[i + 1] == '[')
-			{
-				j = i + 1;
-				while (sh->curline[i] && sh->curline[i] != ']')
-					i++;
-				if (!sh->curline[i])
-				{
-					ft_fprintf(2, "42sh: lacking closing [\n");
-					clean_lines(sh);
-					return (-1);
-				}
-				if (insert(sh->curline, j) == -1)
-				{
-					ft_fprintf(2, "42sh: %s: bad substitution\n", sh->curline + j - 2);
-					clean_lines(sh);
-					return (-1);
-				}
-			}
+			else if (cmd[i + 1] && cmd[i + 1] == '{')
+				j = pls(env, &cmd, i, '}');
+			else if (cmd[i + 1] && cmd[i + 1] == '(')
+				j = pls(env, &cmd, i, ')');
+			else
+				j = pls(env, &cmd, i , ' ');
+			if (j == -1)
+				return (-1);
+			i = j;
 		}
-		else if (sh->curline[i] == '\'' && !sh->isindquote)
-			sh->isinsquote = (sh->isinsquote ? 0 : 1);
-		else if (sh->curline[i] == '"' && !sh->isinsquote)
-			sh->isindquote = (sh->isindquote ? 0 : 1);
-		else if (sh->curline[i] == '\\' && !sh->isinsquote)
+		else if (cmd[i] == '\\' && !squote)
 		{
-			if (sh->curline[i + 1])
+			if (cmd[i + 1])
 				i++;
 		}
 		i++;
 	}
+	*str = cmd;
 	return (i);
-}
-/*
-   void		rm_bslash(t_sh *sh)
-   {
-   char	*new;
-
-   new = ft_strndup(sh->completeline, ft_strlen(sh->completeline) - 1);
-   free(sh->completeline);
-   sh->completeline = new;
-   }
-   */
-void		check_quotes(t_sh *sh)
-{
-	int		i;
-
-	//	cat_lines(sh);
-	//	loopy_loop(sh);
-	if ((i = loopy_loop(sh)) != -1)
-	{
-		if (sh->isindquote)
-		{
-			cat_lines(sh, 1);
-			ft_dquote(sh);
-		}
-		else if (sh->isinsquote)
-		{
-			cat_lines(sh, 1);
-			ft_squote(sh);
-		}
-		else if (((i - 1 >= 0) && (sh->curline[i - 1] == '\\')) || (!ft_strcmp(sh->completeline, "\\\n") && !sh->isbslash))
-		{
-			cat_lines(sh, 2);
-			//		rm_bslash(sh);
-			sh->isbslash = 1;
-			ft_bslash(sh);
-		}
-		else if (ft_strlen(sh->completeline) > 1 || ft_strlen(sh->curline) > 1)
-		{
-			cat_lines(sh, 0);
-			//			if (tcsetattr(0, TCSANOW, &sh->origin) < 0)
-			//			{
-			//				ft_fprintf(sh->ttfd, "42sh: an error occured with the termcaps.\n");
-			//				clean_exit(sh);
-			//			}
-			split_semi_colon(sh);
-		}
-		else
-		{
-			clean_lines(sh);
-			//	free(sh->curline);
-			//	sh->curline = NULL;
-			//	free(sh->completeline);
-			//	sh->completeline = NULL;
-		}
-	}
 }
