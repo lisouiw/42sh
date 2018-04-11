@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/09 11:38:59 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/11 13:35:30 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+
+typedef struct			s_op
+{
+	long 				x;
+	int					priority;
+	char				op;
+	struct s_op			*next;
+}						t_op;
 
 typedef struct		s_num
 {
@@ -273,9 +281,6 @@ t_froz				*init_fz(t_froz *fz);
 void				free_init_fz(t_froz *fz);
 
 
-
-
-
 void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp);
 
 
@@ -286,4 +291,13 @@ void	sig_int4(int sig);
 void    print_here(t_froz *fz);
 void    print_ex(t_cmd *ex);
 void    print_ex_up(t_cmd *ex);
+
+int					loopy_loop(char **cmd, t_env *env);
+char				**translate(t_env *env, char *cmd);
+t_op				*calculator(char *var);
+t_op				*op_new(long x, char op, int priority);
+void				op_add(t_op **op, t_op *new);
+int					check_priority(t_op *op);
+void				lol(t_env *env);
+
 #endif
