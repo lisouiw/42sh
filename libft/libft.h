@@ -6,7 +6,7 @@
 /*   By: ltran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:17:48 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/10 16:13:12 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/18 16:48:12 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,7 @@ t_list				*ft_lstmap(t_list *lst, t_list*(f)(t_list *elem));
 int					get_next_line(int fd, char **line);
 char				*ft_ltoa(long int nbr);
 int					ft_llen(long int nbr);
+int					ft_strchr_quote(const char *s, char c);
+char				*ft_strnsub(char const *s, int start, int end);
 
 #endif

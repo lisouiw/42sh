@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:36:32 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/11 15:13:08 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/19 16:46:56 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ t_env	*exec_fct_re(t_cmd **ex, t_env *env, t_exec *s)
 	char	*tmp;
 
 	//arr = ft_strsplit((*ex)->cmd, ' ');  //pasrsing_bonus
-	//arr = translate(env, (*ex)->cmd);
+	arr = translate(env, (*ex)->cmd);
 	tmp = (*ex)->cmd;
 	if (loopy_loop(&tmp, env) != -1)
 	{
-		arr = ft_strsplit(tmp, ' ');
+		//arr = ft_strsplit(tmp, ' ');
 		env = exec_fct(arr, env, s);
 		free_tab(arr);
 	}

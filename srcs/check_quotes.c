@@ -6,7 +6,7 @@
 /*   By: ybensimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 04:40:31 by ybensimo          #+#    #+#             */
-/*   Updated: 2018/04/11 17:06:23 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/16 21:15:41 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ char	*charsub(char *var, char **cmd, int i, int j)
 
 	tmp = ft_strsub(*cmd, 0, i);
 	tmp = ft_strjoin(tmp, var);
-	tmp = ft_strjoin(tmp, ft_strsub(*cmd, j, ft_strlen(tmp) - j));
+	if (j != (int)ft_strlen(*cmd) - 1) 
+		tmp = ft_strjoin(tmp, ft_strsub(*cmd, j, ft_strlen(*cmd) - j));
 	return (tmp);
 }
 
@@ -146,9 +147,9 @@ int		pls(t_env *env, char **cmd, int i, char c)
 
 	if (c != ' ')
 	{
-		i++;
 		if ((k = check_quote(*cmd, c, i)) == -1)
 			return (-1);
+		i++;
 	}
 	var = get_var(*cmd + i, c, &j);
 	var = find_variable(var, env);
@@ -158,7 +159,7 @@ int		pls(t_env *env, char **cmd, int i, char c)
 		return (-1);
 	}
 	j = (c == ' ') ? j + i : j;
-	*cmd = charsub(var, cmd, i, j);
+	*cmd = charsub(var, cmd, i - 1, k + 1);
 	return (k);
 }
 
@@ -190,9 +191,9 @@ int	loopy_loop(char **str, t_env *env)
 				if (check_quote(cmd, ']', i) == -1)
 					return (-1);
 				var = get_var(cmd + 1, ']', &j);
-				op = calculator(var);
-				if (op->priority != -1)
-					charsub(ft_ltoa(op->x), &cmd, i, j);
+				op = calculator(var + 3);
+				if (op && op->priority != -1)
+					cmd = charsub(ft_ltoa(op->x), &cmd, i, j - 2);
 			}
 			else if (cmd[i + 1] && cmd[i + 1] == '{')
 				j = pls(env, &cmd, i, '}');

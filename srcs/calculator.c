@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 01:49:32 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/10 17:05:08 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/16 21:13:01 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,6 +320,7 @@ t_op		*calculator(char *var)
 	t_op	*op;
 	int		vip;
 
+		printf("var = %s\n", var);
 	op = NULL;
 	error = 0;
 	i = check_var(var, &error);
@@ -329,7 +330,7 @@ t_op		*calculator(char *var)
 		return (op);
 	}
 	if (var[0] == '\0')
-		return (0);
+		return (op_new(0, '-', 0));
 	else
 	{
 		op = NULL;

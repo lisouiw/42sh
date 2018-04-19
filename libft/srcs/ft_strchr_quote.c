@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_strchr_quote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltran <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 02:06:39 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/12 18:29:10 by mallard          ###   ########.fr       */
+/*   Created: 2018/04/13 13:28:57 by mallard           #+#    #+#             */
+/*   Updated: 2018/04/19 17:59:21 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int		ft_isspace(char const *s, unsigned int i)
+int			ft_strchr_quote(const char *s, char c)
 {
-	if (s[i] == '\n' || s[i] == ' ' || s[i] == '\t' || s[i] == 'v' \
-		|| s[i] == 's')
-		return (0);
-	return (1);
+	int     i;
+	char    *b;
+
+	i = 0;
+	b = (char*)s;
+	while (b[i] != c && b[i] != '\0')
+	{
+		if (b[i] == '\\')
+			i++;
+		i++;
+	}
+	if (b[i] == c)
+		return (i);
+	return (i);
 }
