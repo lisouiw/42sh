@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/12 18:21:52 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/19 21:16:34 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct		s_froz
 	char			*paste;
 	char			*cmd;
 	int				nb[1];
+	int				child;
 	struct s_here	*here;
 }					t_froz;
 

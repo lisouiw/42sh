@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:27:15 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/05 18:45:57 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/19 21:21:48 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 void	sig_int(int sig)
 {
 	int		status;
+	int		i;
 
 	status = 0;
+	i = 0;
 	while (g_ed->rpz[0] == 0)
 		g_ed = g_ed->next;
+	while (i < g_fz->child)
+	{
+		wait(0);
+		i++;
+	}
 	if (g_ed->rpz[0] == 1 && g_ed->rpz[1] != 1)
 		return ;
-	waitpid(-1, &status, 0);
 	if (WIFSIGNALED(status) && WEXITSTATUS(status) == 0)
 		write(1, "\n", 1);
 	else

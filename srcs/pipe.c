@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:17:26 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/09 15:20:34 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/19 21:19:05 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 	i = 0;
 	pp = 1;
 	s->in = 0;
+	g_fz->child = 0;
 	while (pp == 1)
 	{
 		s->out = dup(1);
@@ -81,6 +82,7 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 		if ((*ex)->cmd == NULL)
 			return (env);
 		pipe(s->p);
+		g_fz->child++;
 		if (!((*ex)->type == 0 || ((*ex)->type >= 6 && (*ex)->type <= 11)))
 			*ex = (*ex)->next;
 		else if ((pid = fork()) == -1)
