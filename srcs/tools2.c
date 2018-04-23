@@ -22,9 +22,15 @@ char	*strjoin_free(char *nw, char *sub, int i)
 	{
 		tmp = ft_strjoin(sub, nw);
 		if (i == 1 || i == 3)
+		{
 			free(nw);
+			nw = NULL;
+		}
 		if (i == 2 || i == 3)
+		{
 			free(sub);
+			sub = NULL;
+		}
 		return (tmp);
 	}
 	return (sub);

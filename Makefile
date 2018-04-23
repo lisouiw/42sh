@@ -12,7 +12,8 @@ SRCS =  main.c term.c ed.c env.c touch.c print_shell.c treatmt.c exec.c ctrl.c \
 		pipe.c redirecting.c redirecting_checking.c cd.c heredoc.c error.c \
 		aggregation.c env2.c treatmt_here.c separate_cmd.c free2.c init2.c \
 		join.c	parse_synthaxe.c tools2.c free_cut.c histo.c add_doc_delim.c \
-		print_outils.c translate.c check_quotes.c calculator.c op.c
+		print_outils.c translate.c check_quotes.c calculator.c op.c \
+		parsing_backslash.c
 
 SRC_N = $(addprefix $(SRCDIR)/, $(SRCS))
 

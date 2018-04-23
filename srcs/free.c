@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:01:58 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 17:27:40 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/22 19:36:46 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_all_ex(t_cmd **ex)
 	{
 		tmp = (*ex)->prev;
 		free((*ex)->cmd);
+		(*ex)->cmd = NULL;
 		free(*ex);
 		*ex = tmp;
 	}

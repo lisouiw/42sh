@@ -26,11 +26,13 @@ int		parsing_op_here(char *s, t_cmd **ex, t_froz *fz)
 	if ((i = parse_synthaxe(*ex)) != 0)
 	{
 		free(s);
+		s = NULL;
 		return (i);
 	}
 	join_redirecting(ex);
 	join_ex(ex);
 	free(s);
+	s = NULL;
 	return (check_struct(fz));
 }
 

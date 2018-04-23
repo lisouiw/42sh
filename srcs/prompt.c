@@ -29,6 +29,8 @@ void	put_prompt_init(t_froz **fz)
 		(*fz)->nb[0] = 7;
 	else if ((*fz)->mode[3] == 6)
 		(*fz)->nb[0] = 9;
+	else if ((*fz)->mode[3] == 20)
+		(*fz)->nb[0] = 2;
 }
 
 void	put_prompt(t_froz *fz)
@@ -47,6 +49,8 @@ void	put_prompt(t_froz *fz)
 		ft_putstr("\033[0;33;40mcmdor>\033[0m");
 	else if (fz->mode[3] == 6)
 		ft_putstr("\033[0;33;40mheredoc>\033[0m");
+	else if (fz->mode[3] == 20)
+		ft_putstr("\033[0;33;40m>\033[0m");
 }
 
 int		giv_last(t_froz *fz)
@@ -65,5 +69,7 @@ int		giv_last(t_froz *fz)
 		return (7);
 	else if (fz->mode[3] == 6)
 		return (9);
+	else if (fz->mode[3] == 20)
+		return (2);
 	return (3);
 }

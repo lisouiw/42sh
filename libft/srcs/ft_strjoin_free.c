@@ -6,7 +6,7 @@
 /*   By: ltran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 17:43:13 by ltran             #+#    #+#             */
-/*   Updated: 2017/06/23 15:36:02 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/21 14:44:45 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ char	*ft_strjoin_free(char *s1, char *s2, int i)
 		return (NULL);
 	join = ft_strcpy(join, s1);
 	join = ft_strcat(join, s2);
-	if (i == 1)
+	if (i == 1 || i == 3)
 		free(s1);
-	if (i == 2)
+	if (i == 2 || i == 3)
 		free(s2);
 	return (join);
 }

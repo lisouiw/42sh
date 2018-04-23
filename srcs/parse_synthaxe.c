@@ -52,6 +52,8 @@ int		parse_synthaxe(t_cmd *ex)
 {
 	int		i;
 
+	if (parse_synthaxe_back(ex))
+		return(20);
 	if ((i = parse_synthaxe_1(ex)) < 0)
 		return (i);
 	while (ex->next != NULL)

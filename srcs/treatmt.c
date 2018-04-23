@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:36:32 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/19 16:46:56 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/22 15:58:35 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	add_his(t_his **hs, t_his *nw, t_froz *fz)
 	{
 		free(nw->cmd);
 		free(nw);
+		nw = NULL;
 		return ;
 	}
 	(*hs)->next->prev = nw;
@@ -65,14 +66,10 @@ void	add_his(t_his **hs, t_his *nw, t_froz *fz)
 t_env	*exec_fct_re(t_cmd **ex, t_env *env, t_exec *s)
 {
 	char	**arr;
-	char	*tmp;
 
-	//arr = ft_strsplit((*ex)->cmd, ' ');  //pasrsing_bonus
-	arr = translate(env, (*ex)->cmd);
-	tmp = (*ex)->cmd;
-	if (loopy_loop(&tmp, env) != -1)
+	arr = translate(env, ex);
+	if (arr)
 	{
-		//arr = ft_strsplit(tmp, ' ');
 		env = exec_fct(arr, env, s);
 		free_tab(arr);
 	}
@@ -95,7 +92,7 @@ t_env	*launchcmd(t_cmd *ex, t_env *env)
 			move_on(&ex, 5);
 		else if (ex->type == 0 && !(ex->next->type >= 6 &&
 					ex->next->type <= 11))
-			env = exec_fct_re(&ex, env, &s);
+		env = exec_fct_re(&ex, env, &s);
 		else if (ex->type == 0 && ex->next->type >= 6 && ex->next->type <= 11)
 			redirection_fork(&ex, &env, &s);
 		else if (ex->type >= 6 && ex->type <= 11)

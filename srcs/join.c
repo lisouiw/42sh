@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:29:00 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 15:30:52 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/21 15:27:27 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	join_ex(t_cmd **ex)
 			cmd = (*ex)->next;
 			tmp = ft_strjoin(" ", (*ex)->next->cmd);
 			tmp2 = ft_strjoin((*ex)->cmd, tmp);
+			// printf("maillon ici : %p\n", *ex);
 			free((*ex)->cmd);
 			(*ex)->cmd = tmp2;
 			(*ex)->next = (*ex)->next->next;

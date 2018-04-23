@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybensimo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/05 04:40:31 by ybensimo          #+#    #+#             */
-/*   Updated: 2018/04/16 21:15:41 by mallard          ###   ########.fr       */
+/*   Created: 2018/04/22 15:28:49 by mallard           #+#    #+#             */
+/*   Updated: 2018/04/23 20:47:53 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static char *get_var(char *str, char c, int *j)
 			}
 			var[safe] = '\0';
 		}
-
 	}
 	*j = i;
 	return (var);
@@ -113,31 +112,37 @@ int		check_quote(char *cmd, char c, int i)
 	return (i);
 }
 
-char	*find_variable(char *var, t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	var = ft_strjoin(var, "=");
-	while (tmp->next)
-	{
-		if (!ft_strcmp(var, tmp->name))
-			return (tmp->ctn);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
 char	*charsub(char *var, char **cmd, int i, int j)
 {
 	char		*tmp;
 
 	tmp = ft_strsub(*cmd, 0, i);
-	tmp = ft_strjoin(tmp, var);
-	if (j != (int)ft_strlen(*cmd) - 1) 
-		tmp = ft_strjoin(tmp, ft_strsub(*cmd, j, ft_strlen(*cmd) - j));
+	tmp = ft_strjoin_free(tmp, var, 1);
+	if (j != (int)ft_strlen(*cmd) - 1)
+		tmp = ft_strjoin_free(tmp, ft_strsub(*cmd, j, ft_strlen(*cmd) - j), 3);
+	free(*cmd);
 	return (tmp);
 }
+
+char	*find_variable(char *var, t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	var = ft_strjoin_free(var, "=", 1);
+	while (tmp->next)
+	{
+		if (!ft_strcmp(var, tmp->name))
+		{
+			ft_strdel(&var);
+			return (tmp->ctn);
+		}
+		tmp = tmp->next;
+	}
+	ft_strdel(&var);
+	return (NULL);
+}
+
 
 int		pls(t_env *env, char **cmd, int i, char c)
 {
@@ -145,6 +150,7 @@ int		pls(t_env *env, char **cmd, int i, char c)
 	char	*var;
 	int		j;
 
+	k = 0;
 	if (c != ' ')
 	{
 		if ((k = check_quote(*cmd, c, i)) == -1)
@@ -158,9 +164,65 @@ int		pls(t_env *env, char **cmd, int i, char c)
 		ft_putstr_fd("42sh: bad substitution\n", 2);
 		return (-1);
 	}
-	j = (c == ' ') ? j + i : j;
+	i = (c == ' ') ? i + 1 : i;
+	j = (c == ' ') ? j + 1 : k;
 	*cmd = charsub(var, cmd, i - 1, k + 1);
 	return (k);
+}
+
+void	free_op(t_op **op)
+{
+	t_op	*tmp;
+	t_op	*t;
+
+	tmp = *op;
+	while (tmp->next)
+	{
+		t = tmp;
+		tmp = tmp->next;
+		free(t);
+		t = NULL;
+	}
+	free(tmp);
+	tmp = NULL;
+	*op = NULL;
+}
+
+
+int		expand_var_env(char **cmd, int i, t_env *env)
+{
+	char		*var;
+	int			j;
+	int			k;
+	t_op		*op;
+	char		*tmp;
+
+	tmp = NULL;
+	if ((*cmd)[i + 1] && (*cmd)[i + 1] == '[')
+	{
+		if ((k = check_quote(*cmd, ']', i)) == -1)
+			return (-1);
+		var = get_var(*cmd + i + 1, ']', &j);
+		op = calculator(var);
+		ft_strdel(&var);
+		if (op && op->priority == -1)
+		{
+			free_op(&op);
+			return (-1);
+		}
+		var = ft_ltoa(op->x);
+		tmp = *cmd;
+		*cmd = charsub(var, cmd, i, k + 1);
+		free_op(&op);
+		ft_strdel(&var);
+	}
+	else if ((*cmd)[i + 1] && (*cmd)[i + 1] == '{')
+		j = pls(env, cmd, i, '}');
+	else if ((*cmd)[i + 1] && (*cmd)[i + 1] == '(')
+		j = pls(env, cmd, i, ')');
+	else
+		j = pls(env, cmd, i, ' ');
+	return (j);
 }
 
 int	loopy_loop(char **str, t_env *env)
@@ -168,17 +230,15 @@ int	loopy_loop(char **str, t_env *env)
 	int		i;
 	int		squote;
 	int		dquote;
-	int		j;
-	t_op	*op;
-	char	*var;
 	char	*cmd;
+	int		size;
 
 	cmd = *str;
 	i = 0;
 	squote = 0;
 	dquote = 0;
-	j = 0;
-	while (cmd[i])
+	size = ft_strlen(cmd);
+	while (i < size && cmd[i])
 	{
 		if (cmd[i] == '\'')
 			squote = (squote == 1) ? 0 : 1;
@@ -186,24 +246,9 @@ int	loopy_loop(char **str, t_env *env)
 			dquote = (dquote == 1) ? 0 : 1;
 		if (cmd[i] == '$' && !squote)
 		{
-			if (cmd[i + 1] && cmd[i + 1] == '[')
-			{
-				if (check_quote(cmd, ']', i) == -1)
-					return (-1);
-				var = get_var(cmd + 1, ']', &j);
-				op = calculator(var + 3);
-				if (op && op->priority != -1)
-					cmd = charsub(ft_ltoa(op->x), &cmd, i, j - 2);
-			}
-			else if (cmd[i + 1] && cmd[i + 1] == '{')
-				j = pls(env, &cmd, i, '}');
-			else if (cmd[i + 1] && cmd[i + 1] == '(')
-				j = pls(env, &cmd, i, ')');
-			else
-				j = pls(env, &cmd, i , ' ');
-			if (j == -1)
+			i = expand_var_env(&cmd, i, env);
+			if (i == -1)
 				return (-1);
-			i = j;
 		}
 		else if (cmd[i] == '\\' && !squote)
 		{

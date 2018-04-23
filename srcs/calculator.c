@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 01:49:32 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/16 21:13:01 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/23 20:47:49 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_str(char *error, char *var)
 	ft_putendl_fd(var, 2);
 }
 
-void	error_op(int error, char *var, long int x, t_op *op)
+void	error_op(int error, char *var, t_op *op)
 {
 	if (error == 1)
 		error_str("bad math expression: operator expected at", var);
@@ -32,7 +32,8 @@ void	error_op(int error, char *var, long int x, t_op *op)
 	else if (error == 5)
 		ft_putstr_fd("42sh: division by zero\n", 2);
 	else if (error == 6)
-		printf("number truncated after 19 digits: %ld\n", x);
+		error_str("number truncated after 19 digits: ", var);
+	if (error != 6)
 		op->priority = -1;
 }
 
@@ -154,7 +155,7 @@ long	operator(long a, long b, char op)
 	long	i;
 	int		ret;
 
-	i = 0;
+	i = 1;
 	if (op == '|')
 	{
 		ret = a;
@@ -172,7 +173,6 @@ long	operator(long a, long b, char op)
 		return (a / b);
 	if (op == '%')
 		return (a % b);
-	printf("mdr\n");
 	return (-1);
 }
 
@@ -180,26 +180,41 @@ int		check_list(t_op **op)
 {
 	t_op	*tmp;
 	t_op	*t2;
+	t_op	*pls;
 
 	tmp = *op;
 	t2 = tmp->next;
 	while (tmp->next)
 	{
-		if (tmp->x == 0 && tmp->next->x == 0 && tmp->op == '/')
+		pls = NULL;
+		if ((tmp->x == 0 || tmp->next->x == 0) && tmp->op == '/')
 			return (5);
 		if (tmp->op == 0 && tmp->next)
 		{
 			tmp->op = t2->op;
+			pls = t2;
 			tmp->priority = t2->priority;
 			tmp->next = t2->next;
 		}
 		else
 			tmp = tmp->next;
 		t2 = t2->next;
-	}
+		if (pls)
+			free(pls);
+	} 
 	if (tmp->op != 0)
 		return (3);
 	return (0);
+}
+
+int		check_long(char *str)
+{
+	int		i;
+
+	i = (str[0] == '-') ? 1 : 0;
+	while (str[i] && ft_isnumber(str[i]))
+		i++;
+	return (i + 1);
 }
 
 int     add_op(t_op **op, char *tmp, int *i, int vip)
@@ -209,15 +224,23 @@ int     add_op(t_op **op, char *tmp, int *i, int vip)
 	char    	c;
 	int     	a;
 	int			p;
+	char		*str;
 
 	a = (ft_isop(tmp[*i])) ? *i + 1: *i;
 	x = ft_atol(tmp + *i);
-	if (ft_llen(x) > 19)
-		error_op(6, NULL, x, *op);
+	if (check_long(tmp + *i) >= 19)
+	{
+		error_op(6, tmp + *i, *op);
+		str = ft_strsub(tmp, *i, 19);
+		x = ft_atol(str);
+	}
 	while (tmp[a] && !ft_isop(tmp[a]))
 		a++;
 	if (tmp[a] == '*' && tmp[a + 1] == '*')
+	{
 		c = '|';
+		a++;
+	}
 	else
 		c = (tmp[a]) ? tmp[a] : 0;
 	if (c == '+' || c == '-')
@@ -245,7 +268,7 @@ int			bracket(char *var)
 			b++;
 		if (var[i] == ')')
 			b--;
- 		if (b == 0)
+		if (b == 0)
 			return (i);
 		i++;
 	}
@@ -292,23 +315,40 @@ int     op_priority(t_op *op, int priority)
 {
 	t_op    *t;
 	t_op    *t2;
-	t_op	*tmp;
+	t_op	*pls;
 
 	t = op;
-	t2 = t->next;
-	tmp = t;
+	t2 = t->next;	
+
+	while (t)
+	{
+		ft_putendl("00 - loop");
+		t = t->next;
+	}
+	t = op;
 	while (t && t2)
 	{
+		pls = NULL;
 		if (t->priority == priority)
 		{
 			t->x = operator(t->x, t2->x, t->op);
 			t->op = t2->op;
 			t->priority = t2->priority;
+			pls = t2;
 			t->next = t2->next;
 		}
 		else
 			t = t->next;
 		t2 = t2->next;
+		if (pls)
+			free(pls);
+	}
+	t = op;
+
+	while (t)
+	{
+		ft_putendl("01 - loop");
+		t = t->next;
 	}
 	return (0);
 }
@@ -318,33 +358,31 @@ t_op		*calculator(char *var)
 	int		i;
 	int		error;
 	t_op	*op;
+	t_op	*tmp;
 	int		vip;
 
-		printf("var = %s\n", var);
 	op = NULL;
 	error = 0;
 	i = check_var(var, &error);
 	if (i != -1)
 	{
-		error_op(error, var + i, 0, op);
+		op = op_new(0, '-', 1);
+		error_op(error, var + i, op);
 		return (op);
 	}
 	if (var[0] == '\0')
-		return (op_new(0, '-', 0));
+		return (op_new(0, '-', 1));
 	else
 	{
 		op = NULL;
 		op = op_list(var, 0);
 		if (op == NULL)
-		{
-			op = op_new(0, '-', -1);
-			return (op);
-		}
+			return (op_new(0, '-', -1));
 		vip = check_priority(op);
 		error = check_list(&op);
 		if (error != 0)
 		{
-			error_op(error, var, 0, op);
+			error_op(error, var, op);
 			return (op);
 		}
 		while (vip >= 0)
@@ -352,7 +390,9 @@ t_op		*calculator(char *var)
 			op_priority(op, vip);
 			vip--;
 		}
-		return (op);
+		tmp = op_new(op->x, 0, 1);
+		free_op(&op);
+		return (tmp);
 	}
-	return (NULL);
+	return (op_new(0, '-', -1));
 }

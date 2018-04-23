@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/12 18:21:52 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/22 19:03:14 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,11 +293,15 @@ void    print_ex(t_cmd *ex);
 void    print_ex_up(t_cmd *ex);
 
 int					loopy_loop(char **cmd, t_env *env);
-char				**translate(t_env *env, char *cmd);
+char				**translate(t_env *env, t_cmd **ex);
 t_op				*calculator(char *var);
 t_op				*op_new(long x, char op, int priority);
 void				op_add(t_op **op, t_op *new);
 int					check_priority(t_op *op);
 void				lol(t_env *env);
+void				free_op(t_op **op);
+
+int		last_multiple_char(char *s, char c);
+int     parse_synthaxe_back(t_cmd *ex);
 
 #endif

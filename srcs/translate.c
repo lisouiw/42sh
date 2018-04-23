@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 13:54:02 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/19 17:57:43 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/22 20:03:37 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		arg_nbr(char *cmd)
 	i = -1;
 	arg = 0;
 	active = 0;
-	while (cmd[++i] && i < size)
+	while (i < size && cmd[++i])
 	{
 		if (cmd[i] != ' ' && !ft_isquote(cmd[i]))
 		{
@@ -56,7 +56,6 @@ int		arg_nbr(char *cmd)
 				++i;
 			}
 			active = 0;
-
 		}
 	}
 	return (arg);
@@ -68,7 +67,7 @@ char		**charcut(char *cmd)
 	int		i;
 	int		k;
 	int		j;
-	int     size = (int)ft_strlen(cmd);
+	int     size;
 	char	c;
 
 	i = -1;
@@ -77,13 +76,14 @@ char		**charcut(char *cmd)
 		exit(1);
 	arg[k] = NULL;
 	k = 0;
-	while (cmd[++i] && i < size)
+	size = ft_strlen(cmd);
+	while (i < size && cmd[++i])
 	{
 		if (cmd[i] == '\\')
 			i++;
 		else if (cmd[i] != ' ' && !ft_isquote(cmd[i]))
 		{
-			j 	= ft_strchr_quote(cmd + i, ' ');
+			j = ft_strchr_quote(cmd + i, ' ');
 			if (j == 0)
 				break;
 			arg[k++] = ft_strsub(cmd, i, j);
@@ -101,9 +101,14 @@ char		**charcut(char *cmd)
 	return (arg);
 }
 
-char		**translate(t_env *env, char *cmd)
+char		**translate(t_env *env, t_cmd **ex)
 {
+	char	*cmd;
+
+	cmd = (*ex)->cmd;
 	if (loopy_loop(&cmd, env) == -1)
 		return (NULL);
+	// free((*ex)->cmd);
+	(*ex)->cmd = cmd;
 	return (charcut(cmd));
 }

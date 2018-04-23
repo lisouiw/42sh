@@ -6,35 +6,65 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:41:23 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/10 16:12:41 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/21 13:34:09 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char		*ft_ltoa(long int nbr)
+static int      ft_digit_quantity(unsigned long long n)
 {
-	char	*str;
-	int		i;
+	int ret;
+	ret = 1;
+	while (n >= 10)
+	{
+		n = n / 10;
+		ret++;
+	}
+	return (ret);
+}
+static char     *create_str(char *str, int neg, unsigned long long nb)
+{
+	int digits;
 
-	i = ft_llen(nbr) - 1;
-	if (nbr == -9223372036854775807 - 1)
-		return (ft_strdup("-9223372036854775808"));
-	if (nbr == 0)
-		return (ft_strdup("0"));
-	if (!(str = ft_strnew(i)))
-		exit(1);
-	if (nbr < 0)
+	digits = 0;
+	digits = ft_digit_quantity(nb);
+	str = ft_strnew(digits + neg);
+	return (str);
+}
+static char     *recursive_itoa(char *str, unsigned long long nb)
+{
+	if (nb >= 10)
 	{
-		i--;
-		nbr = nbr * -1;
-		str[0] = '-';
+		str = recursive_itoa(str, nb / 10);
+		str = recursive_itoa(str + 1, nb % 10);
+		return (str);
 	}
-	while (i >= 0)
+	else
 	{
-		str[i] = (nbr % 10) + '0';
-		nbr/=10;
-		i--;
+		*str = '0' + nb;
+		return (str);
 	}
+}
+char            *ft_ltoa(long n)
+{
+	char                *str;
+	unsigned long long  nb;
+	int                 negatif;
+
+	str = NULL;
+	nb = n;
+	negatif = 0;
+	if (n < 0)
+	{
+		negatif = 1;
+		nb = (unsigned long long)n * -1;
+	}
+	str = create_str(str, negatif, nb);
+	if (str == NULL)
+		return (NULL);
+	if (negatif)
+		*str = '-';
+	recursive_itoa(str + negatif, nb);
 	return (str);
 }
