@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 01:45:49 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/21 14:35:23 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/27 23:01:28 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_op		*op_new(long x, char op, int priority)
 
 void		op_add(t_op **op, t_op *new)
 {
-	t_op 	*tmp;
+	t_op	*tmp;
 
 	if (new)
 	{
@@ -52,4 +52,22 @@ int			check_priority(t_op *op)
 		tmp = tmp->next;
 	}
 	return (max);
+}
+
+void		free_op(t_op **op)
+{
+	t_op	*tmp;
+	t_op	*t;
+
+	tmp = *op;
+	while (tmp->next)
+	{
+		t = tmp;
+		tmp = tmp->next;
+		free(t);
+		t = NULL;
+	}
+	free(tmp);
+	tmp = NULL;
+	*op = NULL;
 }

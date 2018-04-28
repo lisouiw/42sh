@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:58:30 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 16:23:49 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/28 17:29:25 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,32 @@ int		error_syntax(t_froz *fz)
 		ft_putendl_fd("sh: parse error near `;'", 2);
 	fz->mode[3] = 0;
 	return (0);
+}
+
+void	error_str(char *error, char *var)
+{
+	ft_putstr_fd("42sh: ", 2);
+	ft_putstr_fd(error, 2);
+	ft_putendl_fd(var, 2);
+}
+
+void	error_op(int error, char *var, t_op *op)
+{
+	if (error == 1)
+		error_str("bad math expression: operator expected at", var);
+	else if (error == 2)
+		ft_putstr_fd("42sh: bad math expression: lvalue required\n", 2);
+	else if (error == 3)
+	{
+		ft_putstr_fd("42sh: bad math expression: operand expected at \n", 2);
+		ft_putstr_fd("end of string\n", 2);
+	}
+	else if (error == 4)
+		error_str("bad math expression: operand expected at", var);
+	else if (error == 5)
+		ft_putstr_fd("42sh: division by zero\n", 2);
+	else if (error == 6)
+		error_str("number truncated after 19 digits: ", var);
+	if (error != 6)
+		op->priority = -1;
 }

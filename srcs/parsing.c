@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:09:16 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/23 19:56:37 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/26 17:49:59 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 char    *replace_nwl_spc(char *s)
 {
-    int        i;
-    int        q;
+	int        i;
+	int        q;
 
-    q = 0;
-    i = -1;
-    while (s[++i])
-    {
-        if ((i > 0 && s[i - 1] != '/') && s[i] == 39 && q != 2)
-            q = (q == 1) ? 0 : 1;
-        else if ((i > 0 && s[i - 1] != '/') && s[i] == 34 && q != 1)
-            q = (q == 2) ? 0 : 2;
-        else if (s[i] == '\n' && q == 0)
-            s[i] = ' ';
-    }
-    return (s);
+	q = 0;
+	i = -1;
+	while (s[++i])
+	{
+		if ((i > 0 && s[i - 1] != '/') && s[i] == 39 && q != 2)
+			q = (q == 1) ? 0 : 1;
+		else if ((i > 0 && s[i - 1] != '/') && s[i] == 34 && q != 1)
+			q = (q == 2) ? 0 : 2;
+		else if (s[i] == '\n' && q == 0)
+			s[i] = ' ';
+	}
+	return (s);
 }
 
 int		parsing_op(char *s, t_cmd **ex, t_froz *fz)
@@ -51,26 +51,27 @@ int		parsing_op(char *s, t_cmd **ex, t_froz *fz)
 	join_ex(ex);
 	print_ex_up(*ex);
 	free(s);
-    s = NULL;
+	s = NULL;
 	return (add_delim(fz, *ex));
 }
 
 int        parsing_quote(char *s)
 {
-    int        i;
-    int        a;
+	int        i;
+	int        a;
 
-    i = 0;
-    a = -1;
-	ft_putstr(s);
-    while (s[++a])
-    {
-        if (i != 1 && a > 0 && s[a - 1] != 47 && s[a] == '"')
-            i = (i == 0) ? 2 : 0;
-        else if (i != 2 && a > 0 && s[a - 1] != 47 && s[a] == 39)
-            i = (i == 0) ? 1 : 0;
-    }
-    return (i);
+	i = 0;
+	a = -1;
+	while (s[++a])
+	{
+		if (s[a] == '\\')
+			a++;
+		else if (s[a] == '"' && i != 1)
+			i = (i == 0) ? 2 : 0;
+		else if (s[a] == 39 && i != 2)
+			i = (i == 0) ? 1 : 0;
+	}
+	return (i);
 }
 
 int		parsing(t_edit *ed, t_froz *fz, t_cmd **ex)

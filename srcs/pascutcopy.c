@@ -32,6 +32,7 @@ t_edit	*copy(t_edit *ed, t_froz **fz)
 			free((*fz)->paste);
 		(*fz)->paste = keep_paste(&ed, NULL);
 	}
+	(*fz)->mode[1] = 0;
 	(*fz)->mode[0] = ((*fz)->mode[0] == 0) ? 1 : 0;
 	if ((*fz)->mode[1] == 1 || (*fz)->mode[0] == 0)
 	{
@@ -60,6 +61,7 @@ void	cut(t_edit **ed, t_froz **fz)
 		(*fz)->paste = keep_paste(&(*ed), NULL);
 		free_cut(&(*ed), *fz);
 	}
+	(*fz)->mode[0] = 0;
 	(*fz)->mode[1] = ((*fz)->mode[1] == 0) ? 1 : 0;
 	if ((*fz)->mode[0] == 1 || (*fz)->mode[1] == 0)
 	{
