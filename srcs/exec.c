@@ -41,7 +41,7 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 	}
 	else if (ft_strcmp("cd", cut[0]) == 0)
 	{
-		b_cd(cut[1], &env);
+		b_cd(&cut[1], &env, 0);
 		exit(0);
 	}
 	if (ft_strcmp(cut[0], "exit") == 0)
@@ -73,7 +73,7 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
 		b_unset(cut, &env, 0);
 	else if (ft_strcmp("cd", cut[0]) == 0)
-		b_cd(cut[1], &env);
+		b_cd(&cut[1], &env, 0);
 	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
 		free_tab(cut);
