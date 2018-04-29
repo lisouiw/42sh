@@ -6,7 +6,7 @@
 /*   By: ltran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:17:48 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/20 22:17:43 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/30 01:19:06 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,9 @@ int					ft_llen(long int nbr);
 int					ft_strchr_quote(const char *s, char c);
 char				*ft_strnsub(char const *s, int start, int end);
 void				ft_putlong(long n);
+char				*ft_strlowcase(char *str);
+char				*ft_strndup(char *str, int len);
+char				*strdup(char const *src);
+char				**split(char const *s, char c);
 
 #endif

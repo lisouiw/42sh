@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/28 17:39:41 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/30 01:16:24 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include "srcs/ft_comp42.h"
 
 typedef struct		s_glob
 {
@@ -413,6 +414,8 @@ char				**translate(t_env *env, t_cmd **ex);
 void				ft_replace_b(char *str, int i);
 int					ft_isquote(char c);
 int					arg_nbr(char *cmd);
+
+t_edit				*auto_completion(t_edit *ed, t_froz *fz);
 
 
 #endif
