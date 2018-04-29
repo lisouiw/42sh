@@ -428,6 +428,15 @@ void				cd_simple(t_env **env, char *cd, char *buf, char *real);
 void				cd_prev(t_env **env, char *buf);
 void				cd_home(t_env **env, char *buf);
 void				cd_name(t_env **env, char *cd, char *user, char *buf);
+void				print_octal(int nb);
+int					check_octal3(char *str, int i, char **ta, int *t);
+int					check_octal2(char *str, int i, char **ta, int *t);
+int					check_octal42(char **ta, int *t, int i, char *str_nb);
+int					check_octal(char **ta, int *t, int i);
+int					check_echo_flags2(char **cd, int *tab1, int a, int b);
+int					check_echo_flags(char **cd, int *tab1, int a, int b);
+int					check_n(char **ta, int *t, int a);
+
 
 
 
