@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 18:16:28 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/27 17:01:32 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/29 19:35:56 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	b_cd2(char *cd, t_env **env, char *buf, char *way)
 	return (1);
 }
 
-void	b_cd(char **cd2, t_env **env, int a)
+void		b_cd(char **cd2, t_env **env, int a)
 {
 	char	buf[PATH_MAX - 1];
 	char	*way;

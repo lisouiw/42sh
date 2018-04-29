@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd4.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/29 19:38:47 by corosteg          #+#    #+#             */
+/*   Updated: 2018/04/29 19:39:29 by corosteg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../twenty.h"
 
-void	cd_link(t_env **env, char *cd, char *buf, char *real)
+void		cd_link(t_env **env, char *cd, char *buf, char *real)
 {
 	char		*b;
 	char		*cd2;
@@ -24,13 +36,13 @@ void	cd_link(t_env **env, char *cd, char *buf, char *real)
 	free(cd2);
 }
 
-int		usage(void)
+int			usage(void)
 {
 	ft_putendl_fd("usage: cd [-LP] [path...]", 2);
 	return (2);
 }
 
-int		check_flags(char **cd, int *tab1)
+int			check_flags(char **cd, int *tab1)
 {
 	int		a;
 
@@ -58,7 +70,7 @@ int		check_flags(char **cd, int *tab1)
 	return (0);
 }
 
-char	*ft_getenv(t_env *env)
+char		*ft_getenv(t_env *env)
 {
 	while (env && ft_strcmp(env->name, "PWD="))
 		env = env->next;

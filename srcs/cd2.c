@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd2.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/29 19:36:45 by corosteg          #+#    #+#             */
+/*   Updated: 2018/04/29 19:37:38 by corosteg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../twenty.h"
 
 static char	*delete_dot3(char *cd, char *pwd, int a, char *tmp)
@@ -11,7 +23,7 @@ static char	*delete_dot3(char *cd, char *pwd, int a, char *tmp)
 	return (pwd);
 }
 
-static int  delete_dot4(char *cd, int a)
+static int	delete_dot4(char *cd, int a)
 {
 	if (cd[a] == '.')
 		a++;
@@ -48,12 +60,12 @@ static char	*delete_dot2(char *cd, char *pwd, int a, char *tmp)
 	return (pwd);
 }
 
-char	    *delete_dot(char *cd, t_env **env, int a)
+char		*delete_dot(char *cd, t_env **env, int a)
 {
 	char		*pwd;
 	char		*tmp;
 
-    tmp = NULL;
+	tmp = NULL;
 	if ((cd[0] == '/') || ((pwd = ft_getenv(*env)) == NULL))
 		return (cd);
 	if (cd[0] != '/' && cd[0] != '.' && cd[1] && cd[1] != '.')

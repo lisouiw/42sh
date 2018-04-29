@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 17:55:54 by corosteg          #+#    #+#             */
-/*   Updated: 2018/04/29 17:56:03 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/29 19:43:10 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int				check_echo_flags(char **cd, int *tab1, int a, int b)
 
 	while (cd[tab1[0]] && cd[tab1[0]][0] == '-')
 	{
-		while (cd[tab1[0]][a])
+		while (cd[tab1[0]][++a])
 		{
 			if ((cd[tab1[0]][a] != '-' && cd[tab1[0]][a] != 'e' &&
 				cd[tab1[0]][a] != 'n') || (cd[tab1[0]][a] == '-'
@@ -44,16 +44,15 @@ int				check_echo_flags(char **cd, int *tab1, int a, int b)
 					return (b);
 				}
 			b = check_echo_flags2(cd, tab1, a, b);
-			a++;
 		}
 		final = b;
-		a = 0;
+		a = -1;
 		tab1[0]++;
 	}
 	return (final);
 }
 
-int		check_n(char **ta, int *t, int a)
+int				check_n(char **ta, int *t, int a)
 {
 	int i;
 	int b;

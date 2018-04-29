@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 17:53:20 by corosteg          #+#    #+#             */
-/*   Updated: 2018/04/29 17:53:23 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/29 19:43:57 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 static int	check_option2(char **ta, int *t, int i)
 {
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 'n')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 'n')
 	{
 		ft_putchar_fd(ta[t[0]][i], 1);
 		i = i + 4;
 		ft_putchar_fd('\n', 1);
 	}
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 'r')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 'r')
 	{
 		ft_putchar_fd(ta[t[0]][i], 1);
 		i = i + 4;
 		ft_putchar_fd('\r', 1);
 	}
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 'v')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 'v')
 	{
 		ft_putchar_fd(ta[t[0]][i], 1);
 		i = i + 4;
@@ -40,22 +40,22 @@ static int	check_option2(char **ta, int *t, int i)
 
 static int	check_option3(char **ta, int *t, int i)
 {
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 'f')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 'f')
 	{
 		ft_putchar_fd(ta[t[0]][i], 1);
 		i = i + 4;
 		ft_putchar_fd('\f', 1);
 	}
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 'a')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 'a')
 	{
 		ft_putchar_fd(ta[t[0]][i], 1);
 		i = i + 4;
 		ft_putchar_fd('\a', 1);
 	}
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 't')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 't')
 	{
 		ft_putchar_fd(ta[t[0]][i], 1);
 		ft_putchar_fd('\t', 1);
@@ -66,8 +66,8 @@ static int	check_option3(char **ta, int *t, int i)
 
 static int	check_option(char **ta, int *t, int i, int *abis)
 {
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == '\\')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == '\\')
 	{
 		i = i + 4;
 		ft_putchar_fd('\\', 1);
@@ -75,20 +75,15 @@ static int	check_option(char **ta, int *t, int i, int *abis)
 	i = check_octal(ta, t, i);
 	i = check_option2(ta, t, i);
 	i = check_option3(ta, t, i);
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 'b')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 'b')
 		i = i + 4;
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\' && ta[t[0]][i + 2] == '\\'
-		&& ta[t[0]][i + 3] == 'c')
+	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\'
+		&& ta[t[0]][i + 2] == 'c')
 	{
 		ft_putchar_fd(ta[t[0]][i], 1);
 		abis[0] = 42;
 		return (0);
-	}
-	if (ta[t[0]][i] && ta[t[0]][i + 1] == '\\')
-	{
-		ft_putchar_fd(ta[t[0]][i], 1);
-		i = i + 2;
 	}
 	return (i);
 }
@@ -128,7 +123,7 @@ void		print_tab(char **ta, int i)
 	t[0] = 1;
 	a = 0;
 	i = 0;
-	a = check_echo_flags(ta, t, 0, 0);
+	a = check_echo_flags(ta, t, -1, 0);
 	while (ta[t[0]] && (a != 2 && a != 3))
 	{
 		ft_putstr_fd(ta[t[0]], 1);
