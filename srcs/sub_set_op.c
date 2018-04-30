@@ -78,6 +78,7 @@ t_op		*op_list(char *var, int vip, int i)
 			i = j;
 			new = op_list(tmp, vip + 1, 0);
 			(op == NULL) ? new = op : op_add(&op, new);
+			ft_strdel(&tmp);
 		}
 		if (var[i] && ft_isop(var[i]) == 1)
 			j = add_op(&op, var, &i, vip);
