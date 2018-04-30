@@ -16,7 +16,7 @@ SRCS =  main.c term.c ed.c env.c touch.c print_shell.c treatmt.c exec.c ctrl.c \
 		join.c	parse_synthaxe.c tools2.c free_cut.c histo.c add_doc_delim.c \
 		print_outils.c translate.c sub_check_quotes.c sub_calculator.c \
 		sub_op.c parsing_backslash.c sub_tools.c $(GLOB) sub_check_quotes_2.c \
-		cd.c cd2.c cd3.c cd4.c cd5.c ft_echo.c ft_echo2.c ft_echo3.c ft_exit.c\
+		cd.c cd2.c cd3.c cd4.c cd5.c manage_env.c ft_echo.c ft_echo2.c ft_echo3.c ft_exit.c\
 		sub_trad_d.c sub_check_calc.c sub_set_op.c sub_translate.c\
 		auto_begin_comp.c auto_core_comp.c auto_display.c auto_display2.c \
                 auto_end.c      auto_get_prop.c auto_parse_comp.c auto_tool_comp.c \

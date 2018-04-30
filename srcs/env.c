@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:53:54 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 15:17:43 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/30 20:40:28 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ t_env	*give_env(t_env *env)
 		env = add_env(environ[i], env, ft_strlen(ft_strchr(environ[i], '=')),
 				ft_strlen(environ[i]));
 	}
+	manage_env(env);
 	return (env);
 }
