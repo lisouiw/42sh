@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/29 20:16:02 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/30 18:52:43 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -437,6 +437,7 @@ int					check_echo_flags2(char **cd, int *tab1, int a, int b);
 int					check_echo_flags(char **cd, int *tab1, int a, int b);
 int					check_n(char **ta, int *t, int a);
 void				ft_exit(char *cmd);
+void				manage_env(t_env *env);
 
 
 
