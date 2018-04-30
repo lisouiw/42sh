@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:59:51 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/09 11:24:29 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/30 15:04:58 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 {
+	char	*cmd;
+
+	cmd = NULL;
 	if (ft_strcmp("echo", cut[0]) == 0)
 	{
 		print_tab(cut, 0);
@@ -46,10 +49,17 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 	}
 	if (ft_strcmp(cut[0], "exit") == 0)
 	{
-		free_tab(cut);
-		free_list(&env);
-		free_all_ex(ex);
-		free_for_exit();
+		if (cut[0] && cut[1] && cut [2])
+			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
+		else
+		{
+			if (cut[1])
+				cmd = ft_strdup(cut[1]);
+			free_tab(cut);
+			free_list(&env);
+			free_all_ex(ex);
+			free_for_exit(cmd, 0);
+		}
 	}
 	else
 		b_other_nf(cut, env, s);
@@ -58,6 +68,9 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 
 t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 {
+	char	*cmd;
+
+	cmd = NULL;
 	if (ft_strcmp("echo", cut[0]) == 0)
 	{
 		print_tab(cut, 0);
@@ -76,9 +89,16 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 		b_cd(&cut[1], &env, 0);
 	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
-		free_tab(cut);
-		free_list(&env);
-		free_for_exit();
+		if (cut[0] && cut[1] && cut [2])
+			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
+		else
+		{
+			if (cut[1])
+				cmd = ft_strdup(cut[1]);
+			free_tab(cut);
+			free_list(&env);
+			free_for_exit(cmd, 0);
+		}
 	}
 	else
 		b_other(cut, env, s);

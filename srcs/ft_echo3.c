@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 17:55:54 by corosteg          #+#    #+#             */
-/*   Updated: 2018/04/29 19:43:10 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/30 15:32:18 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,35 @@ int				check_echo_flags2(char **cd, int *tab1, int a, int b)
 	return (b);
 }
 
+static int		end_flags_echo(int final, int *tab1, int b)
+{
+	if (tab1[0] > 1)
+		return (final);
+	else
+		return (0);
+	return (b);
+}
+
 int				check_echo_flags(char **cd, int *tab1, int a, int b)
 {
 	int		final;
 
+	final = 42;
 	while (cd[tab1[0]] && cd[tab1[0]][0] == '-')
 	{
-		while (cd[tab1[0]][++a])
+		while (cd[tab1[0]][a])
 		{
 			if ((cd[tab1[0]][a] != '-' && cd[tab1[0]][a] != 'e' &&
 				cd[tab1[0]][a] != 'n') || (cd[tab1[0]][a] == '-'
 				&& cd[tab1[0]][a + 1] == '-'))
 				if (cd[tab1[0]][a] == '-' || cd[tab1[0]][a] != 'n'
-					|| cd[tab1[0]][a] != 'e')
-				{
-					if (tab1[0] > 1)
-						return (final);
-					else
-						return (0);
-					return (b);
-				}
+				|| cd[tab1[0]][a] != 'e')
+					return (end_flags_echo(final, tab1, b));
 			b = check_echo_flags2(cd, tab1, a, b);
+			a++;
 		}
 		final = b;
-		a = -1;
+		a = 0;
 		tab1[0]++;
 	}
 	return (final);

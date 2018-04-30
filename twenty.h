@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/28 22:08:41 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/29 20:16:02 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ void				free_cut(t_edit **ed, t_froz *g_fz);
 void				free_all_ex(t_cmd **ex);
 void				free_init_g_fz(t_froz *g_fz);
 void				free_for_hs(void);
-void				free_for_exit(void);
+void				free_for_exit(char *cmd, int i);
 void				free_elem(t_env *tmp);
 void				free_ed(t_edit **ed, t_froz *g_fz);
 void				free_list(t_env **env);
@@ -436,6 +436,7 @@ int					check_octal(char **ta, int *t, int i);
 int					check_echo_flags2(char **cd, int *tab1, int a, int b);
 int					check_echo_flags(char **cd, int *tab1, int a, int b);
 int					check_n(char **ta, int *t, int a);
+void				ft_exit(char *cmd);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 17:53:20 by corosteg          #+#    #+#             */
-/*   Updated: 2018/04/29 19:43:57 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/30 15:26:41 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void		print_tab(char **ta, int i)
 	t[0] = 1;
 	a = 0;
 	i = 0;
-	a = check_echo_flags(ta, t, -1, 0);
+	a = check_echo_flags(ta, t, 0, 0);
 	while (ta[t[0]] && (a != 2 && a != 3))
 	{
 		ft_putstr_fd(ta[t[0]], 1);
@@ -133,6 +133,6 @@ void		print_tab(char **ta, int i)
 	}
 	if (a == 2 || a == 3)
 		a = e_flag(ta, t, a);
-	if (a != 1 & a != 3)
+	if (a != 1 && a != 3)
 		ft_putchar_fd('\n', 1);
 }
