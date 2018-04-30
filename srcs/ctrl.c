@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 18:23:49 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/03 22:21:27 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/30 19:58:33 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ctrl_touch(t_edit **ed, t_froz **fz, char c)
 {
 	while ((*ed)->rpz[2] == 0)
 		*ed = (*ed)->next;
-	if (c == 5 && (*ed)->rpz[1] == 0)
+	if (c == 9)
+		*ed = auto_completion(*ed, *fz);
+	else if (c == 5 && (*ed)->rpz[1] == 0)
 		*ed = move_word_right(*ed);
 	else if (c == 23 && (*ed)->rpz[0] == 0)
 		*ed = move_word_left(*ed);

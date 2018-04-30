@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/30 19:48:23 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/30 20:09:33 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+
 
 typedef struct		s_glob
 {
@@ -437,7 +438,53 @@ int					check_echo_flags2(char **cd, int *tab1, int a, int b);
 int					check_echo_flags(char **cd, int *tab1, int a, int b);
 int					check_n(char **ta, int *t, int a);
 void				ft_exit(char *cmd);
+// void			ft_set_term(int i, int nb);
+// char			*get_final2(char **cmd, t_stop *stop, char *final);
+// char			*get_final(char **cmd, t_stop *stop, char *final);
+// char			*begin_comp(char *str, int i, char *final);
+t_edit			*auto_completion(t_edit *ed, t_froz *fz);
+// void			print_list(t_data *list, int x, int y);
+// void			out_clean(void);
+// t_data			*get_args(char **av, int i, int nb, t_data *list);
+// t_stop			*core2_comp42(t_data *list, t_stop *stop);
+// t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi);
+// void				ft_left(t_data *list);
+// void				ft_right(t_data *list);
+// void		do_up(t_data *list, int col, int prop, int i);
+// void		ft_up(t_data *list, int col, int prop, int i);
+// void		do_down(t_data *list, int col, int prop, int i);
+// void		ft_down(t_data *list, int col, int prop, int i);
+// void		free_data(t_data *list);
+// void		free_comp(t_comp *data);
+// void		stop_init(t_stop *stop, char *str, int i);
+// char		*epur_str(char *str);
+// char			**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb);
+// t_data			*get_prop2(t_comp *data, int i, t_data *list);
+// char			**prop_rac(char *path, struct dirent *file, DIR *rep, int nb);
+// char			**prop_2(t_comp *data, struct dirent *file, int i, DIR *rep);
+// t_data			*get_prop(char *str, t_stop *stop, t_data *list, int *tb);
+// char		*cut_path(char *str);
+// char		*find(char *str, int *tb, char *tmp, char *new);
+// char		*get_path(t_comp *data, int i, int path, int *tabi);
+// char		**init_path(void);
+// char		**parse_select(char *str, int i, char **path, t_stop *stop);
+// static t_data	*hey_hook(int buf, t_data *list, t_stop *stop);
+// int			do_space(char *command);
+// int				out_size(t_data *list);
+// t_data			*check_command(t_data *list, t_stop *stop);
+// void			ft_comp42(int nb, char *str, t_stop *list);
+// void			final_print(t_data *list, t_stop *stop);
+// char		*strdupmore(char *src, int nb);
 
+// int			get_high_len(char **proposition);
+// char		**prop_2_2(struct dirent *file, t_comp *data, char **prop, DIR *rep);
+// char		**get_prop2_2(t_comp *data, int i, char **prop, DIR *rep);
+// char		**get_prop2_2(t_comp *data, int i, char **prop, DIR *rep);
+// int				how_cut(char *str, int i, int len);
+// char			*to_str(char **cmd);
+// void			data_init(t_comp *data);
+// void			free_stop(t_stop *stop);
+// int				where_am_i(char *str, int i);
 
 
 
