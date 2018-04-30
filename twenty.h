@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/29 20:16:02 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/04/30 19:48:23 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void				cursor_end(t_edit *ed);
 void				put_my_cur(int nb, char c);
 int					parse_synthaxe_1(t_cmd *ex);
 void				parse_synthaxe_2(t_cmd *ex);
-int					parse_synthaxe(t_cmd *ex);
+int					parse_synthaxe(t_cmd *ex, char *s);
 int					isnumber(char *s);
 int					isnumber_len(char *s);
 t_cmd				*parse_redirec(t_cmd *ex, char *s);

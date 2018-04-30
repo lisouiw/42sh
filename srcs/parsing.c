@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:09:16 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/26 17:49:59 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/30 19:48:12 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		parsing_op(char *s, t_cmd **ex, t_froz *fz)
 	*ex = separate_cmd(s, i, i, *ex);
 	i = parse_type(ex);
 	*ex = parse_op_int(*ex, s);
-	if ((i = parse_synthaxe(*ex)) != 0)
+	if ((i = parse_synthaxe(*ex, s)) != 0)
 	{
 		free(s);
 		return (i);

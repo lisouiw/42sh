@@ -6,38 +6,60 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:36:32 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/25 15:43:56 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/30 19:47:12 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-t_env	*treat_cmd(t_env *env, t_edit **cmd, t_his **hs, t_froz **fz)
+void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd	**ex)
 {
-	t_cmd	*ex;
+	if (i == 1 || i == 3)
+		add_his(hs, NULL, *fz);
+	if (i > 1)
+		free_all_ex(ex);
+	free((*fz)->cmd);
+	(*fz)->cmd = NULL;
+}
 
-	ex = NULL;
+
+int		init_treatmt(t_cmd	**ex, t_edit **cmd, t_froz **fz)
+{
+	*ex = NULL;
 	while ((*cmd)->rpz[0] == 0)
 		*cmd = (*cmd)->next;
 	if ((*fz)->nb[0] % g_nb->tb[0] != 1)
 		ft_putchar('\n');
 	if ((*fz)->mode[3] != 6 && (*fz)->mode[3] != 20 && ((*cmd)->c[0] == '\0' || (if_only_i(ed_str(*cmd,
-							NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))) && (*fz)->cmd == NULL)
+		NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))) && (*fz)->cmd == NULL)
+		return (1);
+	return (0);
+}
+
+t_env	*treat_cmd(t_env *env, t_edit **cmd, t_his **hs, t_froz **fz)
+{
+	t_cmd	*ex;
+
+	if (init_treatmt(&ex, cmd, fz))
 		return (env);
+	else if ((*fz)->mode[3] == 20 && ((*cmd)->c[0] == '\0' || (if_only_i(ed_str(*cmd, NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))))
+	{
+		add_his(hs, NULL, *fz);
+		if (parsing(*cmd, *fz, &ex) == 1)
+		{
+			env = launchcmd(ex, env);
+			init_free_his(hs, fz, 2, &ex);
+		}
+		else if ((*fz)->mode[3] == 0)
+			init_free_his(hs, fz, 0, &ex);
+	}
 	else if (parsing(*cmd, *fz, &ex) == 1)
 	{
-		add_his(hs, NULL, *fz);
 		env = launchcmd(ex, env);
-		free_all_ex(&ex);
-		free((*fz)->cmd);
-		(*fz)->cmd = NULL;
+		init_free_his(hs, fz, 3, &ex);
 	}
 	else if ((*fz)->mode[3] == 0)
-	{
-		add_his(hs, NULL, *fz);
-		free((*fz)->cmd);
-		(*fz)->cmd = NULL;
-	}
+		init_free_his(hs, fz, 1, &ex);
 	return (env);
 }
 
