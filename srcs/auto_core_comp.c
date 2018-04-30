@@ -97,11 +97,11 @@ t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi)
 {
 	list = get_prop((str), stop, list, tabi);
 	(list != NULL) ? out_size(list) : 0;
-	if (list != NULL && list->how_prop <= 175)
+	if (list != NULL && list->how_prop <= 175 && out_size(list))
 		ft_set_term(1, list->how_row);
 	else
 		free_data(list);
-	if (list == NULL || list->how_prop > 175)
+	if (list == NULL || list->how_prop > 175 || (!(out_size(list))))
 	{
 		free_stop(stop);
 		return (NULL);
