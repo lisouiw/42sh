@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/28 17:39:41 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/29 20:16:02 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void				cd_prev(t_env **env, char *buf);
 void				cd_home(t_env **env, char *buf);
 void				cd_name(t_env **env, char *cd, char *user, char *buf);
 void				cd_simple(t_env **env, char *cd, char *buf, char *real);
-void				b_cd(char *cd, t_env **env);
+void				b_cd(char **cd, t_env **env, int a);
 void				ctrl_touch(t_edit **ed, t_froz **g_fz, char c);
 t_edit				*home_end(t_edit *ed, t_froz *g_fz);
 t_edit				*up_down(t_edit *ed, char c);
@@ -198,7 +198,7 @@ void				free_cut(t_edit **ed, t_froz *g_fz);
 void				free_all_ex(t_cmd **ex);
 void				free_init_g_fz(t_froz *g_fz);
 void				free_for_hs(void);
-void				free_for_exit(void);
+void				free_for_exit(char *cmd, int i);
 void				free_elem(t_env *tmp);
 void				free_ed(t_edit **ed, t_froz *g_fz);
 void				free_list(t_env **env);
@@ -413,6 +413,32 @@ char				**translate(t_env *env, t_cmd **ex);
 void				ft_replace_b(char *str, int i);
 int					ft_isquote(char c);
 int					arg_nbr(char *cmd);
+char	    		*delete_dot(char *cd, t_env **env, int a);
+void				free_b_cd(char *real, char *cd, char *way);
+char				*purif2(char *str);
+char				*purif3(char *str);
+char				*purification(char *str, int ind);
+int					check_next_cd(char *str);
+char				*ft_strndup(char *s, int len);
+char				*ft_getenv(t_env *env);
+int					check_flags(char **cd, int *tab1);
+int					usage(void);
+void				cd_link(t_env **env, char *cd, char *buf, char *real);
+void				cd_simple(t_env **env, char *cd, char *buf, char *real);
+void				cd_prev(t_env **env, char *buf);
+void				cd_home(t_env **env, char *buf);
+void				cd_name(t_env **env, char *cd, char *user, char *buf);
+void				print_octal(int nb);
+int					check_octal3(char *str, int i, char **ta, int *t);
+int					check_octal2(char *str, int i, char **ta, int *t);
+int					check_octal42(char **ta, int *t, int i, char *str_nb);
+int					check_octal(char **ta, int *t, int i);
+int					check_echo_flags2(char **cd, int *tab1, int a, int b);
+int					check_echo_flags(char **cd, int *tab1, int a, int b);
+int					check_n(char **ta, int *t, int a);
+void				ft_exit(char *cmd);
+
+
 
 
 #endif

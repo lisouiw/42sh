@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:55:03 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/06 19:11:37 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/29 20:18:12 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		main(void)
 			init_for_new(&g_hs, &g_fz, &g_ed);
 		}
 		else if (g_fz->buf[0] == 0 && g_fz->buf[1] == 0 && g_fz->buf[2] == 0)
-			free_for_exit();
+			free_for_exit(NULL, 0);
 		else
 			g_ed = touch(&g_ed, &g_fz, &g_hs);
 		init_data(&g_fz);

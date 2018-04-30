@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:01:58 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/22 19:36:46 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/29 20:12:40 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	free_for_hs(void)
 	free(g_hs);
 }
 
-void	free_for_exit(void)
+void	free_for_exit(char *cmd, int i)
 {
 	free_for_hs();
 	if (g_fz->cmd)
@@ -91,7 +91,9 @@ void	free_for_exit(void)
 	}
 	free(g_fz->here);
 	free(g_fz);
-	exit(-1);
+	if (cmd)
+		ft_exit(cmd);
+	exit(i);
 }
 
 void	free_elem(t_env *tmp)

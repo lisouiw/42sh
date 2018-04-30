@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:59:24 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 10:27:25 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/29 17:57:18 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,4 @@ char	**list_to_tab(t_env *env, char **tab_env)
 	}
 	tab_env[i] = NULL;
 	return (tab_env);
-}
-
-void	print_tab(char **ta, int i)
-{
-	while (ta[++i])
-	{
-		ft_putstr_fd(ta[i], 1);
-		if (ta[i + 1])
-			write(1, " ", 1);
-	}
-	ft_putchar_fd('\n', 1);
 }

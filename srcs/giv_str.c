@@ -40,13 +40,13 @@ char	*join_cmd_nw(char *cmd, t_edit *ed, t_froz *fz)
 		cmd = ed_str(ed, NULL, fz->nb[0] - giv_last(fz));
 	else
 	{
-		if (ed->rpz[0] == 1 && ed->rpz[1] == 1)
+		if (fz->mode[3] != 20 && ed->rpz[0] == 1 && ed->rpz[1] == 1)
 			tmp = ft_strjoin(cmd, "\0");
 		else
 		{
-			nw = ft_strjoin_free("\n",
-				ed_str(ed, NULL, fz->nb[0] - giv_last(fz)), 2);
-			tmp = ft_strjoin_free(cmd, nw, 2);
+			nw = ed_str(ed, NULL, fz->nb[0] - giv_last(fz));
+			nw = ft_strjoin_free(fz->mode[3] == 20 ? " " : "\n", nw, 2);
+			tmp = (fz->mode[3] == 20) ? ft_strjoin_free(ft_strsub(cmd, 0, ft_strlen(cmd) - 2), nw, 3) : ft_strjoin_free(cmd, nw, 2);
 		}
 		free(cmd);
 		return (tmp);

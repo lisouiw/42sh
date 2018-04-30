@@ -21,7 +21,7 @@ t_env	*treat_cmd(t_env *env, t_edit **cmd, t_his **hs, t_froz **fz)
 		*cmd = (*cmd)->next;
 	if ((*fz)->nb[0] % g_nb->tb[0] != 1)
 		ft_putchar('\n');
-	if ((*fz)->mode[3] != 6 && ((*cmd)->c[0] == '\0' || (if_only_i(ed_str(*cmd,
+	if ((*fz)->mode[3] != 6 && (*fz)->mode[3] != 20 && ((*cmd)->c[0] == '\0' || (if_only_i(ed_str(*cmd,
 							NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))) && (*fz)->cmd == NULL)
 		return (env);
 	else if (parsing(*cmd, *fz, &ex) == 1)

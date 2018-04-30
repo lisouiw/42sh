@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:28:49 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/28 17:34:27 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/30 19:06:48 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,33 @@ int				expand_var_env(char **cmd, int i, t_env *env)
 
 static void		loop_2(char *cmd, int *i, int *squote, int *dquote)
 {
-	if (cmd[*i] == '\\')
-		*i = *i + 1;
-	if (cmd[*i] == '\'')
+	int			j;
+
+	j = *i;
+	if (cmd[j] == '\\')
+		j++;
+	if (cmd[j] == '\'')
 		*squote = (*squote == 1) ? 0 : 1;
-	else if (cmd[*i] == '"')
+	else if (cmd[j] == '"')
 		*dquote = (*dquote == 1) ? 0 : 1;
-	if (cmd[*i] == '\\' && *squote == 0)
+	if (cmd[j] == '\\' && *squote == 0)
 	{
-		if (cmd[*i + 1])
-			*i = *i + 1;
+		if (cmd[j + 1])
+			j++;
 		if (*dquote == 0)
-			if (cmd[*i] != '\\')
-				*i = *i - 1;
+			if (cmd[j] != '\\')
+				j--;
 	}
+	*i = j;
+}
+
+void			ft_home(char **cmd, int i, t_env *env)
+{
+	char		*tmp;
+
+	tmp = find_variable(ft_strdup("HOME"), env);
+	if (tmp)
+		*cmd = charsub(tmp, cmd, i, 0);
 }
 
 int				loopy_loop(char **str, t_env *env)
@@ -114,13 +127,17 @@ int				loopy_loop(char **str, t_env *env)
 	size = ft_strlen(cmd);
 	while (i < size && cmd[i])
 	{
+		printf("i = %d\n", i);
 		loop_2(cmd, &i, &squote, &dquote);
+		printf("i2 = %d\n", i);
 		if (cmd[i] == '$' && !squote)
 		{
 			i = expand_var_env(&cmd, i, env);
 			if (i == -1)
 				return (-1);
 		}
+		else if (cmd[i] == '~')
+			ft_home(&cmd, i, env);
 		i++;
 	}
 	*str = cmd;

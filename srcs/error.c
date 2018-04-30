@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:58:30 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/28 17:29:25 by mallard          ###   ########.fr       */
+/*   Updated: 2018/04/30 17:23:34 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		error_syntax(t_froz *fz)
 {
 	if (fz->mode[3] == -1 || fz->mode[3] == -2 ||
-		(fz->mode[3] <= -6 && fz->mode[3] >= -11))
+			(fz->mode[3] <= -6 && fz->mode[3] >= -11))
 		ft_putendl_fd("sh: parse error near `\\n'", 2);
 	else if (fz->mode[3] == -20)
 		ft_putendl_fd("sh: parse error near `&'", 2);
@@ -41,7 +41,11 @@ void	error_str(char *error, char *var)
 void	error_op(int error, char *var, t_op *op)
 {
 	if (error == 1)
-		error_str("bad math expression: operator expected at", var);
+	{
+		ft_putstr_fd("42sh: bad math expression: operator expected at `", 2);
+		ft_putstr_fd(var, 2);
+		ft_putendl_fd("'", 2);
+	}
 	else if (error == 2)
 		ft_putstr_fd("42sh: bad math expression: lvalue required\n", 2);
 	else if (error == 3)

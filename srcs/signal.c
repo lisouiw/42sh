@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:27:15 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/05 18:45:57 by ltran            ###   ########.fr       */
+/*   Updated: 2018/04/30 14:50:47 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sig_int(int sig)
 		write(1, "\r", 1);
 		init();
 		free_list(&g_env);
-		free_for_exit();
 		tputs(tgetstr("ce", NULL), 0, ft_put);
+		free_for_exit(NULL, 0);
 		exit(1);
 	}
 	sig = 0;
