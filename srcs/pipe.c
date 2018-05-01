@@ -16,19 +16,19 @@ void	end_pipe(t_cmd **ex, t_exec **s, int pp)
 {
 	int		status;
 
+	dup2(1, (*s)->out);
+	dup2(0, (*s)->in);
 	if (pp == 0)
 	{
 		signal(SIGCHLD, SIG_DFL);
-		waitpid(0, &status, WNOHANG);
-		(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
 		while (--(*s)->pipe)
-			wait(NULL);
+			waitpid(0, &status, WNOHANG |WUNTRACED );
+		wait(&status);
+		(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
 	}
 	else
 		++(*s)->pipe;
 	close((*s)->p[1]);
-	dup2(1, (*s)->out);
-	dup2(0, (*s)->in);
 	while ((*ex)->type != 3 && (*ex)->type != 4 && (*ex)->type != 5
 		&& (*ex)->type != 13 && (*ex)->type != 42)
 		*ex = (*ex)->next;
