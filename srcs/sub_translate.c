@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:35:02 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/29 22:33:00 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/01 17:54:47 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int			arg_nbr(char *cmd)
 			i = i + ft_strchr_quote(cmd + i, ' ');
 			arg++;
 		}
-		else if ((c = cmd[i]) && (c == '"' || c == '\'') && arg++)
+		else if ((c = cmd[i]) && (c == '"' || c == '\'') && ++arg)
 			arg_nbr2(cmd, &i, c);
 	}
+	printf("arg= %d\n", arg);
 	return (arg);
 }
