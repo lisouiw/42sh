@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 23:35:20 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 14:08:47 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 18:55:08 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,14 @@ void				ft_right(t_data *list)
 void				s_winch(int i)
 {
 	(void)i;
-	if (out_size(g_se))
-	{
-		tputs(tgetstr("cl", NULL), 0, ft_put);
-		print_list(g_se, 0, 0);
-	}
-	else
-		g_se2->stop = 2;
+	g_se2->sig = 2;
 }
 
-void				ft_move(void)
+void				ft_move(t_stop *stop)
 {
-	signal(SIGWINCH, s_winch);
+	stop->sig = 1;
+	if (stop->sig == 1)
+		signal(SIGWINCH, s_winch);
 }
 
 char				*get_path2(t_comp *data, int i, int path, int *tabi)

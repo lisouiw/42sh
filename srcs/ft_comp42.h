@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 18:14:10 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:16:29 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:11:36 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct			s_stop
 	int					add;
 	struct s_comp		*data;
 	int					more;
+	int					sig;
 }						t_stop;
 
 typedef struct			s_data
@@ -76,8 +77,9 @@ t_stop					*core_comp42(char *str, t_data *list, t_stop *stop,
 void					ft_comp42(int nb, char *str, t_stop *list);
 
 void					ft_set_term(int i, int nb);
-void					ft_move(void);
+void					ft_move(t_stop *stop);
 void					s_winch(int i);
+t_data					*hey_hook(int buf, t_data *list, t_stop *stop);
 
 int						out_size(t_data *list);
 void					out_clean(void);

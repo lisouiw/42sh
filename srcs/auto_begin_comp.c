@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:35:57 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:43:41 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 18:54:42 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void			ft_set_term(int i, int nb)
 {
-	//signal(SIGWINCH, s_winch);
 	if ((tputs(tgetstr("sf", NULL), 1, ft_put) == ERR))
 		return ;
 	if ((tputs(tgetstr("sf", NULL), 1, ft_put) == ERR))

@@ -6,13 +6,13 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/28 19:08:59 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:44:07 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 18:43:57 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_comp42.h"
 
-static t_data	*hey_hook(int buf, t_data *list, t_stop *stop)
+t_data			*hey_hook(int buf, t_data *list, t_stop *stop)
 {
 	if (buf == DOWN || buf == UP || buf == RIGHT || buf == LEFT || buf == ENTER
 			|| buf == TAB)

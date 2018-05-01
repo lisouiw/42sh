@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 18:30:18 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 14:11:58 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 18:54:05 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,48 @@ t_stop			*core2_comp42(t_data *list, t_stop *stop)
 	while (1)
 	{
 		g_se = list;
-		/*signal(SIGWINCH, s_winch);
-		if (g_se2->stop == 2)
+		//stop->sig = 1;
+		//ft_move(stop);
+		signal(SIGWINCH, s_winch);
+			/*if (g_se == NULL)
+				return (NULL);*/
+		/*if (g_se2->stop == 2)
 		{
 			free_data(list);
 			out_clean();
 			tputs(tgetstr("up", NULL), 0, ft_put);
-			tputs(tgetstr("up", NULL), 0, ft_put);
 			tputs(tgetstr("sc", NULL), 0, ft_put);
 			free_stop(stop);
-			return (NULL);
+			break ;
 		}*/
-		/*if (stop->stop == 2)
+		/*if (g_se2->stop == 2)
 		{
-			free_stop(stop);
+			//free_stop(stop);
 			ft_comp42(3, strdup(list->arg), stop);
 			free_data(list);
 			out_clean();
 			tputs(tgetstr("up", NULL), 0, ft_put);
 			tputs(tgetstr("sc", NULL), 0, ft_put);
-			return (stop);
+			break ;
 		}*/
-		if (!(out_size(list)))
+		/*if (g_se == NULL)
+			return (NULL);*/
+		/*if (!(out_size(list)))
+		{
+			free_stop(stop);
+			//ft_comp42(3, strdup(list->arg), stop);
+			free_data(list);
+			out_clean();
+			tputs(tgetstr("up", NULL), 0, ft_put);
+			tputs(tgetstr("sc", NULL), 0, ft_put);
+			return (NULL);
+		}*/
+		if (out_size(list) && g_se2->sig != 2)
+		{
+			if ((list = check_command(list, stop)) == NULL)
+				return (NULL);
+		}
+		else
 		{
 			free_stop(stop);
 			//ft_comp42(3, strdup(list->arg), stop);
@@ -113,8 +133,6 @@ t_stop			*core2_comp42(t_data *list, t_stop *stop)
 			tputs(tgetstr("sc", NULL), 0, ft_put);
 			return (NULL);
 		}
-		if ((list = check_command(list, stop)) == NULL)
-			return (NULL);
 		(stop->stop == 1) ? out_clean() : 0;
 		if (stop->stop == 1)
 		{
@@ -122,6 +140,7 @@ t_stop			*core2_comp42(t_data *list, t_stop *stop)
 			return (stop);
 		}
 	}
+	return (NULL);
 }
 
 t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi)

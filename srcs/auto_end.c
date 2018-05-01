@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 11:39:26 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 02:05:29 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:53:38 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		stop_init(t_stop *stop, char *str, int i)
 	stop->nb = where_am_i(str, i);
 	stop->print = ft_strdup("");
 	stop->cut = 0;
+	stop->sig = 0;
 	stop->stop = 0;
 	stop->add = 0;
 }
