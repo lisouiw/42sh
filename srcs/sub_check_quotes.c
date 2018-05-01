@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:28:49 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/30 19:06:48 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/01 13:24:55 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				expand_var_env(char **cmd, int i, t_env *env)
 	return (j);
 }
 
-static void		loop_2(char *cmd, int *i, int *squote, int *dquote)
+static int		loop_2(char *cmd, int *i, int *squote, int *dquote)
 {
 	int			j;
 
@@ -100,7 +100,10 @@ static void		loop_2(char *cmd, int *i, int *squote, int *dquote)
 			if (cmd[j] != '\\')
 				j--;
 	}
+	if (j == *i)
+		return (0);
 	*i = j;
+	return (1);
 }
 
 void			ft_home(char **cmd, int i, t_env *env)
@@ -121,25 +124,22 @@ int				loopy_loop(char **str, t_env *env)
 	int			size;
 
 	cmd = *str;
-	i = 0;
+	i = -1;
 	squote = 0;
 	dquote = 0;
 	size = ft_strlen(cmd);
-	while (i < size && cmd[i])
-	{
-		printf("i = %d\n", i);
-		loop_2(cmd, &i, &squote, &dquote);
-		printf("i2 = %d\n", i);
-		if (cmd[i] == '$' && !squote)
+	while (i < size && cmd[++i])
+		if (!loop_2(cmd, &i, &squote, &dquote))
 		{
-			i = expand_var_env(&cmd, i, env);
-			if (i == -1)
-				return (-1);
+			if (cmd[i] == '$' && !squote)
+			{
+				i = expand_var_env(&cmd, i, env);
+				if (i == -1)
+					return (-1);
+			}
+			else if (cmd[i] == '~' && !squote)
+				ft_home(&cmd, i, env);
 		}
-		else if (cmd[i] == '~')
-			ft_home(&cmd, i, env);
-		i++;
-	}
 	*str = cmd;
 	return (i);
 }
