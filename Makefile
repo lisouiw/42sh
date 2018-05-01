@@ -6,6 +6,8 @@ SRCDIR = srcs
 
 FLAGS = -Wall -Werror -Wextra -g
 
+FLAG = -g3 -fsanitize=address
+
 GLOB = glob.c glob_algo.c glob_fct.c glob_fct_brackets.c glob_fct_star.c glob_free.c glob_list.c glob_list_ascii.c glob_list_p_inter.c glob_tab.c glob_tab_add.c glob_tab_add2.c glob_tools.c
 
 SRCS =  main.c term.c ed.c env.c touch.c print_shell.c treatmt.c exec.c ctrl.c \
@@ -19,7 +21,7 @@ SRCS =  main.c term.c ed.c env.c touch.c print_shell.c treatmt.c exec.c ctrl.c \
 		sub_trad_d.c sub_check_calc.c sub_set_op.c sub_translate.c \
 		auto_begin_comp.c auto_core_comp.c auto_display.c auto_display2.c \
 		auto_end.c	auto_get_prop.c auto_parse_comp.c auto_tool_comp.c \
-		auto_tool2_comp.c auto_tool3_comp.c
+		auto_tool2_comp.c auto_tool3_comp.c auto_tool4_comp.c
 
 
 SRC_N = $(addprefix $(SRCDIR)/, $(SRCS))

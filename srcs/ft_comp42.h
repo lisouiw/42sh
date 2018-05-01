@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 18:14:10 by paoroste          #+#    #+#             */
-/*   Updated: 2018/04/27 17:54:00 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 04:16:29 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,22 @@ typedef struct			s_stop
 	int					cut;
 	int					nb;
 	int					add;
+	struct s_comp		*data;
+	int					more;
 }						t_stop;
 
-typedef struct		s_data
+typedef struct			s_data
 {
-	char			*arg;
-	int				cursor;
-	struct s_data	*next;
-	struct s_data	*prev;
-	int				max_len;
-	int				how_col;
-	int				how_prop;
-	int				how_row;
-	int				nb;
-}					t_data;
+	char				*arg;
+	int					cursor;
+	struct s_data		*next;
+	struct s_data		*prev;
+	int					max_len;
+	int					how_col;
+	int					how_prop;
+	int					how_row;
+	int					nb;
+}						t_data;
 
 typedef struct			s_comp
 {
@@ -74,7 +76,8 @@ t_stop					*core_comp42(char *str, t_data *list, t_stop *stop,
 void					ft_comp42(int nb, char *str, t_stop *list);
 
 void					ft_set_term(int i, int nb);
-//void					ft_move(void);
+void					ft_move(void);
+void					s_winch(int i);
 
 int						out_size(t_data *list);
 void					out_clean(void);
@@ -104,6 +107,8 @@ int						do_space(char *command);
 int						how_cut(char *str, int i, int len);
 char					*to_str(char **cmd);
 char					*add_str(char *str, int i);
+char					*add_home(char *str);
+int						no_bin(char *str);
 int						cursor_midspace(char *str, int i);
 
 char					**parse_select(char *str, int i, char **path,
@@ -111,14 +116,23 @@ char					**parse_select(char *str, int i, char **path,
 char					*get_occur(char *cmd, int what, int i, int repere);
 char					*get_path(t_comp *data, int i, int path, int *tabi);
 char					*find(char *str, int *tb, char *tmp, char *neww);
+char					*get_path2(t_comp *data, int i, int path, int *tabi);
+char					*cut_path(char *str);
 
 t_data					*get_prop(char *str, t_stop *stop, t_data *list,
 		int *tb);
 t_data					*get_args(char **av, int i, int nb, t_data *list);
-t_data					*get_prop2(t_comp *data, int i, t_data *list);
+t_data					*get_prop2(t_comp *data, t_data *list, t_stop *stop,
+		int *tb);
 char					**get_prop2_2(t_comp *data, int i, char **prop,
 		DIR *rep);
 char					**prop_2_2(struct dirent *file, t_comp *data,
 		char **prop, DIR *rep);
+t_data					*get_prop_rac(t_comp *data, t_data *list, t_stop *stop,
+		int *tb);
+char					**prop_2(t_comp *data, struct dirent *file, int i,
+		DIR *rep);
+char					**prop_rac(char *path, struct dirent *file, DIR *rep,
+		int nb);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:35:57 by paoroste          #+#    #+#             */
-/*   Updated: 2018/04/30 01:31:48 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 04:43:41 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void			ft_set_term(int i, int nb)
 {
+	//signal(SIGWINCH, s_winch);
 	if ((tputs(tgetstr("sf", NULL), 1, ft_put) == ERR))
 		return ;
 	if ((tputs(tgetstr("sf", NULL), 1, ft_put) == ERR))
@@ -63,10 +64,15 @@ char			*get_final(char **cmd, t_stop *stop, char *final)
 {
 	if (cmd[1])
 		final = get_final2(cmd, stop, final);
-	else if (!cmd[1] && stop->nb > 0)
+	else if ((!cmd[1] && stop->nb > 0))
 	{
 		final = strdup(cmd[0]);
 		final = strjoin_free_n(final, " ", 1);
+		final = strjoin_free_n(final, stop->print, 1);
+	}
+	else if (!cmd[1] && stop->more == 1)
+	{
+		final = cut_path(cmd[0]);
 		final = strjoin_free_n(final, stop->print, 1);
 	}
 	else
@@ -95,6 +101,7 @@ char			*begin_comp(char *str, int i, char *final)
 		return (NULL);
 	stop = (t_stop*)malloc(sizeof(t_stop));
 	stop_init(stop, str, i);
+	g_se2 = stop;
 	stop = core_comp42(str, NULL, stop, tabi);
 	if (stop != NULL)
 		cmd = split(str, ' ');

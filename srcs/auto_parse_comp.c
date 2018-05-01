@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 14:08:10 by paoroste          #+#    #+#             */
-/*   Updated: 2018/04/25 19:13:25 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 04:44:32 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char		**init_path(void)
 {
 	char		**path;
 
-	path = (char**)malloc(sizeof(char*) * 9);
+	path = (char**)malloc(sizeof(char*) * 8);
 	path[0] = strdup("/usr/bin");
 	path[1] = strdup("/bin");
 	path[2] = strdup("/usr/sbin");
@@ -104,13 +104,15 @@ char		**init_path(void)
 	path[4] = strdup("/usr/local/bin");
 	path[5] = strdup("/usr/local/munki");
 	path[6] = strdup("./");
-	path[7] = strdup("./");
-	path[8] = NULL;
+	path[7] = NULL;
 	return (path);
 }
 
 char		**parse_select(char *str, int i, char **path, t_stop *stop)
 {
+	char	*tmp;
+
+	tmp = NULL;
 	while (str[i])
 		i++;
 	path = split(str, ' ');
@@ -122,6 +124,13 @@ char		**parse_select(char *str, int i, char **path, t_stop *stop)
 		path[1] = strdup(" ");
 		path[2] = NULL;
 		return (path);
+	}
+	if (path[stop->nb][0] == '~' ||
+			(path[stop->nb][0] == '~' && path[stop->nb][1] == '/'))
+	{
+		tmp = ft_strdup(path[stop->nb]);
+		free(path[stop->nb]);
+		path[stop->nb] = add_home(tmp);
 	}
 	return (path);
 }

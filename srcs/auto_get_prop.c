@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 11:05:17 by paoroste          #+#    #+#             */
-/*   Updated: 2018/04/25 18:46:44 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 04:32:20 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,20 @@ char			**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb)
 	return (prop);
 }
 
-t_data			*get_prop2(t_comp *data, int i, t_data *list)
+t_data			*get_prop2(t_comp *data, t_data *list, t_stop *stop, int *tb)
 {
 	char		**prop;
+	int			i;
 
+	i = 0;
+	if (no_bin(data->cmd[0]) == 1)
+		return (get_prop_rac(data, list, stop, tb));
 	prop = prop22(data, NULL, NULL, 0);
 	if (prop == NULL)
+	{
+		free_comp(data);
 		return (NULL);
+	}
 	prop = get_prop2_2(data, i, prop, NULL);
 	free_comp(data);
 	if (prop == NULL)
@@ -129,7 +136,7 @@ t_data			*get_prop(char *str, t_stop *stop, t_data *list, int *tb)
 			prop = prop_2(data, NULL, 0, NULL);
 	}
 	else
-		return (get_prop2(data, 0, list));
+		return (get_prop2(data, list, stop, tb));
 	free_comp(data);
 	if (prop == NULL)
 		return (NULL);
