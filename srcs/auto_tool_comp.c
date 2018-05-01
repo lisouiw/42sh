@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/28 19:08:59 by paoroste          #+#    #+#             */
-/*   Updated: 2018/04/30 01:27:38 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 04:44:07 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int				out_size(t_data *list)
 		else
 			list->how_row = list->how_prop / list->how_col;
 	}
-	if ((size.ws_row - 1 < list->how_row) || (list->max_len > size.ws_col))
+	if ((size.ws_row < (list->how_row + 3)) || (list->max_len > size.ws_col))
 	{
 		list = NULL;
 		return (0);
