@@ -72,4 +72,5 @@ void	init_launch(t_exec *dot, t_cmd **ex)
 	dot->out = 1;
 	dot->in = 0;
 	dot->ok = 0;
+	dot->pipe = 0;
 }

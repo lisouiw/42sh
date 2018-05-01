@@ -21,10 +21,14 @@ void	end_pipe(t_cmd **ex, t_exec **s, int pp)
 		signal(SIGCHLD, SIG_DFL);
 		waitpid(0, &status, WNOHANG);
 		(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
+		while (--(*s)->pipe)
+			wait(NULL);
 	}
+	else
+		++(*s)->pipe;
 	close((*s)->p[1]);
 	dup2(1, (*s)->out);
-	// dup2(0, (*s)->in);
+	dup2(0, (*s)->in);
 	while ((*ex)->type != 3 && (*ex)->type != 4 && (*ex)->type != 5
 		&& (*ex)->type != 13 && (*ex)->type != 42)
 		*ex = (*ex)->next;
@@ -90,6 +94,5 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 		else
 			end_pipe(&(*ex), &s, pp);
 	}
-	wait(NULL);
 	return (env);
 }

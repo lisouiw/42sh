@@ -135,6 +135,7 @@ typedef struct		s_exec
 	int				err;
 	int				ok;
 	int				cmd;
+	int				pipe;
 }					t_exec;
 
 typedef struct		s_proc
