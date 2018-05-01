@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 23:35:20 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:42:24 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/01 14:08:47 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void				s_winch(int i)
 {
 	(void)i;
 	if (out_size(g_se))
+	{
+		tputs(tgetstr("cl", NULL), 0, ft_put);
 		print_list(g_se, 0, 0);
+	}
 	else
 		g_se2->stop = 2;
 }
