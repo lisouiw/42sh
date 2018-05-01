@@ -94,5 +94,6 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 		else
 			end_pipe(&(*ex), &s, pp);
 	}
+	wait(NULL);
 	return (env);
 }
