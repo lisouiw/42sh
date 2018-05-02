@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:25:59 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 15:26:18 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 19:00:50 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ void	init_launch(t_exec *dot, t_cmd **ex)
 	dot->in = 0;
 	dot->ok = 0;
 	dot->pipe = 0;
+}
+
+void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd **ex)
+{
+	if (i == 1 || i == 3)
+		add_his(hs, NULL, *fz);
+	if (i > 1)
+		free_all_ex(ex);
+	free((*fz)->cmd);
+	(*fz)->cmd = NULL;
 }
