@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 23:01:50 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/01 23:19:52 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 19:16:28 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char			*charsub(char *var, char **cmd, int i, int j)
 		tmp = ft_strjoin_free(tmp, var, 1);
 	if ((*cmd)[i] == '~')
 		i++;
-		tmp = ft_strjoin_free(tmp, ft_strsub(*cmd, i, ft_strlen(*cmd) - j), 3);
+	tmp = ft_strjoin_free(tmp, ft_strsub(*cmd, i, ft_strlen(*cmd) - j), 3);
 	free(*cmd);
 	return (tmp);
 }
