@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 17:10:10 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 19:06:40 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -465,5 +465,8 @@ char				*giv_brace_s(char *s);
 int					isaltwo(char *deb, char *end);
 int					brace_semicolon(char *s);
 int					isnumber_np(char *s);
+void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd **ex);
+t_env	*exec_fct_nf_build(char **cut, t_env *env, t_exec *s);
+t_env	*exec_fct_build(char **cut, t_env *env, t_exec *s);
 
 #endif
