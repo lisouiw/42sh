@@ -26,12 +26,10 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-
 typedef struct		s_glob
 {
 	char			*cmd;
-	size_t				i[2];	//[0] int au niveau du parse
-							//[1] = bon ou pas
+	size_t			i[2];
 	struct s_glob	*prev;
 	struct s_glob	*next;
 }					t_glob;
@@ -39,8 +37,7 @@ typedef struct		s_glob
 typedef struct		s_glob_p
 {
 	char			*cmd;
-	size_t			i[2];	//
-							//
+	size_t			i[2];
 	struct s_glob_p	*prev;
 	struct s_glob_p	*next;
 }					t_glob_p;
@@ -55,22 +52,22 @@ typedef struct		s_glob_b
 {
 	int				deb;
 	int				end;
-	char    		*s;
-    char		    *m;
-	char    		*e;
-	char    		*cs;
-	char    		*ce;
-	char    		*cms1;
-    char    		*cms2;
+	char			*s;
+	char			*m;
+	char			*e;
+	char			*cs;
+	char			*ce;
+	char			*cms1;
+	char			*cms2;
 }					t_glob_b;
 
-typedef struct			s_op
+typedef struct		s_op
 {
-	long 				x;
-	int					priority;
-	char				op;
-	struct s_op			*next;
-}						t_op;
+	long			x;
+	int				priority;
+	char			op;
+	struct s_op		*next;
+}					t_op;
 
 typedef struct		s_num
 {
@@ -138,20 +135,20 @@ typedef struct		s_exec
 	int				pipe;
 }					t_exec;
 
-typedef struct          s_glob_a
+typedef struct		s_glob_a
 {
-        int                             deb;
-        int                             end;
-        char                    *s;
-    char                    *m;
-        char                    *e;
-        char                    *cs;
-        char                    *ce;
-        char                    *cms1;
-        char                    *cms2;
-        int                     *ok;
-        struct s_glob_a *next;
-}                                       t_glob_a;
+	int				deb;
+	int				end;
+	char			*s;
+	char			*m;
+	char			*e;
+	char			*cs;
+	char			*ce;
+	char			*cms1;
+	char			*cms2;
+	int				*ok;
+	struct s_glob_a	*next;
+}					t_glob_a;
 
 typedef struct		s_proc
 {
@@ -231,7 +228,7 @@ void				histo_add(t_his *hs, t_edit **ed, t_froz **g_fz);
 t_his				*histo(t_his *hs, char c, t_edit **ed, t_froz **g_fz);
 t_his				*init_hs(t_his *hs, t_his *next);
 t_num				*init_shell(t_froz **g_fz, t_env **env, t_edit **ed,
-						t_his **hs);
+					t_his **hs);
 t_froz				*init_g_fz(t_froz *g_fz);
 void				init_data(t_froz **g_fz);
 void				init_for_new(t_his **hs, t_froz **g_fz, t_edit **ed);
@@ -255,19 +252,7 @@ t_cmd				*parse_pipe_or(t_cmd *ex);
 t_cmd				*giv_type(t_cmd *ex, char *s);
 t_cmd				*parse_op_int(t_cmd *ex, char *s);
 int					parse_type(t_cmd **ex);
-// t_varq				*varq_simple_quote(char *s, int *i, t_varq *v);
-// t_varq				*varq_double_quote(char *s, int *i, t_varq *v, t_env *env);
-// t_varq				*varq_env(char *s, int *i, t_varq *v, t_env *env);
-// int					move_to_put_varq(char *s, int i, int o);
-// char				*change_w_varq(char *s, t_varq *v, int i, char *nw);
-// char				*search_var_env(char *sub, t_env *env);
-// char				*translate_dquote(char *s, t_env *env);
-// void				free_varq(t_varq *v);
-// t_varq				*add_struct_varq(char *s, t_varq *v);
-// t_varq				*add_varq(char *s, int *i, t_varq *v, t_env *env);
-// t_varq				*add_varq_loop(char *s, t_varq *v, t_env *env);
 char				*replace_nwl_spc(char *s);
-// char				*quote_variable(char *s, t_varq *v, t_env *env);
 int					parsing_op(char *s, t_cmd **ex, t_froz *g_fz);
 int					parsing_quote(char *s);
 int					parsing(t_edit *ed, t_froz *g_fz, t_cmd **ex);
@@ -278,7 +263,6 @@ int					give_paste_in(t_edit **ed);
 char				*keep_paste(t_edit **ed, char *s);
 void				end_pipe(t_cmd **ex, t_exec **s, int pp);
 int					pipe_on(t_cmd *ex);
-// void				pipe_exec(t_exec *s, t_cmd **ex, t_env *env, int pp);
 t_env				*pipe_fct(t_exec *s, t_cmd **ex, t_env *env);
 int					ft_put(int c);
 void				my_tputs(t_edit *ed, t_froz *g_fz);
@@ -297,7 +281,7 @@ void				redirection(t_cmd **ex, t_env **env, t_exec *s);
 void				redirection_fork(t_cmd **ex, t_env **env, t_exec *s);
 char				**give_seven(t_cmd *ex, t_env *env);
 void				redirecting_exec(t_cmd **ex, t_env **env, char **arr,
-						t_exec *s);
+					t_exec *s);
 void				sub_into_ex_fct(char *s, int i, int in, t_cmd *ex);
 t_cmd				*sub_into_ex(char *s, int i, int in, t_cmd *ex);
 t_cmd				*separate_cmd_fct(char *s, int *i, int *in, t_cmd *ex);
@@ -333,18 +317,13 @@ t_env				*exec_fct_re(t_cmd **ex, t_env *env, t_exec *s);
 t_env				*launchcmd(t_cmd *ex, t_env *env);
 t_froz				*init_fz(t_froz *fz);
 void				free_init_fz(t_froz *fz);
-
 void				pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp);
-
 void				sig_int4(int sig);
-
 void				print_here(t_froz *fz);
 void				print_ex(t_cmd *ex);
 void				print_ex_up(t_cmd *ex);
-
 int					last_multiple_char(char *s, char c);
 int					parse_synthaxe_back(t_cmd *ex);
-
 void				glob(char *s, int *i, t_cmd **ex);
 char				*glob_parsing(t_cmd **ex);
 char				*join_trad(t_glob *g);
@@ -389,13 +368,12 @@ t_glob_p			*check_backslash_str(t_glob_p *gp, int *st, int *end,
 					char *trad);
 t_glob_p			*check_match_str(t_glob_p *gp, int *st, int *end,
 					char *trad);
-t_glob_p			*add_question_list(t_glob_p *gp, int *st, int *end,
+t_glob_p			*add_question_list(t_glob_p *gp, int *st, int *end,\
 					char *s);
 void				glob_free1(t_glob *g);
 void				glob_free(t_glob *g);
 void				glob_free_list(t_glob *g);
 void				glob_p_free_list(t_glob_p *g);
-
 int					check_op(char tmp[3], int *error);
 int					check_var(char *var, int *error, int op, int i);
 long				operator(long a, long b, char op);
@@ -430,7 +408,7 @@ char				**translate(t_env *env, t_cmd **ex);
 void				ft_replace_b(char *str, int i);
 int					ft_isquote(char c);
 int					arg_nbr(char *cmd);
-char	    		*delete_dot(char *cd, t_env **env, int a);
+char				*delete_dot(char *cd, t_env **env, int a);
 void				free_b_cd(char *real, char *cd, char *way);
 char				*purif2(char *str);
 char				*purif3(char *str);
@@ -455,83 +433,37 @@ int					check_echo_flags(char **cd, int *tab1, int a, int b);
 int					check_n(char **ta, int *t, int a);
 void				ft_exit(char *cmd);
 void				manage_env(t_env *env);
-// void			ft_set_term(int i, int nb);
-// char			*get_final2(char **cmd, t_stop *stop, char *final);
-// char			*get_final(char **cmd, t_stop *stop, char *final);
-// char			*begin_comp(char *str, int i, char *final);
-t_edit			*auto_completion(t_edit *ed, t_froz *fz);
-// void			print_list(t_data *list, int x, int y);
-// void			out_clean(void);
-// t_data			*get_args(char **av, int i, int nb, t_data *list);
-// t_stop			*core2_comp42(t_data *list, t_stop *stop);
-// t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi);
-// void				ft_left(t_data *list);
-// void				ft_right(t_data *list);
-// void		do_up(t_data *list, int col, int prop, int i);
-// void		ft_up(t_data *list, int col, int prop, int i);
-// void		do_down(t_data *list, int col, int prop, int i);
-// void		ft_down(t_data *list, int col, int prop, int i);
-// void		free_data(t_data *list);
-// void		free_comp(t_comp *data);
-// void		stop_init(t_stop *stop, char *str, int i);
-// char		*epur_str(char *str);
-// char			**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb);
-// t_data			*get_prop2(t_comp *data, int i, t_data *list);
-// char			**prop_rac(char *path, struct dirent *file, DIR *rep, int nb);
-// char			**prop_2(t_comp *data, struct dirent *file, int i, DIR *rep);
-// t_data			*get_prop(char *str, t_stop *stop, t_data *list, int *tb);
-// char		*cut_path(char *str);
-// char		*find(char *str, int *tb, char *tmp, char *new);
-// char		*get_path(t_comp *data, int i, int path, int *tabi);
-// char		**init_path(void);
-// char		**parse_select(char *str, int i, char **path, t_stop *stop);
-// static t_data	*hey_hook(int buf, t_data *list, t_stop *stop);
-// int			do_space(char *command);
-// int				out_size(t_data *list);
-// t_data			*check_command(t_data *list, t_stop *stop);
-// void			ft_comp42(int nb, char *str, t_stop *list);
-// void			final_print(t_data *list, t_stop *stop);
-// char		*strdupmore(char *src, int nb);
-
-// int			get_high_len(char **proposition);
-// char		**prop_2_2(struct dirent *file, t_comp *data, char **prop, DIR *rep);
-// char		**get_prop2_2(t_comp *data, int i, char **prop, DIR *rep);
-// char		**get_prop2_2(t_comp *data, int i, char **prop, DIR *rep);
-// int				how_cut(char *str, int i, int len);
-// char			*to_str(char **cmd);
-// void			data_init(t_comp *data);
-// void			free_stop(t_stop *stop);
-// int				where_am_i(char *str, int i);
-char	*semicolon_translate(t_glob_b *b, char *final);
-char	*join_semicolon(t_glob_b *b);
-char	*join_two_comas(t_glob_b *b);
-char	*glob_brace_str(t_cmd **ex, t_glob_b *b);
-char	*glob_brace(t_cmd **ex);
-char	*join_two_comas_num_down(t_glob_b *b, int num1, int num2);
-char	*join_two_comas_num_up(t_glob_b *b, int num1, int num2);
-char	*join_brace_nf(t_glob_b *b, char *final);
-char	*join_two_comas_alpha_down(t_glob_b *b);
-char	*join_two_comas_alpha_up(t_glob_b *b);
-char	*modif_s_e(t_glob_b *b, char *final);
-char	*giv_brace_e(char *s);
-char	*giv_brace_s(char *s);
-char	*join_brace(t_glob_b *b, char *final);
-int			int_split(char *mid, int *i);
-void		free_glob_a(t_glob_a *a);
-t_glob_a	*add_glob_a(char *mid, t_glob_a *a);
-t_glob_a	*give_semicolon_list(char *mid, t_glob_b *b, t_glob_a *a);
-char		*join_list_glob_a(t_glob_a *a);
-int		check_brace(char *s, t_glob_b *b);
-int		match_brace(char *s, t_glob_b *b, int i);
-int		glob_brace_int(t_cmd **ex, t_glob_b *b);
-int		isaltwo(char *deb, char *end);
-int		brace_semicolon(char *s);
-int		brace_two_comas(t_glob_b *b);
-char	*modif_s_e(t_glob_b *b, char *final);
-char	*giv_brace_e(char *s);
-char	*giv_brace_s(char *s);
-int		isaltwo(char *deb, char *end);
-int		brace_semicolon(char *s);
-int     isnumber_np(char *s);
+t_edit				*auto_completion(t_edit *ed, t_froz *fz);
+char				*semicolon_translate(t_glob_b *b, char *final);
+char				*join_semicolon(t_glob_b *b);
+char				*join_two_comas(t_glob_b *b);
+char				*glob_brace_str(t_cmd **ex, t_glob_b *b);
+char				*glob_brace(t_cmd **ex);
+char				*join_two_comas_num_down(t_glob_b *b, int num1, int num2);
+char				*join_two_comas_num_up(t_glob_b *b, int num1, int num2);
+char				*join_brace_nf(t_glob_b *b, char *final);
+char				*join_two_comas_alpha_down(t_glob_b *b);
+char				*join_two_comas_alpha_up(t_glob_b *b);
+char				*modif_s_e(t_glob_b *b, char *final);
+char				*giv_brace_e(char *s);
+char				*giv_brace_s(char *s);
+char				*join_brace(t_glob_b *b, char *final);
+int					int_split(char *mid, int *i);
+void				free_glob_a(t_glob_a *a);
+t_glob_a			*add_glob_a(char *mid, t_glob_a *a);
+t_glob_a			*give_semicolon_list(char *mid, t_glob_b *b, t_glob_a *a);
+char				*join_list_glob_a(t_glob_a *a);
+int					check_brace(char *s, t_glob_b *b);
+int					match_brace(char *s, t_glob_b *b, int i);
+int					glob_brace_int(t_cmd **ex, t_glob_b *b);
+int					isaltwo(char *deb, char *end);
+int					brace_semicolon(char *s);
+int					brace_two_comas(t_glob_b *b);
+char				*modif_s_e(t_glob_b *b, char *final);
+char				*giv_brace_e(char *s);
+char				*giv_brace_s(char *s);
+int					isaltwo(char *deb, char *end);
+int					brace_semicolon(char *s);
+int					isnumber_np(char *s);
 
 #endif
