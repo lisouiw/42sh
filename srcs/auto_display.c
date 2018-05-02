@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 23:35:20 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/02 13:53:56 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:21:02 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_stop				*ft_set_mssg(t_data *list)
 	if (list == NULL)
 		ft_putstr_fd("\n42sh: No occurence ", 0);
 	else if (list->how_prop > 175)
-		ft_putstr_fd("\n42sh: Affine your search ", 0);
+		ft_putstr_fd("\n42sh: Refine your search ", 0);
 	else if (!(out_size(list)))
 		ft_putstr_fd("\n42sh: Window too small ", 0);
 	if (list != NULL)
