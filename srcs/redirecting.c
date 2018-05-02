@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:25:25 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/09 11:22:37 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 16:58:25 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	redirection(t_cmd **ex, t_env **env, t_exec *s)
 
 	arr = translate(*env, ex); //pasrsing_bonus
 	*ex = (*ex)->next;
-	if (redirection_check_create(*ex))
+	if (redirection_check_create(*ex, *env))
 		redirecting_exec(ex, env, arr, s);
 	else
 	{
@@ -44,7 +44,7 @@ void	redirection_fork(t_cmd **ex, t_env **env, t_exec *s)
 		exit(EXIT_FAILURE);
 	else if (pid == 0)
 	{
-		if (redirection_check_create(*ex))
+		if (redirection_check_create(*ex, *env))
 			redirecting_exec(ex, env, arr, s);
 		else
 			exit(-1);
@@ -64,7 +64,7 @@ void	redirection_no_cmd(t_cmd **ex, t_env **env, t_exec *s)
 	s->in = dup(0);
 	s->out = dup(1);
 	 //pasrsing_bonus
-	if (redirection_check_create(*ex))
+	if (redirection_check_create(*ex, *env))
 		redirecting_exec(ex, env, NULL, s);
 	dup2(s->out, 1);
 	dup2(s->in, 0);

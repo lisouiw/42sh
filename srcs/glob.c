@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:11:08 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/28 15:38:23 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 17:00:00 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*glob_parsing(t_cmd **ex)
 
 	i = -1;
 	q = 0;
-	// (*ex)->cmd = glob_brace(ex)
+	(*ex)->cmd = glob_brace(ex);
 	while ((*ex)->cmd[++i])
 	{
 		//if ((*ex)->cmd[i] == '\\')

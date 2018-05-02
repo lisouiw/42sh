@@ -11,7 +11,10 @@ AUTO =	auto_begin_comp.c auto_core_comp.c auto_display.c auto_display2.c \
     	auto_tool2_comp.c auto_tool3_comp.c auto_tool4_comp.c \
 
 GLOB =	glob.c glob_algo.c glob_fct.c glob_fct_brackets.c glob_fct_star.c \
-		glob_free.c glob_list.c glob_list_ascii.c glob_list_p_inter.c glob_tab.c glob_tab_add.c glob_tab_add2.c glob_tools.c
+		glob_free.c glob_list.c glob_list_ascii.c glob_list_p_inter.c glob_tab.c \
+		glob_tab_add.c glob_tab_add2.c glob_tools.c glob_brace.c\
+		glob_brace_parsing.c glob_brace_semicolon_split.c \
+		glob_brace_split.c glob_brace_two_comas.c glob_brace_parsing_check.c\
 
 SRCS =  main.c term.c ed.c env.c touch.c print_shell.c treatmt.c exec.c ctrl.c \
 		tools.c init.c parsing.c prompt.c giv_str.c pascutcopy.c signal.c \

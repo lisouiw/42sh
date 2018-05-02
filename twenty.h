@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/30 20:41:01 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 17:10:10 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,21 @@ typedef struct		s_exec
 	int				cmd;
 	int				pipe;
 }					t_exec;
+
+typedef struct          s_glob_a
+{
+        int                             deb;
+        int                             end;
+        char                    *s;
+    char                    *m;
+        char                    *e;
+        char                    *cs;
+        char                    *ce;
+        char                    *cms1;
+        char                    *cms2;
+        int                     *ok;
+        struct s_glob_a *next;
+}                                       t_glob_a;
 
 typedef struct		s_proc
 {
@@ -487,7 +502,36 @@ t_edit			*auto_completion(t_edit *ed, t_froz *fz);
 // void			data_init(t_comp *data);
 // void			free_stop(t_stop *stop);
 // int				where_am_i(char *str, int i);
-
-
+char	*semicolon_translate(t_glob_b *b, char *final);
+char	*join_semicolon(t_glob_b *b);
+char	*join_two_comas(t_glob_b *b);
+char	*glob_brace_str(t_cmd **ex, t_glob_b *b);
+char	*glob_brace(t_cmd **ex);
+char	*join_two_comas_num_down(t_glob_b *b, int num1, int num2);
+char	*join_two_comas_num_up(t_glob_b *b, int num1, int num2);
+char	*join_brace_nf(t_glob_b *b, char *final);
+char	*join_two_comas_alpha_down(t_glob_b *b);
+char	*join_two_comas_alpha_up(t_glob_b *b);
+char	*modif_s_e(t_glob_b *b, char *final);
+char	*giv_brace_e(char *s);
+char	*giv_brace_s(char *s);
+char	*join_brace(t_glob_b *b, char *final);
+int			int_split(char *mid, int *i);
+void		free_glob_a(t_glob_a *a);
+t_glob_a	*add_glob_a(char *mid, t_glob_a *a);
+t_glob_a	*give_semicolon_list(char *mid, t_glob_b *b, t_glob_a *a);
+char		*join_list_glob_a(t_glob_a *a);
+int		check_brace(char *s, t_glob_b *b);
+int		match_brace(char *s, t_glob_b *b, int i);
+int		glob_brace_int(t_cmd **ex, t_glob_b *b);
+int		isaltwo(char *deb, char *end);
+int		brace_semicolon(char *s);
+int		brace_two_comas(t_glob_b *b);
+char	*modif_s_e(t_glob_b *b, char *final);
+char	*giv_brace_e(char *s);
+char	*giv_brace_s(char *s);
+int		isaltwo(char *deb, char *end);
+int		brace_semicolon(char *s);
+int     isnumber_np(char *s);
 
 #endif
