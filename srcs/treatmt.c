@@ -6,31 +6,21 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:36:32 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/01 23:32:57 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 19:00:54 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd	**ex)
-{
-	if (i == 1 || i == 3)
-		add_his(hs, NULL, *fz);
-	if (i > 1)
-		free_all_ex(ex);
-	free((*fz)->cmd);
-	(*fz)->cmd = NULL;
-}
-
-
-int		init_treatmt(t_cmd	**ex, t_edit **cmd, t_froz **fz)
+int		init_treatmt(t_cmd **ex, t_edit **cmd, t_froz **fz)
 {
 	*ex = NULL;
 	while ((*cmd)->rpz[0] == 0)
 		*cmd = (*cmd)->next;
 	if ((*fz)->nb[0] % g_nb->tb[0] != 1)
 		ft_putchar('\n');
-	if ((*fz)->mode[3] != 6 && (*fz)->mode[3] != 20 && ((*cmd)->c[0] == '\0' || (if_only_i(ed_str(*cmd,
+	if ((*fz)->mode[3] != 6 && (*fz)->mode[3] != 20 && ((*cmd)->c[0] == '\0'
+		|| (if_only_i(ed_str(*cmd,
 		NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))) && (*fz)->cmd == NULL)
 		return (1);
 	return (0);
@@ -42,7 +32,8 @@ t_env	*treat_cmd(t_env *env, t_edit **cmd, t_his **hs, t_froz **fz)
 
 	if (init_treatmt(&ex, cmd, fz))
 		return (env);
-	else if ((*fz)->mode[3] == 20 && ((*cmd)->c[0] == '\0' || (if_only_i(ed_str(*cmd, NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))))
+	else if ((*fz)->mode[3] == 20 && ((*cmd)->c[0] == '\0' ||
+		(if_only_i(ed_str(*cmd, NULL, (*fz)->nb[0] - giv_last(*fz)), ' '))))
 	{
 		add_his(hs, NULL, *fz);
 		if (parsing(*cmd, *fz, &ex) == 1)
@@ -117,8 +108,8 @@ t_env	*launchcmd(t_cmd *ex, t_env *env)
 		else if (ex->type == 5 && s.ok == 1)
 			move_on(&ex, 5);
 		else if (ex->type == 0 && !(ex->next->type >= 6 &&
-					ex->next->type <= 11))
-		env = exec_fct_re(&ex, env, &s);
+			ex->next->type <= 11))
+			env = exec_fct_re(&ex, env, &s);
 		else if (ex->type == 0 && ex->next->type >= 6 && ex->next->type <= 11)
 			redirection_fork(&ex, &env, &s);
 		else if (ex->type >= 6 && ex->type <= 11)
