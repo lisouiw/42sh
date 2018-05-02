@@ -6,11 +6,59 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:11:08 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 17:00:00 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 18:20:55 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
+
+int		clean_brackets_star_loop(t_glob **g, char **tb, int y, int i)
+{
+	while (tb[++y] && (i = -1))
+	{
+		while (tb[y][++i])
+		{
+			if (tb[y][i] && tb[y][i + 1] == '-')
+			{
+				if ((*g)->cmd[(*g)->i[0]] >= tb[y][i]
+					&& (*g)->cmd[(*g)->i[0]] <= tb[y][i + 2])
+				{
+					(*g)->i[0] = (*g)->i[0] + 1;
+					break ;
+				}
+				else
+					i = i + 2;
+			}
+			else if (tb[y][i] == (*g)->cmd[(*g)->i[0]])
+			{
+				(*g)->i[0] = (*g)->i[0] + 1;
+				break ;
+			}
+		}
+		if ((!tb[y][i]))
+			return (1);
+	}
+	return (0);
+}
+
+int		check_question(char *cmd, char *s, int i, char *next)
+{
+	int		len;
+
+	len = ft_strlen(cmd);
+	while (len > 0 && s[i])
+	{
+		--len;
+		++i;
+	}
+	if (len == 0)
+	{
+		if (next == NULL && s[i])
+			return (1);
+		return (0);
+	}
+	return (1);
+}
 
 void	glob(char *s, int *i, t_cmd **ex)
 {
@@ -47,8 +95,8 @@ char	*glob_parsing(t_cmd **ex)
 	(*ex)->cmd = glob_brace(ex);
 	while ((*ex)->cmd[++i])
 	{
-		//if ((*ex)->cmd[i] == '\\')
-		//	i++;
+		if ((*ex)->cmd[i] == '\\')
+			i += 2;
 		if (q != 1 && (*ex)->cmd[i] == 39)
 			q = (q == 2) ? 0 : 2;
 		else if (q != 2 && (*ex)->cmd[i] == '"')
@@ -59,7 +107,3 @@ char	*glob_parsing(t_cmd **ex)
 	}
 	return ((*ex)->cmd);
 }
-// glob.c glob_algo.c glob_fct.c glob_fct_brackets.c glob_fct_star.c glob_free.c glob_list.c glob_list_ascii.c glob_list_p_inter.c glob_print.c glob_tab.c glob_tab_add.c glob_tab_add2.c glob_tools.c
-
-// glob_brace_split.c glob_brace_split_alpha.c glob_brace.c glob_brace_parsing.c
-// glob_brace_parsing_fct.c

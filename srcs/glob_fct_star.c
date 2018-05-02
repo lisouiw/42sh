@@ -6,59 +6,11 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 10:32:25 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/26 18:02:07 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 18:19:31 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
-
-int		check_question(char *cmd, char *s, int i, char *next)
-{
-	int		len;
-
-	len = ft_strlen(cmd);
-	while (len > 0 && s[i])
-	{
-		--len;
-		++i;
-	}
-	if (len == 0)
-	{
-		if (next == NULL && s[i])
-			return (1);
-		return (0);
-	}
-	return (1);
-}
-
-int		clean_brackets_star_loop(t_glob **g, char **tb, int y, int i)
-{
-	while (tb[++y] && (i = -1))
-	{
-		while (tb[y][++i])
-		{
-			if (tb[y][i] && tb[y][i + 1] == '-')
-			{
-				if ((*g)->cmd[(*g)->i[0]] >= tb[y][i]
-					&& (*g)->cmd[(*g)->i[0]] <= tb[y][i + 2])
-				{
-					(*g)->i[0] = (*g)->i[0] + 1;
-					break ;
-				}
-				else
-					i = i + 2;
-			}
-			else if (tb[y][i] == (*g)->cmd[(*g)->i[0]])
-			{
-				(*g)->i[0] = (*g)->i[0] + 1;
-				break ;
-			}
-		}
-		if ((!tb[y][i]))
-			return (1);
-	}
-	return (0);
-}
 
 int		clean_brackets_star(t_glob **g, t_glob_p **parse)
 {

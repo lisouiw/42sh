@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 19:04:24 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 17:56:05 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 18:20:32 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		check_brace(char *s, t_glob_b *b)
 	free(b->e);
 	return (0);
 }
-
 
 int		match_brace(char *s, t_glob_b *b, int i)
 {
