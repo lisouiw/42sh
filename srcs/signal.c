@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:27:15 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/30 14:50:47 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:15:51 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,6 @@ void	sig_int(int sig)
 	}
 	sig = 0;
 }
-
-void	sig_int4(int sig)
-{
-	sig =0;
-	// wait(0);
-	// kill(0, SIGINT);
-	printf("coucou %d\n", wait(NULL));
-	// sig_int4(wait(NULL));
-}
-
 
 void	sig_int3(int sig)
 {
