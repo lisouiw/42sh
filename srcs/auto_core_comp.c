@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 18:30:18 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 18:54:05 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:55:09 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,48 +76,12 @@ t_data			*get_args(char **av, int i, int nb, t_data *list)
 	return (list);
 }
 
-t_stop			*core2_comp42(t_data *list, t_stop *stop)
+static t_stop	*core2_comp42(t_data *list, t_stop *stop)
 {
 	print_list(list, 0, 0);
 	while (1)
 	{
-		g_se = list;
-		//stop->sig = 1;
-		//ft_move(stop);
 		signal(SIGWINCH, s_winch);
-			/*if (g_se == NULL)
-				return (NULL);*/
-		/*if (g_se2->stop == 2)
-		{
-			free_data(list);
-			out_clean();
-			tputs(tgetstr("up", NULL), 0, ft_put);
-			tputs(tgetstr("sc", NULL), 0, ft_put);
-			free_stop(stop);
-			break ;
-		}*/
-		/*if (g_se2->stop == 2)
-		{
-			//free_stop(stop);
-			ft_comp42(3, strdup(list->arg), stop);
-			free_data(list);
-			out_clean();
-			tputs(tgetstr("up", NULL), 0, ft_put);
-			tputs(tgetstr("sc", NULL), 0, ft_put);
-			break ;
-		}*/
-		/*if (g_se == NULL)
-			return (NULL);*/
-		/*if (!(out_size(list)))
-		{
-			free_stop(stop);
-			//ft_comp42(3, strdup(list->arg), stop);
-			free_data(list);
-			out_clean();
-			tputs(tgetstr("up", NULL), 0, ft_put);
-			tputs(tgetstr("sc", NULL), 0, ft_put);
-			return (NULL);
-		}*/
 		if (out_size(list) && g_se2->sig != 2)
 		{
 			if ((list = check_command(list, stop)) == NULL)
@@ -126,7 +90,6 @@ t_stop			*core2_comp42(t_data *list, t_stop *stop)
 		else
 		{
 			free_stop(stop);
-			//ft_comp42(3, strdup(list->arg), stop);
 			free_data(list);
 			out_clean();
 			tputs(tgetstr("up", NULL), 0, ft_put);
@@ -140,7 +103,6 @@ t_stop			*core2_comp42(t_data *list, t_stop *stop)
 			return (stop);
 		}
 	}
-	return (NULL);
 }
 
 t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi)
@@ -149,12 +111,10 @@ t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi)
 	(list != NULL) ? out_size(list) : 0;
 	if (list != NULL && list->how_prop <= 175 && out_size(list))
 		ft_set_term(1, list->how_row);
-	else
-		free_data(list);
 	if (list == NULL || list->how_prop > 175 || (!(out_size(list))))
 	{
 		free_stop(stop);
-		return (NULL);
+		return (ft_set_mssg(list));
 	}
 	else if (out_size(list) && list->how_prop >= 1)
 		return (core2_comp42(list, stop));

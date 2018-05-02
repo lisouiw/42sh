@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 18:14:10 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 17:11:36 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:03:39 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,21 @@ t_stop					*core_comp42(char *str, t_data *list, t_stop *stop,
 void					ft_comp42(int nb, char *str, t_stop *list);
 
 void					ft_set_term(int i, int nb);
-void					ft_move(t_stop *stop);
 void					s_winch(int i);
-t_data					*hey_hook(int buf, t_data *list, t_stop *stop);
 
 int						out_size(t_data *list);
 void					out_clean(void);
 void					free_data(t_data *list);
 void					free_comp(t_comp *data);
 void					free_stop(t_stop *stop);
+t_stop					*ft_set_mssg(t_data *list);
 
 void					stop_init(t_stop *stop, char *str, int i);
 void					data_init(t_comp *data);
 char					**init_path(void);
 
 t_data					*check_command(t_data *list, t_stop *stop);
+t_data					*hey_hook(int buf, t_data *list, t_stop *stop);
 void					print_list(t_data *list, int x, int y);
 void					final_print(t_data *list, t_stop *stop);
 
@@ -100,26 +100,23 @@ void					ft_down(t_data *list, int col, int prop, int i);
 void					ft_right(t_data *list);
 void					ft_left(t_data *list);
 
+t_data					*do_prev(t_data *list, t_data *tmp);
+int						do_space(char *command);
+int						where_am_i(char *str, int i);
+char					*to_str(char **cmd);
+int						how_cut(char *str, int i, int len);
 char					*strdupmore(char *src, int nb);
 int						get_high_len(char **proposition);
-t_data					*do_prev(t_data *list, t_data *tmp);
-char					*epur_str(char *str);
-int						where_am_i(char *str, int i);
-int						do_space(char *command);
-int						how_cut(char *str, int i, int len);
-char					*to_str(char **cmd);
-char					*add_str(char *str, int i);
 char					*add_home(char *str);
 int						no_bin(char *str);
-int						cursor_midspace(char *str, int i);
 
 char					**parse_select(char *str, int i, char **path,
 		t_stop *stop);
-char					*get_occur(char *cmd, int what, int i, int repere);
 char					*get_path(t_comp *data, int i, int path, int *tabi);
-char					*find(char *str, int *tb, char *tmp, char *neww);
 char					*get_path2(t_comp *data, int i, int path, int *tabi);
+char					*find(char *str, int *tb, char *tmp, char *neww);
 char					*cut_path(char *str);
+char					*epur_str(char *str);
 
 t_data					*get_prop(char *str, t_stop *stop, t_data *list,
 		int *tb);

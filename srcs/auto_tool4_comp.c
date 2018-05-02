@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 04:44:54 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:46:12 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:46:29 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_data				*get_prop_rac(t_comp *data, t_data *list, t_stop *stop,
 	return (get_args(prop, 1, get_high_len(prop), list));
 }
 
-char				*ft_get_home(char *str, int how)
+static char			*ft_get_home(char *str, int how)
 {
 	int				i;
 	char			*new;
@@ -66,7 +66,7 @@ char				*ft_get_home(char *str, int how)
 	return (new);
 }
 
-char				*add_home2(char *tmp, char **environ, char *str)
+static char			*add_home2(char *tmp, char **environ, char *str)
 {
 	int				i;
 

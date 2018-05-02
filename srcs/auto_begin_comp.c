@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:35:57 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 18:54:42 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:37:22 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			ft_set_term(int i, int nb)
 	return ;
 }
 
-char			*get_final2(char **cmd, t_stop *stop, char *final)
+static char		*get_final2(char **cmd, t_stop *stop, char *final)
 {
 	if (stop->cut == 1)
 	{
@@ -59,7 +59,7 @@ char			*get_final2(char **cmd, t_stop *stop, char *final)
 	return (final);
 }
 
-char			*get_final(char **cmd, t_stop *stop, char *final)
+static char		*get_final(char **cmd, t_stop *stop, char *final)
 {
 	if (cmd[1])
 		final = get_final2(cmd, stop, final);
@@ -86,7 +86,7 @@ char			*get_final(char **cmd, t_stop *stop, char *final)
 	return (final);
 }
 
-char			*begin_comp(char *str, int i, char *final)
+static char		*begin_comp(char *str, int i, char *final)
 {
 	t_stop		*stop;
 	char		**cmd;

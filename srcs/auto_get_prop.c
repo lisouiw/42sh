@@ -6,13 +6,13 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 11:05:17 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:32:20 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:44:10 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_comp42.h"
 
-char			**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb)
+static char		**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb)
 {
 	int		i;
 	char	**prop;

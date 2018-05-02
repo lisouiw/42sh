@@ -6,13 +6,13 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 04:54:51 by paoroste          #+#    #+#             */
-/*   Updated: 2018/04/22 19:28:25 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:42:55 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_comp42.h"
 
-void		do_up(t_data *list, int col, int prop, int i)
+static void		do_up(t_data *list, int col, int prop, int i)
 {
 	int			end;
 	int			nb;
@@ -33,7 +33,7 @@ void		do_up(t_data *list, int col, int prop, int i)
 	list->cursor = 1;
 }
 
-void		ft_up(t_data *list, int col, int prop, int i)
+void			ft_up(t_data *list, int col, int prop, int i)
 {
 	int			nb;
 
@@ -61,7 +61,7 @@ void		ft_up(t_data *list, int col, int prop, int i)
 	}
 }
 
-void		do_down(t_data *list, int col, int prop, int i)
+static void		do_down(t_data *list, int col, int prop, int i)
 {
 	int			begin;
 	int			nb;
@@ -83,7 +83,7 @@ void		do_down(t_data *list, int col, int prop, int i)
 	list->cursor = 1;
 }
 
-void		ft_down(t_data *list, int col, int prop, int i)
+void			ft_down(t_data *list, int col, int prop, int i)
 {
 	int			nb;
 
