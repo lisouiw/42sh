@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:35:57 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/02 13:37:22 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:23:35 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,22 +86,18 @@ static char		*get_final(char **cmd, t_stop *stop, char *final)
 	return (final);
 }
 
-static char		*begin_comp(char *str, int i, char *final)
+static char		*begin_comp(char *str, int i, char *final, t_env *env)
 {
 	t_stop		*stop;
 	char		**cmd;
-	int			tabi[3];
 
-	tabi[0] = 0;
-	tabi[1] = 0;
-	tabi[2] = 0;
 	(do_space(str)) ? free(str) : 0;
 	if (do_space(str))
 		return (NULL);
 	stop = (t_stop*)malloc(sizeof(t_stop));
 	stop_init(stop, str, i);
 	g_se2 = stop;
-	stop = core_comp42(str, NULL, stop, tabi);
+	stop = core_comp42(str, NULL, stop, env);
 	if (stop != NULL)
 		cmd = split(str, ' ');
 	free(str);
@@ -114,7 +110,7 @@ static char		*begin_comp(char *str, int i, char *final)
 	}
 }
 
-t_edit			*auto_completion(t_edit *ed, t_froz *fz)
+t_edit			*auto_completion(t_edit *ed, t_froz *fz, t_env *env)
 {
 	char		*cmd;
 	int			i;
@@ -123,7 +119,7 @@ t_edit			*auto_completion(t_edit *ed, t_froz *fz)
 	while (ed->rpz[2] == 0)
 		ed = ed->next;
 	i = ed->rpz[2] - giv_last(fz);
-	cmd = begin_comp(cmd, i, NULL);
+	cmd = begin_comp(cmd, i, NULL, env);
 	if (cmd != NULL)
 	{
 		i = -1;

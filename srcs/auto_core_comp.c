@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 18:30:18 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/02 13:55:09 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:47:05 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ static t_stop	*core2_comp42(t_data *list, t_stop *stop)
 	}
 }
 
-t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi)
+t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, t_env *env)
 {
-	list = get_prop((str), stop, list, tabi);
+	list = get_prop((str), stop, list, env);
 	(list != NULL) ? out_size(list) : 0;
 	if (list != NULL && list->how_prop <= 175 && out_size(list))
 		ft_set_term(1, list->how_row);

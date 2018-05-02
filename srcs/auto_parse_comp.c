@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 14:08:10 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:44:32 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:47:42 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char		*get_path(t_comp *data, int i, int path, int *tabi)
 			if (data->cmd[data->nb][i] == '/')
 				path = 1;
 			if (data->cmd[data->nb][i + 1] == '\0' && (data->cmd[data->nb][i]
-						== '/' || data->cmd[data->nb][i] == '#'))
+						== '/'))
 				data->all_prop = 1;
 			i++;
 		}
@@ -108,11 +108,11 @@ char		**init_path(void)
 	return (path);
 }
 
-char		**parse_select(char *str, int i, char **path, t_stop *stop)
+char		**parse_select(char *str, t_env *env, char **path, t_stop *stop)
 {
-	char	*tmp;
+	int		i;
 
-	tmp = NULL;
+	i = 0;
 	while (str[i])
 		i++;
 	path = split(str, ' ');
@@ -128,9 +128,11 @@ char		**parse_select(char *str, int i, char **path, t_stop *stop)
 	if (path[stop->nb][0] == '~' ||
 			(path[stop->nb][0] == '~' && path[stop->nb][1] == '/'))
 	{
-		tmp = ft_strdup(path[stop->nb]);
-		free(path[stop->nb]);
-		path[stop->nb] = add_home(tmp);
+		path[stop->nb] = add_home(path[stop->nb], env);
+		if (path[stop->nb] == NULL)
+			free_tab(path);
+		if (path[0] == NULL)
+			return (NULL);
 	}
 	return (path);
 }
