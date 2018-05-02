@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 21:28:32 by corosteg         ###   ########.fr       */
+/*   Updated: 2018/05/03 01:06:55 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ typedef struct			s_comp
 	char				*find;
 }						t_comp;
 
+int					g_kill;
 struct s_num		*g_nb;
 struct s_env		*g_env;
 struct s_his		*g_hs;

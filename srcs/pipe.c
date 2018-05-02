@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:17:26 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 19:05:36 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/03 01:07:24 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 	i = 0;
 	pp = 1;
 	s->in = 0;
+	g_kill = 0;
 	while (pp == 1)
 	{
+		g_kill++;
 		s->out = dup(1);
 		pp = pipe_on(*ex);
 		if ((*ex)->cmd == NULL)

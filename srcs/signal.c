@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:27:15 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 18:15:51 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/03 01:09:03 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void	sig_int(int sig)
 {
 	int		status;
+	int		i;
 
+	i = -1;
+	while (++i < g_kill)
+		wait(0);
 	status = 0;
 	while (g_ed->rpz[0] == 0)
 		g_ed = g_ed->next;
