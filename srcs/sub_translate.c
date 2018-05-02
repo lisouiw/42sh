@@ -6,11 +6,20 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:35:02 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/01 23:06:55 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 19:09:46 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
+
+void		ft_home(char **cmd, int i, t_env *env)
+{
+	char	*tmp;
+
+	tmp = find_variable(ft_strdup("HOME"), env);
+	if (tmp)
+		*cmd = charsub(tmp, cmd, i, 0);
+}
 
 void		ft_replace_b(char *str, int i)
 {

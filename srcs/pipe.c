@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:17:26 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/09 15:20:34 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 19:05:36 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	end_pipe(t_cmd **ex, t_exec **s, int pp)
 	{
 		signal(SIGCHLD, SIG_DFL);
 		while (--(*s)->pipe)
-			waitpid(0, &status, WNOHANG |WUNTRACED );
+			waitpid(0, &status, WNOHANG | WUNTRACED);
 		wait(&status);
 		(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
 	}
@@ -66,7 +66,7 @@ void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 	else if ((*ex)->next->type >= 6 && (*ex)->next->type <= 11)
 		redirection(ex, &env, *s);
 	else if ((*ex)->type == 0)
-		env = exec_fct_nf(translate(env, ex), env, ex, *s);  //pasrsing_bonus
+		env = exec_fct_nf(translate(env, ex), env, ex, *s);
 }
 
 t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)

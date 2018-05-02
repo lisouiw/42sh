@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:00:08 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/30 19:48:00 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 19:07:26 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		parse_synthaxe(t_cmd *ex, char *s)
 	int		i;
 
 	if (s[ft_strlen(s) - 1] == '\\' && parse_synthaxe_back(ex))
-		return(20);
+		return (20);
 	if ((i = parse_synthaxe_1(ex)) < 0)
 		return (i);
 	while (ex->next != NULL)
