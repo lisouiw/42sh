@@ -6,50 +6,25 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:59:51 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 15:35:29 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 18:55:55 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
-
-
-//refaire bien les builtin et rajouter les s->ok  pour les 2 fct exec
 
 t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 {
 	char	*cmd;
 
 	cmd = NULL;
-	if (ft_strcmp("echo", cut[0]) == 0)
+	if (ft_strcmp("echo", cut[0]) == 0 || ft_strcmp("env", cut[0]) == 0 ||
+		ft_strcmp("setenv", cut[0]) == 0 ||
+			(env && ft_strcmp("unsetenv", cut[0]) == 0)
+				|| ft_strcmp("cd", cut[0]) == 0)
+		exec_fct_nf_build(cut, env, s);
+	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
-		print_tab(cut, 0);
-		s->ok = 1;
-		exit(0);
-	}
-	else if (ft_strcmp("env", cut[0]) == 0)
-	{
-		builtin_env(cut, env, s);
-		exit(0);
-	}
-	else if (ft_strcmp("setenv", cut[0]) == 0)
-	{
-		b_setenv(cut, env);
-		s->ok = 1;
-		exit(0);
-	}
-	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
-	{
-		b_unset(cut, &env, 0);
-		exit(0);
-	}
-	else if (ft_strcmp("cd", cut[0]) == 0)
-	{
-		b_cd(&cut[1], &env, 0);
-		exit(0);
-	}
-	if (ft_strcmp(cut[0], "exit") == 0)
-	{
-		if (cut[0] && cut[1] && cut [2])
+		if (cut[0] && cut[1] && cut[2])
 			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
 		else
 		{
@@ -71,25 +46,14 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 	char	*cmd;
 
 	cmd = NULL;
-	if (ft_strcmp("echo", cut[0]) == 0)
-	{
-		print_tab(cut, 0);
-		s->ok = 1;
-	}
-	else if (ft_strcmp("env", cut[0]) == 0)
-		builtin_env(cut, env, s);
-	else if (ft_strcmp("setenv", cut[0]) == 0)
-	{
-		b_setenv(cut, env);
-		s->ok = 1;
-	}
-	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
-		b_unset(cut, &env, 0);
-	else if (ft_strcmp("cd", cut[0]) == 0)
-		b_cd(&cut[1], &env, 0);
+	if (ft_strcmp("echo", cut[0]) == 0 || ft_strcmp("env", cut[0]) == 0 ||
+	ft_strcmp("setenv", cut[0]) == 0 ||
+		(env && ft_strcmp("unsetenv", cut[0]) == 0)
+			|| ft_strcmp("cd", cut[0]) == 0)
+		exec_fct_build(cut, env, s);
 	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
-		if (cut[0] && cut[1] && cut [2])
+		if (cut[0] && cut[1] && cut[2])
 			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
 		else
 		{
