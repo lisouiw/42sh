@@ -6,13 +6,13 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 04:54:51 by paoroste          #+#    #+#             */
-/*   Updated: 2018/04/22 19:28:25 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:29:44 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_comp42.h"
 
-void		do_up(t_data *list, int col, int prop, int i)
+static void		do_up(t_data *list, int col, int prop, int i)
 {
 	int			end;
 	int			nb;
@@ -33,7 +33,7 @@ void		do_up(t_data *list, int col, int prop, int i)
 	list->cursor = 1;
 }
 
-void		ft_up(t_data *list, int col, int prop, int i)
+void			ft_up(t_data *list, int col, int prop, int i)
 {
 	int			nb;
 
@@ -61,7 +61,7 @@ void		ft_up(t_data *list, int col, int prop, int i)
 	}
 }
 
-void		do_down(t_data *list, int col, int prop, int i)
+static void		do_down(t_data *list, int col, int prop, int i)
 {
 	int			begin;
 	int			nb;
@@ -83,7 +83,7 @@ void		do_down(t_data *list, int col, int prop, int i)
 	list->cursor = 1;
 }
 
-void		ft_down(t_data *list, int col, int prop, int i)
+void			ft_down(t_data *list, int col, int prop, int i)
 {
 	int			nb;
 
@@ -109,4 +109,16 @@ void		ft_down(t_data *list, int col, int prop, int i)
 		list = list->next;
 		i++;
 	}
+}
+
+char			**get_prop22(t_stop *stop, t_comp *data, char **prop, int *tb)
+{
+	(data->cmd[1][0] != ' ') ? stop->cut = 1 : 0;
+	(data->cmd[1][0] != ' ') ? data->nb = stop->nb : 0;
+	data->path = get_path(data, 0, 0, tb);
+	if (data->all_prop == 1)
+		prop = prop_rac(data->path, NULL, NULL, 0);
+	else
+		prop = prop_2(data, NULL, 0, NULL);
+	return (prop);
 }

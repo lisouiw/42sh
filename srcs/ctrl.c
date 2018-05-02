@@ -6,18 +6,18 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 18:23:49 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/30 19:58:33 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 21:23:45 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-void	ctrl_touch(t_edit **ed, t_froz **fz, char c)
+void	ctrl_touch(t_edit **ed, t_froz **fz, char c, t_env *env)
 {
 	while ((*ed)->rpz[2] == 0)
 		*ed = (*ed)->next;
 	if (c == 9)
-		*ed = auto_completion(*ed, *fz);
+		*ed = auto_completion(*ed, *fz, env);
 	else if (c == 5 && (*ed)->rpz[1] == 0)
 		*ed = move_word_right(*ed);
 	else if (c == 23 && (*ed)->rpz[0] == 0)

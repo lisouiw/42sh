@@ -6,18 +6,18 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:33:45 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/04 16:14:27 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 21:22:54 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-t_edit	*touch(t_edit **ed, t_froz **fz, t_his **hs)
+t_edit	*touch(t_edit **ed, t_froz **fz, t_his **hs, t_env *env)
 {
 	if ((*fz)->buf[1] == 0 && (*fz)->buf[2] == 0)
 	{
 		if ((*fz)->buf[0] > 0 && (*fz)->buf[0] < 27)
-			ctrl_touch(&(*ed), &(*fz), (*fz)->buf[0]);
+			ctrl_touch(&(*ed), &(*fz), (*fz)->buf[0], env);
 		else if ((*fz)->buf[0] == 127)
 		{
 			while ((*ed)->rpz[2] == 0)

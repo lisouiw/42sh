@@ -6,13 +6,13 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 11:05:17 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:32:20 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:06:07 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_comp42.h"
 
-char			**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb)
+static char		**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb)
 {
 	int		i;
 	char	**prop;
@@ -117,26 +117,27 @@ char			**prop_2(t_comp *data, struct dirent *file, int i, DIR *rep)
 	return (prop);
 }
 
-t_data			*get_prop(char *str, t_stop *stop, t_data *list, int *tb)
+t_data			*get_prop(char *str, t_stop *stop, t_data *list, t_env *env)
 {
 	t_comp		*data;
 	char		**prop;
+	int			tabi[3];
 
+	tabi[0] = 0;
+	tabi[1] = 0;
+	tabi[2] = 0;
 	data = (t_comp*)malloc(sizeof(t_comp));
-	data->cmd = parse_select(str, 0, NULL, stop);
+	data->cmd = parse_select(str, env, NULL, stop);
+	if (data->cmd == NULL)
+	{
+		free(data);
+		return (NULL);
+	}
 	data_init(data);
 	if ((data->cmd[0] && data->cmd[1]))
-	{
-		(data->cmd[1][0] != ' ') ? stop->cut = 1 : 0;
-		(data->cmd[1][0] != ' ') ? data->nb = stop->nb : 0;
-		data->path = get_path(data, 0, 0, tb);
-		if (data->all_prop == 1)
-			prop = prop_rac(data->path, NULL, NULL, 0);
-		else
-			prop = prop_2(data, NULL, 0, NULL);
-	}
+		prop = get_prop22(stop, data, NULL, tabi);
 	else
-		return (get_prop2(data, list, stop, tb));
+		return (get_prop2(data, list, stop, tabi));
 	free_comp(data);
 	if (prop == NULL)
 		return (NULL);

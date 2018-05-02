@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 19:06:40 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 21:28:32 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,46 @@ typedef struct		s_varq
 	struct s_varq	*next;
 }					t_varq;
 
+typedef struct			s_stop
+{
+	int					stop;
+	char				*print;
+	int					cut;
+	int					nb;
+	int					add;
+	struct s_comp		*data;
+	int					more;
+	int					sig;
+}						t_stop;
+
+typedef struct			s_data
+{
+	char				*arg;
+	int					cursor;
+	struct s_data		*next;
+	struct s_data		*prev;
+	int					max_len;
+	int					how_col;
+	int					how_prop;
+	int					how_row;
+	int					nb;
+}						t_data;
+
+typedef struct			s_comp
+{
+	char				*path;
+	char				**cmd;
+	int					all_prop;
+	int					nb;
+	char				**in_path;
+	char				*str;
+	DIR					*rep;
+	struct dirent		*file;
+	char				*d_name;
+	int					i;
+	char				*find;
+}						t_comp;
+
 struct s_num		*g_nb;
 struct s_env		*g_env;
 struct s_his		*g_hs;
@@ -178,7 +218,7 @@ void				cd_home(t_env **env, char *buf);
 void				cd_name(t_env **env, char *cd, char *user, char *buf);
 void				cd_simple(t_env **env, char *cd, char *buf, char *real);
 void				b_cd(char **cd, t_env **env, int a);
-void				ctrl_touch(t_edit **ed, t_froz **g_fz, char c);
+void				ctrl_touch(t_edit **ed, t_froz **g_fz, char c, t_env *env);
 t_edit				*home_end(t_edit *ed, t_froz *g_fz);
 t_edit				*up_down(t_edit *ed, char c);
 t_edit				*move_word_right(t_edit *ed);
@@ -301,7 +341,7 @@ int					white_space(char *s);
 char				*strjoin_free(char *nw, char *sub, int i);
 char				*strjoin_free_n(char *nw, char *sub, int i);
 void				move_on(t_cmd **ex, int i);
-t_edit				*touch(t_edit **ed, t_froz **g_fz, t_his **hs);
+t_edit				*touch(t_edit **ed, t_froz **g_fz, t_his **hs, t_env *env);
 t_edit				*extern_touch(t_edit *ed, t_froz **g_fz, t_his **hs);
 t_edit				*giv_position(t_edit *ed, int i);
 t_edit				*left_right(t_edit *ed, t_froz *g_fz);
@@ -433,7 +473,6 @@ int					check_echo_flags(char **cd, int *tab1, int a, int b);
 int					check_n(char **ta, int *t, int a);
 void				ft_exit(char *cmd);
 void				manage_env(t_env *env);
-t_edit				*auto_completion(t_edit *ed, t_froz *fz);
 char				*semicolon_translate(t_glob_b *b, char *final);
 char				*join_semicolon(t_glob_b *b);
 char				*join_two_comas(t_glob_b *b);
@@ -465,8 +504,77 @@ char				*giv_brace_s(char *s);
 int					isaltwo(char *deb, char *end);
 int					brace_semicolon(char *s);
 int					isnumber_np(char *s);
+void				ft_home(char **cmd, int i, t_env *env);
 void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd **ex);
 t_env	*exec_fct_nf_build(char **cut, t_env *env, t_exec *s);
 t_env	*exec_fct_build(char **cut, t_env *env, t_exec *s);
+
+t_edit					*auto_completion(t_edit *ed, t_froz *fz, t_env *env);
+t_data					*g_se;
+t_stop					*g_se2;
+
+t_stop					*core_comp42(char *str, t_data *list, t_stop *stop,
+		t_env *env);
+void					ft_comp42(int nb, char *str, t_stop *list);
+
+void					ft_set_term(int i, int nb);
+void					s_winch(int i);
+
+int						out_size(t_data *list);
+void					out_clean(void);
+void					free_data(t_data *list);
+void					free_comp(t_comp *data);
+void					free_stop(t_stop *stop);
+t_stop					*ft_set_mssg(t_data *list);
+
+void					stop_init(t_stop *stop, char *str, int i);
+void					data_init(t_comp *data);
+char					**init_path(void);
+
+t_data					*check_command(t_data *list, t_stop *stop);
+t_data					*hey_hook(int buf, t_data *list, t_stop *stop);
+void					print_list(t_data *list, int x, int y);
+void					final_print(t_data *list, t_stop *stop);
+
+void					ft_up(t_data *list, int col, int prop, int i);
+void					ft_down(t_data *list, int col, int prop, int i);
+void					ft_right(t_data *list);
+void					ft_left(t_data *list);
+
+t_data					*do_prev(t_data *list, t_data *tmp);
+int						do_space(char *command);
+int						where_am_i(char *str, int i);
+char					*to_str(char **cmd);
+int						how_cut(char *str, int i, int len);
+char					*strdupmore(char *src, int nb);
+int						get_high_len(char **proposition);
+char					*add_home(char *str, t_env *env);
+int						no_bin(char *str);
+
+char					**parse_select(char *str, t_env *env, char **path,
+		t_stop *stop);
+char					*get_path(t_comp *data, int i, int path, int *tabi);
+char					*get_path2(t_comp *data, int i, int path, int *tabi);
+char					*find(char *str, int *tb, char *tmp, char *neww);
+char					*cut_path(char *str);
+char					*epur_str(char *str);
+
+t_data					*get_prop(char *str, t_stop *stop, t_data *list,
+		t_env *env);
+char					**get_prop22(t_stop *stop, t_comp *data, char **prop,
+		int *tb);
+t_data					*get_args(char **av, int i, int nb, t_data *list);
+t_data					*get_prop2(t_comp *data, t_data *list, t_stop *stop,
+		int *tb);
+char					**get_prop2_2(t_comp *data, int i, char **prop,
+		DIR *rep);
+char					**prop_2_2(struct dirent *file, t_comp *data,
+		char **prop, DIR *rep);
+t_data					*get_prop_rac(t_comp *data, t_data *list, t_stop *stop,
+		int *tb);
+char					**prop_2(t_comp *data, struct dirent *file, int i,
+		DIR *rep);
+char					**prop_rac(char *path, struct dirent *file, DIR *rep,
+		int nb);
 
 #endif

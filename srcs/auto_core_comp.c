@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 18:30:18 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:26:21 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:47:05 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,45 +76,26 @@ t_data			*get_args(char **av, int i, int nb, t_data *list)
 	return (list);
 }
 
-t_stop			*core2_comp42(t_data *list, t_stop *stop)
+static t_stop	*core2_comp42(t_data *list, t_stop *stop)
 {
 	print_list(list, 0, 0);
 	while (1)
 	{
-		g_se = list;
-		//signal(SIGWINCH, s_winch);
-		/*if (stop->stop == 2)
+		signal(SIGWINCH, s_winch);
+		if (out_size(list) && g_se2->sig != 2)
 		{
-			free_data(list);
-			out_clean();
-			//tputs(tgetstr("cl", NULL), 0, ft_put);
-			tputs(tgetstr("up", NULL), 0, ft_put);
-			tputs(tgetstr("sc", NULL), 0, ft_put);
-			//free_stop(stop);
-			return (NULL);
-		}*/
-		/*if (stop->stop == 2)
+			if ((list = check_command(list, stop)) == NULL)
+				return (NULL);
+		}
+		else
 		{
 			free_stop(stop);
-			ft_comp42(3, strdup(list->arg), stop);
-			free_data(list);
-			out_clean();
-			tputs(tgetstr("up", NULL), 0, ft_put);
-			tputs(tgetstr("sc", NULL), 0, ft_put);
-			return (stop);
-		}*/
-		/*if (!(out_size(list)))
-		{
-			free_stop(stop);
-			//ft_comp42(3, strdup(list->arg), stop);
 			free_data(list);
 			out_clean();
 			tputs(tgetstr("up", NULL), 0, ft_put);
 			tputs(tgetstr("sc", NULL), 0, ft_put);
 			return (NULL);
-		}*/
-		if ((list = check_command(list, stop)) == NULL)
-			return (NULL);
+		}
 		(stop->stop == 1) ? out_clean() : 0;
 		if (stop->stop == 1)
 		{
@@ -124,18 +105,16 @@ t_stop			*core2_comp42(t_data *list, t_stop *stop)
 	}
 }
 
-t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, int *tabi)
+t_stop			*core_comp42(char *str, t_data *list, t_stop *stop, t_env *env)
 {
-	list = get_prop((str), stop, list, tabi);
+	list = get_prop((str), stop, list, env);
 	(list != NULL) ? out_size(list) : 0;
 	if (list != NULL && list->how_prop <= 175 && out_size(list))
 		ft_set_term(1, list->how_row);
-	else
-		free_data(list);
 	if (list == NULL || list->how_prop > 175 || (!(out_size(list))))
 	{
 		free_stop(stop);
-		return (NULL);
+		return (ft_set_mssg(list));
 	}
 	else if (out_size(list) && list->how_prop >= 1)
 		return (core2_comp42(list, stop));

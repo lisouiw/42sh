@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:09:16 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 18:54:34 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 21:31:25 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				parsing_op(char *s, t_cmd **ex, t_froz *fz)
 	}
 	join_redirecting(ex);
 	join_ex(ex);
-	print_ex_up(*ex);
+//	print_ex_up(*ex);
 	free(s);
 	s = NULL;
 	return (add_delim(fz, *ex));

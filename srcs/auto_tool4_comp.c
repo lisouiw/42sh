@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 04:44:54 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/01 04:46:12 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:04:06 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,59 +45,50 @@ t_data				*get_prop_rac(t_comp *data, t_data *list, t_stop *stop,
 	return (get_args(prop, 1, get_high_len(prop), list));
 }
 
-char				*ft_get_home(char *str, int how)
+static char			*get_home(t_env *env, int i)
 {
-	int				i;
-	char			*new;
-
-	i = 0;
-	if (how == 1)
-	{
-		new = ft_strdup("/Users/");
-	}
-	if (how == 2)
-	{
-		while (str[i] != '=')
-			i++;
-		new = strdup(&str[i + 1]);
-	}
-	if (how == 2)
-		new = strjoin_free_n(new, "/", 1);
-	return (new);
+	while (env && ft_strcmp(env->name, "HOME="))
+		env = env->next;
+	if (env && !ft_strcmp(env->name, "HOME=") && i == 2)
+		return (ft_strdup(env->ctn));
+	if (env && !ft_strcmp(env->name, "HOME=") && i == 1)
+		return (ft_strdup("/Users/"));
+	return (NULL);
 }
 
-char				*add_home2(char *tmp, char **environ, char *str)
+static char			*add_home2(char *tmp, t_env *env, char *str)
 {
 	int				i;
 
 	i = 0;
-	while (environ[i])
+	if (str[0] == '~' && str[1] == '/')
 	{
-		if (str[0] == '~' && str[1] == '/')
-		{
-			if (!ft_strncmp(environ[i], "HOME=", 5))
-				tmp = ft_get_home(environ[i], 2);
-		}
+		tmp = get_home(env, 2);
+		if (tmp == NULL)
+			return (NULL);
 		else
-		{
-			if (!ft_strncmp(environ[i], "HOME=", 5))
-				tmp = ft_get_home(environ[i], 1);
-		}
-		i++;
+			tmp = strjoin_free_n(tmp, "/", 1);
 	}
+	else
+		tmp = get_home(env, 1);
+	if (tmp == NULL)
+		return (NULL);
 	return (tmp);
 }
 
-char				*add_home(char *str)
+char				*add_home(char *str, t_env *env)
 {
 	char			*new;
 	char			*tmp;
 	char			*tmp2;
-	extern char		**environ;
 
 	tmp2 = NULL;
 	tmp = NULL;
-	tmp = add_home2(tmp, environ, str);
+	tmp = add_home2(tmp, env, str);
+	if (tmp == NULL)
+		free(str);
+	if (tmp == NULL)
+		return (NULL);
 	if (str[1] == '/' && str[2])
 		tmp2 = ft_strdup(&str[2]);
 	else if (str[0] == '~' && str[1])
@@ -107,7 +98,8 @@ char				*add_home(char *str)
 	else
 		new = ft_strdup(tmp);
 	free(str);
-	free(tmp);
+	if (tmp != NULL)
+		free(tmp);
 	if (tmp2 != NULL)
 		free(tmp2);
 	return (new);
