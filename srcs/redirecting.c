@@ -16,7 +16,7 @@ void	redirection(t_cmd **ex, t_env **env, t_exec *s)
 {
 	char	**arr;
 
-	arr = ft_strsplit((*ex)->cmd, ' '); //pasrsing_bonus
+	arr = translate(*env, ex); //pasrsing_bonus
 	*ex = (*ex)->next;
 	if (redirection_check_create(*ex))
 		redirecting_exec(ex, env, arr, s);
@@ -38,7 +38,7 @@ void	redirection_fork(t_cmd **ex, t_env **env, t_exec *s)
 
 	s->in = dup(0);
 	s->out = dup(1);
-	arr = ft_strsplit((*ex)->cmd, ' '); //pasrsing_bonus
+	arr = translate(*env, ex); //pasrsing_bonus
 	*ex = (*ex)->next;
 	if ((pid = fork()) == -1)
 		exit(EXIT_FAILURE);
@@ -72,7 +72,7 @@ void	redirection_no_cmd(t_cmd **ex, t_env **env, t_exec *s)
 		*ex = (*ex)->next;
 }
 
-char	**give_seven(t_cmd *ex)
+char	**give_seven(t_cmd *ex, t_env *env)
 {
 	while (ex->next->type >= 6 && ex->next->type <= 11)
 		ex = ex->next;
@@ -87,7 +87,7 @@ char	**give_seven(t_cmd *ex)
 	}
 	else if (ex->type != 7)
 		return (NULL);
-	return (ft_strsplit(ex->cmd, ' '));
+	return (translate(env, &ex));
 }
 
 void	redirecting_exec(t_cmd **ex, t_env **env, char **arr, t_exec *s)
@@ -95,7 +95,7 @@ void	redirecting_exec(t_cmd **ex, t_env **env, char **arr, t_exec *s)
 	int		nw;
 	char	**tmp;
 
-	if ((tmp = give_seven(*ex)) != NULL)
+	if ((tmp = give_seven(*ex, *env)) != NULL)
 	{
 		nw = (tmp[2] == NULL) ? open(tmp[1], O_RDWR) : open(tmp[2], O_RDONLY);
 		dup2(nw, (tmp[2] == NULL ? 0 : ft_atoi(tmp[0])));

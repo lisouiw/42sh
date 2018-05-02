@@ -66,7 +66,7 @@ void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 	else if ((*ex)->next->type >= 6 && (*ex)->next->type <= 11)
 		redirection(ex, &env, *s);
 	else if ((*ex)->type == 0)
-		env = exec_fct_nf(ft_strsplit((*ex)->cmd, ' '), env, ex, *s);  //pasrsing_bonus
+		env = exec_fct_nf(translate(env, ex), env, ex, *s);  //pasrsing_bonus
 }
 
 t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)

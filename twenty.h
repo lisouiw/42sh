@@ -275,12 +275,12 @@ void				put_prompt(t_froz *g_fz);
 int					giv_last(t_froz *g_fz);
 int					parsing_dup_out(char *s, int n);
 int					parsing_dup_in(char *s, int n);
-int					redirection_check_create(t_cmd *ex);
-void				redirection_file_create(t_cmd *ex);
-int					redirection_file_check(t_cmd *ex);
+int					redirection_check_create(t_cmd *ex, t_env *env);
+void				redirection_file_create(t_cmd *ex, t_env *env);
+int					redirection_file_check(t_cmd *ex, t_env *env);
 void				redirection(t_cmd **ex, t_env **env, t_exec *s);
 void				redirection_fork(t_cmd **ex, t_env **env, t_exec *s);
-char				**give_seven(t_cmd *ex);
+char				**give_seven(t_cmd *ex, t_env *env);
 void				redirecting_exec(t_cmd **ex, t_env **env, char **arr,
 						t_exec *s);
 void				sub_into_ex_fct(char *s, int i, int in, t_cmd *ex);
@@ -356,7 +356,7 @@ int					clean_dir(t_glob **g, t_glob_p *parse);
 int					clean_str(t_glob **g, t_glob_p *parse);
 int					clean_char(t_glob **g, t_glob_p **parse);
 int					check_question(char *cmd, char *s, int i, char *next);
-int					clean_brackets_star_loop(t_glob **g, char **tb, int y, 
+int					clean_brackets_star_loop(t_glob **g, char **tb, int y,
 					int i);
 int					clean_brackets_star(t_glob **g, t_glob_p **parse);
 int					clean_str_star_check(t_glob **g, t_glob_p *parse, size_t i);
@@ -370,11 +370,11 @@ int					glob_cleaning(t_glob_p **parse, t_glob **g);
 int					glob_parsing_clean(t_glob **g, t_glob_p *parse);
 t_glob				**glob_parsing_p(t_glob **g, t_glob_p *parse, int a);
 void				translate_glob(t_glob **g, char *s, t_glob_i y, t_cmd **ex);
-t_glob_p			*check_backslash_str(t_glob_p *gp, int *st, int *end, 
+t_glob_p			*check_backslash_str(t_glob_p *gp, int *st, int *end,
 					char *trad);
-t_glob_p			*check_match_str(t_glob_p *gp, int *st, int *end, 
+t_glob_p			*check_match_str(t_glob_p *gp, int *st, int *end,
 					char *trad);
-t_glob_p			*add_question_list(t_glob_p *gp, int *st, int *end, 
+t_glob_p			*add_question_list(t_glob_p *gp, int *st, int *end,
 					char *s);
 void				glob_free1(t_glob *g);
 void				glob_free(t_glob *g);

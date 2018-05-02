@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:20:12 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/30 20:01:10 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 14:22:03 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	free_tab(char **array)
 			ft_strdel(&array[i]);
 			free(array[i]);
 		}
+		free(array);
 	}
-	free(array);
 	array = NULL;
 }

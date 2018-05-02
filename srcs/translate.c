@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 13:54:02 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/29 22:32:15 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 15:32:24 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 static void	check_b_2(int quote, char **arg, int i, int *j)
 {
 	if (quote == 0 && ft_strlen(arg[i]) > 1)
-	{
 		ft_replace_b(arg[i], *j);
-		arg[i] = ft_strdup(arg[i]);
-	}
 	else if (quote == 2)
 	{
 		if (arg[i][*j + 1] && ft_isvip(arg[i][*j + 1]))

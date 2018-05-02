@@ -55,29 +55,29 @@ int		parsing_dup_in(char *s, int n)
 	return (1);
 }
 
-int		redirection_check_create(t_cmd *ex)
+int		redirection_check_create(t_cmd *ex, t_env *env)
 {
 	while ((ex)->type >= 6 && (ex)->type <= 11)
 	{
 		if ((ex)->type == 8 || (ex)->type == 9)
-			redirection_file_create(ex);
-		else if ((ex)->type == 7 && redirection_file_check(ex) == 0)
+			redirection_file_create(ex, env);
+		else if ((ex)->type == 7 && redirection_file_check(ex, env) == 0)
 			return (0);
 		else if (ex->type == 10)
-			aggregation_out(ft_strsplit(ex->cmd, ' '));
+			aggregation_out(translate(env, &ex));
 		else if (ex->type == 11)
-			aggregation_in(ft_strsplit(ex->cmd, ' '));
+			aggregation_in(translate(env, &ex));
 		ex = (ex)->next;
 	}
 	return (1);
 }
 
-void	redirection_file_create(t_cmd *ex)
+void	redirection_file_create(t_cmd *ex, t_env *env)
 {
 	int		nw;
 	char	**arr;
 
-	arr = ft_strsplit((ex)->cmd, ' ');
+	arr = translate(env, &ex);
 	if ((ex)->type == 8)
 		nw = (arr[2] == NULL) ? open(arr[1], O_CREAT | O_RDWR | O_TRUNC, 0644)
 			: open(arr[2], O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -89,12 +89,12 @@ void	redirection_file_create(t_cmd *ex)
 	close(nw);
 }
 
-int		redirection_file_check(t_cmd *ex)
+int		redirection_file_check(t_cmd *ex, t_env *env)
 {
 	int		nw;
 	char	**arr;
 
-	arr = ft_strsplit((ex)->cmd, ' ');
+	arr = translate(env, &ex);
 	nw = (arr[2] == NULL) ? open(arr[1], O_RDONLY) : open(arr[2], O_RDONLY);
 	if (nw == -1)
 	{
