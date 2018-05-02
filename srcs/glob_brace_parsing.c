@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 19:04:24 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 18:20:32 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 19:13:39 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ int		glob_brace_int(t_cmd **ex, t_glob_b *b)
 			q = (q == 1) ? 0 : 1;
 		else if (q == 0 && (*ex)->cmd[i] == '{' && match_brace((*ex)->cmd, b, i)
 			&& check_brace((*ex)->cmd, b))
-		{
-			printf("%s\n", &(*ex)->cmd[i]);
 			return (i);
-		}
 	}
 	return (i);
 }

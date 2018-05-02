@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:28:49 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/01 23:17:25 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 19:12:34 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,6 @@ static int		loop_2(char *cmd, int *i, int *squote, int *dquote)
 		return (0);
 	*i = j;
 	return (1);
-}
-
-void			ft_home(char **cmd, int i, t_env *env)
-{
-	char		*tmp;
-
-	tmp = find_variable(ft_strdup("HOME"), env);
-	if (tmp)
-		*cmd = charsub(tmp, cmd, i, 0);
 }
 
 int				loopy_loop(char **str, t_env *env)

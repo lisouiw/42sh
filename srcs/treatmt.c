@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:36:32 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 19:00:54 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 19:14:09 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,10 @@ void	add_his(t_his **hs, t_his *nw, t_froz *fz)
 t_env	*exec_fct_re(t_cmd **ex, t_env *env, t_exec *s)
 {
 	char	**arr;
-	int		i;
 
 	arr = translate(env, ex);
 	if (arr)
 	{
-		i = -1;
-		while (arr[++i])
-			printf("[%s]\n", arr[i]);
 		env = exec_fct(arr, env, s);
 		free_tab(arr);
 	}
