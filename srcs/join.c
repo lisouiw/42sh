@@ -27,7 +27,6 @@ void	join_ex(t_cmd **ex)
 			cmd = (*ex)->next;
 			tmp = ft_strjoin(" ", (*ex)->next->cmd);
 			tmp2 = ft_strjoin((*ex)->cmd, tmp);
-			// printf("maillon ici : %p\n", *ex);
 			free((*ex)->cmd);
 			(*ex)->cmd = tmp2;
 			(*ex)->next = (*ex)->next->next;

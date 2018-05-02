@@ -46,7 +46,8 @@ char	*join_cmd_nw(char *cmd, t_edit *ed, t_froz *fz)
 		{
 			nw = ed_str(ed, NULL, fz->nb[0] - giv_last(fz));
 			nw = ft_strjoin_free(fz->mode[3] == 20 ? " " : "\n", nw, 2);
-			tmp = (fz->mode[3] == 20) ? ft_strjoin_free(ft_strsub(cmd, 0, ft_strlen(cmd) - 2), nw, 3) : ft_strjoin_free(cmd, nw, 2);
+			tmp = (fz->mode[3] == 20) ? ft_strjoin_free(ft_strsub(cmd, 0, \
+				ft_strlen(cmd) - 2), nw, 3) : ft_strjoin_free(cmd, nw, 2);
 		}
 		free(cmd);
 		return (tmp);

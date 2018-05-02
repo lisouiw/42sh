@@ -6,16 +6,16 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:09:16 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/30 19:48:12 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 18:54:34 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-char    *replace_nwl_spc(char *s)
+char			*replace_nwl_spc(char *s)
 {
-	int        i;
-	int        q;
+	int			i;
+	int			q;
 
 	q = 0;
 	i = -1;
@@ -31,9 +31,9 @@ char    *replace_nwl_spc(char *s)
 	return (s);
 }
 
-int		parsing_op(char *s, t_cmd **ex, t_froz *fz)
+int				parsing_op(char *s, t_cmd **ex, t_froz *fz)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (s[i] && s[i] == ' ')
@@ -55,10 +55,10 @@ int		parsing_op(char *s, t_cmd **ex, t_froz *fz)
 	return (add_delim(fz, *ex));
 }
 
-int        parsing_quote(char *s)
+int				parsing_quote(char *s)
 {
-	int        i;
-	int        a;
+	int			i;
+	int			a;
 
 	i = 0;
 	a = -1;
@@ -74,7 +74,7 @@ int        parsing_quote(char *s)
 	return (i);
 }
 
-int		parsing(t_edit *ed, t_froz *fz, t_cmd **ex)
+int				parsing(t_edit *ed, t_froz *fz, t_cmd **ex)
 {
 	*ex = init_ex(NULL);
 	if (fz->mode[3] == 6)
