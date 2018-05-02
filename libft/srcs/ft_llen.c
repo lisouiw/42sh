@@ -6,15 +6,15 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:11:03 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/10 16:11:50 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 23:38:58 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int         ft_llen(long int nbr)
+int			ft_llen(long int nbr)
 {
-	int     len;
+	int		len;
 
 	len = 1;
 	if (nbr < 0)

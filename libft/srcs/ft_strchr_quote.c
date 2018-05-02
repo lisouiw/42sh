@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 13:28:57 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/24 22:19:51 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 23:33:26 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			ft_strchr_quote(const char *s, char c)
 {
-	int     i;
-	char    *b;
+	int		i;
+	char	*b;
 
 	i = 0;
 	b = (char*)s;

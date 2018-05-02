@@ -6,15 +6,16 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:41:23 by mallard           #+#    #+#             */
-/*   Updated: 2018/04/21 13:34:09 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/02 23:38:32 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int      ft_digit_quantity(unsigned long long n)
+static int				ft_digit_quantity(unsigned long long n)
 {
-	int ret;
+	int					ret;
+
 	ret = 1;
 	while (n >= 10)
 	{
@@ -23,16 +24,18 @@ static int      ft_digit_quantity(unsigned long long n)
 	}
 	return (ret);
 }
-static char     *create_str(char *str, int neg, unsigned long long nb)
+
+static char				*create_str(char *str, int neg, unsigned long long nb)
 {
-	int digits;
+	int					digits;
 
 	digits = 0;
 	digits = ft_digit_quantity(nb);
 	str = ft_strnew(digits + neg);
 	return (str);
 }
-static char     *recursive_itoa(char *str, unsigned long long nb)
+
+static char				*recursive_itoa(char *str, unsigned long long nb)
 {
 	if (nb >= 10)
 	{
@@ -46,11 +49,12 @@ static char     *recursive_itoa(char *str, unsigned long long nb)
 		return (str);
 	}
 }
-char            *ft_ltoa(long n)
+
+char					*ft_ltoa(long n)
 {
-	char                *str;
-	unsigned long long  nb;
-	int                 negatif;
+	char				*str;
+	unsigned long long	nb;
+	int					negatif;
 
 	str = NULL;
 	nb = n;
