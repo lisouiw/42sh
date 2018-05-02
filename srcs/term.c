@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:30:19 by ltran             #+#    #+#             */
-/*   Updated: 2018/04/05 18:56:29 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 18:05:58 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		init(void)
 		return (-1);
 	term.c_lflag |= (ECHO);
 	term.c_lflag |= (ICANON);
-	term.c_lflag &= ~(ECHOCTL);
+	term.c_lflag |= (ECHOCTL);
 	term.c_cc[VEOF] = 4;
 	term.c_cc[VINTR] = 3;
 	if (tcsetattr(0, TCSANOW, &term) == -1)

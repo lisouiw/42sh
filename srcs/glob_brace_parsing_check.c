@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:12:45 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 17:18:28 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/02 18:05:45 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ int		brace_two_comas(t_glob_b *b)
 	}
 	if (isaltwo(b->cms1, b->cms2))
 		return (1);
+	free(b->cms1);
+	free(b->cms2);
 	return (0);
 }
