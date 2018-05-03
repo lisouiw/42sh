@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 23:39:06 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/03 23:51:08 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	b_other(char **cut, t_env *env, t_exec *s)
 		else
 		{
 			waitpid(-1, &status, 0);
-			s->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
+			s->ok = WEXITSTATUS(status);
 		}
 	}
 	free_tab(tab_env);

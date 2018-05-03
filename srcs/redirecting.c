@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirecting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:54:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:54:13 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/03 23:50:33 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	redirection_fork(t_cmd **ex, t_env **env, t_exec *s)
 	else
 	{
 		waitpid(-1, &status, 0);
-		s->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
+		s->ok = WEXITSTATUS(status);
 	}
 	free_tab(arr);
 	while ((*ex)->type >= 6 && (*ex)->type <= 11)

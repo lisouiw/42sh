@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 13:40:22 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/03 23:50:25 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	end_last_pipe(t_exec **s)
 	while (--(*s)->pipe)
 		waitpid(0, &status, WNOHANG | WUNTRACED);
 	wait(&status);
-	(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
+	(*s)->ok = WEXITSTATUS(status);
 }
 
 void	end_pipe(t_cmd **ex, t_exec **s, int pp)
