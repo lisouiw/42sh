@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:58 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:44:59 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 00:30:26 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ int		env_flags_check(char **cut)
 			return (3);
 		return (4);
 	}
-	else
-		return (5);
+	ft_putstr_fd("env: ", 2);
+	ft_putstr_fd(cut[1], 2);	
+	ft_putendl_fd(": No such file or directory", 2);	
+	return (5);
 }
 
 void	set_new_env(char **cut, t_env *env, t_exec *s)
@@ -105,6 +107,4 @@ void	builtin_env(char **cut, t_env *env, t_exec *s)
 		set_new_env(cut + 1, env_cpy, s);
 		free_list(&env_cpy);
 	}
-	if (flags == 5)
-		ft_putendl("usage: env [-i] [NAME=value ...] [utility [argument ...]]");
 }

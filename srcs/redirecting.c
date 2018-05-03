@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:54:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 23:50:33 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 00:32:20 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	redirection(t_cmd **ex, t_env **env, t_exec *s)
 		redirecting_exec(ex, env, arr, s);
 	else
 	{
-		s->ok = 0;
-		exit(-1);
+		s->ok = 1;
+		exit(1);
 	}
 	free_tab(arr);
 	while ((*ex)->type >= 6 && (*ex)->type <= 11)

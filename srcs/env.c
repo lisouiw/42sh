@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:51 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 23:39:06 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 00:20:08 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	b_unset(char **cut, t_env **env, int i)
 			free(tmp->name);
 			free(tmp->ctn);
 			free(tmp);
-			
 		}
 		else
 		{

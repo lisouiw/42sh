@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:52:28 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:52:30 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 00:32:06 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_launch(t_exec *dot, t_cmd **ex)
 	dot->cmd = 0;
 	dot->out = 1;
 	dot->in = 0;
-	dot->ok = 0;
+	dot->ok = 1;
 	dot->pipe = 0;
 	dot->fd = 3;
 }

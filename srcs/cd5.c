@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd5.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:24 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:44:26 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 00:31:10 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	cd_prev(t_env **env, char *buf)
 		}
 		else
 		{
-			ft_putstr("cd: no such file or directory: ");
-			ft_putendl(tmp->ctn);
+			ft_putstr_fd("cd: no such file or directory: ", 2);
+			ft_putendl_fd(tmp->ctn, 2);
 		}
 	}
 	else
-		ft_putendl("sh: cd: OLDPWD not set");
+		ft_putendl_fd("sh: cd: OLDPWD not set", 2);
 }
 
 void	cd_home(t_env **env, char *buf)
@@ -61,12 +61,12 @@ void	cd_home(t_env **env, char *buf)
 		}
 		else if (tmp->ctn != NULL && ft_strcmp(tmp->ctn, "\0") != 0)
 		{
-			ft_putstr("cd: no such file or directory: ");
-			ft_putendl(tmp->ctn);
+			ft_putstr_fd("cd: no such file or directory: ", 2);
+			ft_putendl_fd(tmp->ctn, 2);
 		}
 	}
 	else
-		ft_putendl("sh: cd: HOME not set");
+		ft_putendl_fd("sh: cd: HOME not set", 2);
 }
 
 void	cd_name(t_env **env, char *cd, char *user, char *buf)
