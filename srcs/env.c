@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:51 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:44:53 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/03 22:06:04 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,17 @@ void	b_export(char *cut, t_env **env)
 void	b_unset(char **cut, t_env **env, int i)
 {
 	t_env	*kp;
+	t_env	**tmp;
 	t_env	*sup;
 
 	while (cut[++i] && (kp = *env))
 	{
 		if (ft_strcmp(kp->name, cut[i]) == 61)
 		{
-			(*env) = (*env)->next;
-			free_elem(kp);
+			tmp = env;
+			*env = (*env)->next;
+			free((*tmp)->name);
+			free((*tmp)->ctn);
 		}
 		else
 		{
