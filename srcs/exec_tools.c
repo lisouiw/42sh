@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:16 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:31:43 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 00:50:15 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_env	*exec_fct_nf_build(char **cut, t_env *env, t_exec *s)
 		b_unset(cut, &env, 0);
 	else if (ft_strcmp("cd", cut[0]) == 0)
 		b_cd(&cut[1], &env, 0);
-	exit(0);
+	exit(s.ok);
 	return (env);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:52:18 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:52:21 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 00:51:59 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_num	*init_shell(t_froz **fz, t_env **env, t_edit **ed, t_his **hs)
 	if ((*env = give_env(NULL)) == NULL)
 	{
 		ft_putstr_fd("Need An Environment\n", 2);
-		exit(0);
+		exit(1);
 	}
 	set_up_term();
 	tputs(tgetstr("cl", NULL), 0, ft_put);

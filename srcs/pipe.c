@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 23:50:25 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 00:52:17 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 	if ((*ex)->type >= 6 && (*ex)->type <= 11)
 	{
 		redirection_no_cmd(ex, &env, *s);
-		exit(0);
+		exit(s.ok);
 	}
 	else if ((*ex)->next->type >= 6 && (*ex)->next->type <= 11)
 		redirection(ex, &env, *s);
@@ -97,7 +97,7 @@ t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 		if (!((*ex)->type == 0 || ((*ex)->type >= 6 && (*ex)->type <= 11)))
 			*ex = (*ex)->next;
 		else if ((pid = fork()) == -1)
-			exit(-1);
+			exit(1);
 		else if (pid == 0)
 			pipe_exec(&s, ex, env, pp);
 		else

@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:54:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:32:20 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 00:52:26 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	redirection_fork(t_cmd **ex, t_env **env, t_exec *s)
 		if (arr && redirection_check_create(*ex, *env))
 			redirecting_exec(ex, env, arr, s);
 		else
-			exit(-1);
+			exit(1);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 23:51:08 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 00:50:40 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	b_other(char **cut, t_env *env, t_exec *s)
 			{
 				ft_putstr_fd("sh: command not found: ", 2);
 				ft_putendl_fd(cut[0], 2);
-				exit(-1);
+				exit(1);
 			}
 		}
 		else
@@ -110,7 +110,7 @@ void	b_other_nf(char **cut, t_env *env, t_exec *s)
 			{
 				ft_putstr_fd("sh: command not found: ", 2);
 				ft_putendl_fd(cut[0], 2);
-				exit(-1);
+				exit(1);
 			}
 	}
 	free_tab(tab_env);

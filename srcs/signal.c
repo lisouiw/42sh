@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:54:37 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:54:38 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 00:52:53 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sig_int(int sig)
 		free_list(&g_env);
 		tputs(tgetstr("ce", NULL), 0, ft_put);
 		free_for_exit(NULL, 0);
-		exit(1);
+		exit(0);
 	}
 	sig = 0;
 }
@@ -62,7 +62,7 @@ void	sig_int_here_2(void)
 	while (g_fz->here->prev != NULL)
 		g_fz->here = g_fz->here->prev;
 	if (g_fz->here->next == NULL)
-		exit(0);
+		exit(s.ok);
 	while (g_fz->here->prev != NULL)
 		g_fz->here = g_fz->here->prev;
 	while (g_fz->here->ok[0] == 1)
