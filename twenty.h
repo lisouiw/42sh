@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   twenty.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/04 16:19:17 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/03 01:06:55 by corosteg         ###   ########.fr       */
+/*   Created: 2018/05/03 11:37:22 by mallard           #+#    #+#             */
+/*   Updated: 2018/05/03 11:37:52 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct		s_exec
 	int				ok;
 	int				cmd;
 	int				pipe;
+	int				fd;
 }					t_exec;
 
 typedef struct		s_glob_a
@@ -162,45 +163,45 @@ typedef struct		s_varq
 	struct s_varq	*next;
 }					t_varq;
 
-typedef struct			s_stop
+typedef struct		s_stop
 {
-	int					stop;
-	char				*print;
-	int					cut;
-	int					nb;
-	int					add;
-	struct s_comp		*data;
-	int					more;
-	int					sig;
-}						t_stop;
+	int				stop;
+	char			*print;
+	int				cut;
+	int				nb;
+	int				add;
+	struct s_comp	*data;
+	int				more;
+	int				sig;
+}					t_stop;
 
-typedef struct			s_data
+typedef struct		s_data
 {
-	char				*arg;
-	int					cursor;
-	struct s_data		*next;
-	struct s_data		*prev;
-	int					max_len;
-	int					how_col;
-	int					how_prop;
-	int					how_row;
-	int					nb;
-}						t_data;
+	char			*arg;
+	int				cursor;
+	struct s_data	*next;
+	struct s_data	*prev;
+	int				max_len;
+	int				how_col;
+	int				how_prop;
+	int				how_row;
+	int				nb;
+}					t_data;
 
-typedef struct			s_comp
+typedef struct		s_comp
 {
-	char				*path;
-	char				**cmd;
-	int					all_prop;
-	int					nb;
-	char				**in_path;
-	char				*str;
-	DIR					*rep;
-	struct dirent		*file;
-	char				*d_name;
-	int					i;
-	char				*find;
-}						t_comp;
+	char			*path;
+	char			**cmd;
+	int				all_prop;
+	int				nb;
+	char			**in_path;
+	char			*str;
+	DIR				*rep;
+	struct dirent	*file;
+	char			*d_name;
+	int				i;
+	char			*find;
+}					t_comp;
 
 int					g_kill;
 struct s_num		*g_nb;
@@ -506,76 +507,76 @@ int					isaltwo(char *deb, char *end);
 int					brace_semicolon(char *s);
 int					isnumber_np(char *s);
 void				ft_home(char **cmd, int i, t_env *env);
-void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd **ex);
-t_env	*exec_fct_nf_build(char **cut, t_env *env, t_exec *s);
-t_env	*exec_fct_build(char **cut, t_env *env, t_exec *s);
+void				init_free_his(t_his **hs, t_froz **fz, int i, t_cmd **ex);
+t_env				*exec_fct_nf_build(char **cut, t_env *env, t_exec *s);
+t_env				*exec_fct_build(char **cut, t_env *env, t_exec *s);
 
-t_edit					*auto_completion(t_edit *ed, t_froz *fz, t_env *env);
-t_data					*g_se;
-t_stop					*g_se2;
+t_edit				*auto_completion(t_edit *ed, t_froz *fz, t_env *env);
+t_data				*g_se;
+t_stop				*g_se2;
 
-t_stop					*core_comp42(char *str, t_data *list, t_stop *stop,
-		t_env *env);
-void					ft_comp42(int nb, char *str, t_stop *list);
+t_stop				*core_comp42(char *str, t_data *list, t_stop *stop,
+					t_env *env);
+void				ft_comp42(int nb, char *str, t_stop *list);
 
-void					ft_set_term(int i, int nb);
-void					s_winch(int i);
+void				ft_set_term(int i, int nb);
+void				s_winch(int i);
 
-int						out_size(t_data *list);
-void					out_clean(void);
-void					free_data(t_data *list);
-void					free_comp(t_comp *data);
-void					free_stop(t_stop *stop);
-t_stop					*ft_set_mssg(t_data *list);
+int					out_size(t_data *list);
+void				out_clean(void);
+void				free_data(t_data *list);
+void				free_comp(t_comp *data);
+void				free_stop(t_stop *stop);
+t_stop				*ft_set_mssg(t_data *list);
 
-void					stop_init(t_stop *stop, char *str, int i);
-void					data_init(t_comp *data);
-char					**init_path(void);
+void				stop_init(t_stop *stop, char *str, int i);
+void				data_init(t_comp *data);
+char				**init_path(void);
 
-t_data					*check_command(t_data *list, t_stop *stop);
-t_data					*hey_hook(int buf, t_data *list, t_stop *stop);
-void					print_list(t_data *list, int x, int y);
-void					final_print(t_data *list, t_stop *stop);
+t_data				*check_command(t_data *list, t_stop *stop);
+t_data				*hey_hook(int buf, t_data *list, t_stop *stop);
+void				print_list(t_data *list, int x, int y);
+void				final_print(t_data *list, t_stop *stop);
 
-void					ft_up(t_data *list, int col, int prop, int i);
-void					ft_down(t_data *list, int col, int prop, int i);
-void					ft_right(t_data *list);
-void					ft_left(t_data *list);
+void				ft_up(t_data *list, int col, int prop, int i);
+void				ft_down(t_data *list, int col, int prop, int i);
+void				ft_right(t_data *list);
+void				ft_left(t_data *list);
 
-t_data					*do_prev(t_data *list, t_data *tmp);
-int						do_space(char *command);
-int						where_am_i(char *str, int i);
-char					*to_str(char **cmd);
-int						how_cut(char *str, int i, int len);
-char					*strdupmore(char *src, int nb);
-int						get_high_len(char **proposition);
-char					*add_home(char *str, t_env *env);
-int						no_bin(char *str);
+t_data				*do_prev(t_data *list, t_data *tmp);
+int					do_space(char *command);
+int					where_am_i(char *str, int i);
+char				*to_str(char **cmd);
+int					how_cut(char *str, int i, int len);
+char				*strdupmore(char *src, int nb);
+int					get_high_len(char **proposition);
+char				*add_home(char *str, t_env *env);
+int					no_bin(char *str);
 
-char					**parse_select(char *str, t_env *env, char **path,
-		t_stop *stop);
-char					*get_path(t_comp *data, int i, int path, int *tabi);
-char					*get_path2(t_comp *data, int i, int path, int *tabi);
-char					*find(char *str, int *tb, char *tmp, char *neww);
-char					*cut_path(char *str);
-char					*epur_str(char *str);
+char				**parse_select(char *str, t_env *env, char **path,
+					t_stop *stop);
+char				*get_path(t_comp *data, int i, int path, int *tabi);
+char				*get_path2(t_comp *data, int i, int path, int *tabi);
+char				*find(char *str, int *tb, char *tmp, char *neww);
+char				*cut_path(char *str);
+char				*epur_str(char *str);
 
-t_data					*get_prop(char *str, t_stop *stop, t_data *list,
-		t_env *env);
-char					**get_prop22(t_stop *stop, t_comp *data, char **prop,
-		int *tb);
-t_data					*get_args(char **av, int i, int nb, t_data *list);
-t_data					*get_prop2(t_comp *data, t_data *list, t_stop *stop,
-		int *tb);
-char					**get_prop2_2(t_comp *data, int i, char **prop,
-		DIR *rep);
-char					**prop_2_2(struct dirent *file, t_comp *data,
-		char **prop, DIR *rep);
-t_data					*get_prop_rac(t_comp *data, t_data *list, t_stop *stop,
-		int *tb);
-char					**prop_2(t_comp *data, struct dirent *file, int i,
-		DIR *rep);
-char					**prop_rac(char *path, struct dirent *file, DIR *rep,
-		int nb);
+t_data				*get_prop(char *str, t_stop *stop, t_data *list,
+					t_env *env);
+char				**get_prop22(t_stop *stop, t_comp *data, char **prop,
+					int *tb);
+t_data				*get_args(char **av, int i, int nb, t_data *list);
+t_data				*get_prop2(t_comp *data, t_data *list, t_stop *stop,
+					int *tb);
+char				**get_prop2_2(t_comp *data, int i, char **prop,
+					DIR *rep);
+char				**prop_2_2(struct dirent *file, t_comp *data,
+					char **prop, DIR *rep);
+t_data				*get_prop_rac(t_comp *data, t_data *list, t_stop *stop,
+					int *tb);
+char				**prop_2(t_comp *data, struct dirent *file, int i,
+					DIR *rep);
+char				**prop_rac(char *path, struct dirent *file, DIR *rep,
+					int nb);
 
 #endif

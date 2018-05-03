@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/04 15:25:59 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/02 19:00:50 by ltran            ###   ########.fr       */
+/*   Created: 2018/05/03 11:52:28 by mallard           #+#    #+#             */
+/*   Updated: 2018/05/03 11:52:30 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	init_launch(t_exec *dot, t_cmd **ex)
 	dot->in = 0;
 	dot->ok = 0;
 	dot->pipe = 0;
+	dot->fd = 3;
 }
 
 void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd **ex)

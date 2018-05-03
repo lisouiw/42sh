@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_prop.c                                         :+:      :+:    :+:   */
+/*   auto_get_prop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/27 11:05:17 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/02 19:06:07 by paoroste         ###   ########.fr       */
+/*   Created: 2018/05/03 11:42:54 by mallard           #+#    #+#             */
+/*   Updated: 2018/05/03 11:42:56 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_comp42.h"
+#include "../ft_comp42.h"
 
 static char		**prop22(t_comp *data, struct dirent *file, DIR *rep, int nb)
 {

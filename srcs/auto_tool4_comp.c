@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   auto_tool4_comp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/01 04:44:54 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/02 19:04:06 by paoroste         ###   ########.fr       */
+/*   Created: 2018/05/03 11:43:30 by mallard           #+#    #+#             */
+/*   Updated: 2018/05/03 11:43:32 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_comp42.h"
+#include "../ft_comp42.h"
 
 int					no_bin(char *str)
 {

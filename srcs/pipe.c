@@ -3,29 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 13:17:26 by ltran             #+#    #+#             */
-/*   Updated: 2018/05/03 01:07:24 by corosteg         ###   ########.fr       */
+/*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
+/*   Updated: 2018/05/03 13:40:22 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-void	end_pipe(t_cmd **ex, t_exec **s, int pp)
+void	end_last_pipe(t_exec **s)
 {
 	int		status;
 
-	dup2(1, (*s)->out);
+	signal(SIGCHLD, SIG_DFL);
+	while ((*s)->fd > 2)
+		close((*s)->fd--);
+	while (--(*s)->pipe)
+		waitpid(0, &status, WNOHANG | WUNTRACED);
+	wait(&status);
+	(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
+}
+
+void	end_pipe(t_cmd **ex, t_exec **s, int pp)
+{
+	(*s)->fd = dup2(1, (*s)->out);
 	dup2(0, (*s)->in);
+	close((*s)->out);
+	close((*s)->in);
 	if (pp == 0)
-	{
-		signal(SIGCHLD, SIG_DFL);
-		while (--(*s)->pipe)
-			waitpid(0, &status, WNOHANG | WUNTRACED);
-		wait(&status);
-		(*s)->ok = WEXITSTATUS(status) == 0 ? 1 : 0;
-	}
+		end_last_pipe(s);
 	else
 		++(*s)->pipe;
 	close((*s)->p[1]);

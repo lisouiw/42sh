@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_comp42.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 18:14:10 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/02 21:29:49 by corosteg         ###   ########.fr       */
+/*   Created: 2018/05/03 11:45:46 by mallard           #+#    #+#             */
+/*   Updated: 2018/05/03 11:46:18 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_COMP42_H
 # define FT_COMP42_H
-# include "../twenty.h"
+# include "twenty.h"
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
