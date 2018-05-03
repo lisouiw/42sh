@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:48:22 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:48:23 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 01:06:04 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static int	e_flag(char **ta, int *t, int a)
 	return (a);
 }
 
-void		print_tab(char **ta, int i)
+void		print_tab(char **ta, int i, t_exec *s)
 {
 	int		a;
 	int		t[2];
@@ -135,4 +135,5 @@ void		print_tab(char **ta, int i)
 		a = e_flag(ta, t, a);
 	if (a != 1 && a != 3)
 		ft_putchar_fd('\n', 1);
+	s->ok = 0;
 }

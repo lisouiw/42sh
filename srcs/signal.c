@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:54:37 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:52:53 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 01:02:57 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	sig_int_here_2(void)
 	while (g_fz->here->prev != NULL)
 		g_fz->here = g_fz->here->prev;
 	if (g_fz->here->next == NULL)
-		exit(s.ok);
+		exit(0);
 	while (g_fz->here->prev != NULL)
 		g_fz->here = g_fz->here->prev;
 	while (g_fz->here->ok[0] == 1)

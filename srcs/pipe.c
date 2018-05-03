@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:52:17 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 01:05:52 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 {
 	dup2((*s)->in, 0);
 	if (pp)
-	{
 		dup2((*s)->p[1], 1);
-	}
 	close((*s)->p[0]);
 	if ((*ex)->type >= 6 && (*ex)->type <= 11)
 	{
 		redirection_no_cmd(ex, &env, *s);
-		exit(s.ok);
+		exit((*s)->ok);
 	}
 	else if ((*ex)->next->type >= 6 && (*ex)->next->type <= 11)
 		redirection(ex, &env, *s);

@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:24 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:31:10 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 01:46:56 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	cd_prev(t_env **env, char *buf)
 		ft_putendl_fd("sh: cd: OLDPWD not set", 2);
 }
 
-void	cd_home(t_env **env, char *buf)
+int		cd_home(t_env **env, char *buf)
 {
 	char	*b;
 	t_env	*tmp;
@@ -58,6 +58,7 @@ void	cd_home(t_env **env, char *buf)
 			getcwd(buf, PATH_MAX);
 			b_export((b = ft_strjoin("PWD=", buf)), &(*env));
 			free(b);
+			return (2);
 		}
 		else if (tmp->ctn != NULL && ft_strcmp(tmp->ctn, "\0") != 0)
 		{
@@ -67,6 +68,7 @@ void	cd_home(t_env **env, char *buf)
 	}
 	else
 		ft_putendl_fd("sh: cd: HOME not set", 2);
+	return (1);
 }
 
 void	cd_name(t_env **env, char *cd, char *user, char *buf)

@@ -6,13 +6,13 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:43:53 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:20:32 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 01:53:07 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-static int	check_dir(char *cd, char *real)
+static int	check_dir(char *cd, char *real, t_exec *s)
 {
 	DIR		*di;
 
@@ -25,6 +25,7 @@ static int	check_dir(char *cd, char *real)
 		ft_putendl_fd(real, 2);
 		free(real);
 		free(cd);
+		s->ok = 1;
 		return (1);
 	}
 	if (cd[0] != '-' && cd[0] != '~')
@@ -35,10 +36,7 @@ static int	check_dir(char *cd, char *real)
 static int	check_home(char **cd2, int *tab1, char *buf, t_env **env)
 {
 	if ((!(cd2[tab1[0]]) || ft_strcmp(cd2[tab1[0]], "~") == 0))
-	{
-		cd_home(env, buf);
-		return (1);
-	}
+		return (cd_home(env, buf));
 	if ((cd2[tab1[0]] && cd2[tab1[0]][0] && cd2[tab1[0]][0] == '.'
 		&& cd2[tab1[0]][1] == '/' && cd2[tab1[0]][2] == '\0')
 		|| (cd2[tab1[0]][0] == '.' && cd2[tab1[0]][1] == '\0'))
@@ -72,7 +70,7 @@ static int	b_cd2(char *cd, t_env **env, char *buf, char *way)
 	return (1);
 }
 
-void		b_cd(char **cd2, t_env **env, int a)
+void		b_cd(char **cd2, t_env **env, int a, t_exec *s)
 {
 	char	buf[PATH_MAX - 1];
 	char	*way;
@@ -84,12 +82,12 @@ void		b_cd(char **cd2, t_env **env, int a)
 	cd = NULL;
 	getcwd(buf, PATH_MAX);
 	a = check_flags(cd2, tab1);
-	if (check_home(cd2, tab1, buf, env))
+	if ((s->ok = check_home(cd2, tab1, buf, env)))
 		return ;
 	real = ft_strdup(cd2[tab1[0]]);
 	if ((cd = ini_cd(cd2, tab1, env, cd)) == NULL)
 		return ;
-	if (check_dir(cd, real))
+	if (check_dir(cd, real, s))
 		return ;
 	way = t_strjoin(buf, "/", cd);
 	if (a == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:56:21 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:56:22 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 01:22:34 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		if_only(char *s, char c)
 	return (0);
 }
 
-void	ecriture_info(t_env *lst)
+void	ecriture_info(t_env *lst, t_exec *s)
 {
 	if (!(lst))
 		return ;
@@ -63,6 +63,7 @@ void	ecriture_info(t_env *lst)
 	}
 	ft_putstr_fd(lst->name, 1);
 	ft_putendl_fd(lst->ctn, 1);
+	s->ok = 0;
 }
 
 int		white_space(char *s)

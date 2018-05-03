@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:16 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:50:15 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 01:49:39 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,39 @@
 t_env	*exec_fct_nf_build(char **cut, t_env *env, t_exec *s)
 {
 	if (ft_strcmp("echo", cut[0]) == 0)
-	{
-		print_tab(cut, 0);
-		s->ok = 1;
-	}
+		print_tab(cut, 0, s);
 	else if (ft_strcmp("env", cut[0]) == 0)
 		builtin_env(cut, env, s);
 	else if (ft_strcmp("setenv", cut[0]) == 0)
 	{
-		b_setenv(cut, env);
+		b_setenv(cut, env, s);
 		s->ok = 1;
 	}
 	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
 		b_unset(cut, &env, 0);
 	else if (ft_strcmp("cd", cut[0]) == 0)
-		b_cd(&cut[1], &env, 0);
-	exit(s.ok);
+		b_cd(&cut[1], &env, 0, s);
+	exit(s->ok);
 	return (env);
 }
 
 t_env	*exec_fct_build(char **cut, t_env *env, t_exec *s)
 {
 	if (ft_strcmp("echo", cut[0]) == 0)
-		print_tab(cut, 0);
+		print_tab(cut, 0, s);
 	else if (ft_strcmp("env", cut[0]) == 0)
 		builtin_env(cut, env, s);
 	else if (ft_strcmp("setenv", cut[0]) == 0)
-		b_setenv(cut, env);
+		b_setenv(cut, env, s);
 	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
 		b_unset(cut, &env, 0);
 	else if (ft_strcmp("cd", cut[0]) == 0)
-		b_cd(&cut[1], &env, 0);
+	{
+		printf("[%i]\n", s->ok);
+		b_cd(&cut[1], &env, 0, s);
+		s->ok = (s->ok == 2) ? 0 : 1;
+		printf("[%i]\n", s->ok);
+	}
 	return (env);
 }
 
