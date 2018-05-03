@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:52:42 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:52:43 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/03 23:57:42 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		main(void)
 		{
 			g_fz->mode[3] = 0;
 			add_his(&g_hs, NULL, g_fz);
+			cursor_end(g_ed);
 			write(1, "\n", 1);
 			init_for_new(&g_hs, &g_fz, &g_ed);
 		}

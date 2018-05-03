@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:53 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:53:55 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/03 23:56:02 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	my_tputs(t_edit *ed, t_froz *fz)
 	else if (ed->rpz[4] == 1 && fz->mode[1] == 1)
 		tputs(tgetstr("so", NULL), 0, ft_put);
 	if (ed->c[0] != '\n')
-		ft_putchar(ed->c[0]);
+		write(1, &ed->c[0], 1);
 	tputs(tgetstr("se", NULL), 0, ft_put);
 	tputs(tgetstr("ue", NULL), 0, ft_put);
 }
