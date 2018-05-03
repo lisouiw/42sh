@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:45:11 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/03 23:39:06 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 		ft_strcmp("setenv", cut[0]) == 0 ||
 			(env && ft_strcmp("unsetenv", cut[0]) == 0)
 				|| ft_strcmp("cd", cut[0]) == 0)
-		exec_fct_nf_build(cut, env, s);
+		env = exec_fct_nf_build(cut, env, s);
 	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
 		if (cut[0] && cut[1] && cut[2])
@@ -50,7 +50,7 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 	ft_strcmp("setenv", cut[0]) == 0 ||
 		(env && ft_strcmp("unsetenv", cut[0]) == 0)
 			|| ft_strcmp("cd", cut[0]) == 0)
-		exec_fct_build(cut, env, s);
+		env = exec_fct_build(cut, env, s);
 	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
 		if (cut[0] && cut[1] && cut[2])
