@@ -6,13 +6,13 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 03:46:36 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 04:06:06 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-void	end_last_pipe(t_exec **s)
+void	end_last_pipe(t_cmd **ex, t_exec **s)
 {
 	int		status;
 
@@ -20,7 +20,8 @@ void	end_last_pipe(t_exec **s)
 	while ((*s)->fd > 2)
 		close((*s)->fd--);
 	waitpid(0, &status, WNOHANG | WUNTRACED);
-	g_ok = WEXITSTATUS(status);
+	if ((*ex)->type != 0)
+		g_ok = WEXITSTATUS(status);
 	while (--(*s)->pipe)
 		waitpid(0, &status, WNOHANG | WUNTRACED);
 	wait(&status);
@@ -33,7 +34,7 @@ void	end_pipe(t_cmd **ex, t_exec **s, int pp)
 	close((*s)->out);
 	close((*s)->in);
 	if (pp == 0)
-		end_last_pipe(s);
+		end_last_pipe(ex, s);
 	else
 		++(*s)->pipe;
 	close((*s)->p[1]);
