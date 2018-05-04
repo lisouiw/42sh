@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:52:28 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:41:28 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:43:28 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	init_launch(t_exec *dot, t_cmd **ex)
 	dot->in = 0;
 	dot->pipe = 0;
 	dot->fd = 3;
+	g_ok = 0;
 }
 
 void	init_free_his(t_his **hs, t_froz **fz, int i, t_cmd **ex)
