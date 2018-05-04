@@ -6,11 +6,11 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 23:35:20 by paoroste          #+#    #+#             */
-/*   Updated: 2018/05/04 02:24:32 by paoroste         ###   ########.fr       */
+/*   Updated: 2018/05/04 03:01:01 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_comp42.h"
+#include "../ft_comp42.h"
 
 void				ft_left(t_data *list)
 {
