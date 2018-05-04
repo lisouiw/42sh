@@ -6,19 +6,19 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:51 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 01:24:42 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:28:27 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-void	b_setenv(char **cut, t_env *env, t_exec *s)
+void	b_setenv(char **cut, t_env *env)
 {
 	int		i;
 
 	i = 0;
 	if (!cut[1])
-		ecriture_info(env, s);
+		ecriture_info(env);
 	else
 		while (cut[++i])
 			b_export(cut[i], &env);

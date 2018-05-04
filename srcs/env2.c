@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:58 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 01:24:43 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:30:06 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	set_new_env(char **cut, t_env *env, t_exec *s)
 	if (cut[i])
 		env = exec_fct(&cut[i], env, s);
 	else
-		ecriture_info(env, s);
+		ecriture_info(env);
 }
 
 void	builtin_env(char **cut, t_env *env, t_exec *s)
@@ -95,7 +95,7 @@ void	builtin_env(char **cut, t_env *env, t_exec *s)
 	env_empty = NULL;
 	flags = env_flags_check(cut);
 	if (!flags)
-		ecriture_info(env, s);
+		ecriture_info(env);
 	if (flags == 2)
 	{
 		set_new_env(cut + 2, env_empty, s);

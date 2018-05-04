@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:48:22 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 01:06:04 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:29:06 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static int	e_flag(char **ta, int *t, int a)
 	return (a);
 }
 
-void		print_tab(char **ta, int i, t_exec *s)
+void		print_tab(char **ta, int i)
 {
 	int		a;
 	int		t[2];
@@ -135,5 +135,5 @@ void		print_tab(char **ta, int i, t_exec *s)
 		a = e_flag(ta, t, a);
 	if (a != 1 && a != 3)
 		ft_putchar_fd('\n', 1);
-	s->ok = 0;
+	g_ok = 0;
 }

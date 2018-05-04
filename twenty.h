@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   twenty.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:37:22 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:37:52 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 02:27:25 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ typedef struct		s_comp
 	char			*find;
 }					t_comp;
 
+int					g_ok;
 int					g_kill;
 struct s_num		*g_nb;
 struct s_env		*g_env;
