@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:37:22 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 03:56:10 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 04:25:25 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,6 @@ int					add_doc(t_froz *g_fz, char *s);
 void				aggregation_out(char **t);
 void				aggregation_in(char **t);
 void				cd_prev(t_env **env, char *buf);
-void				cd_home(t_env **env, char *buf);
 void				cd_name(t_env **env, char *cd, char *user, char *buf);
 void				cd_simple(t_env **env, char *cd, char *buf, char *real);
 void				b_cd(char **cd, t_env **env, int a);
@@ -462,7 +461,7 @@ int					usage(void);
 void				cd_link(t_env **env, char *cd, char *buf, char *real);
 void				cd_simple(t_env **env, char *cd, char *buf, char *real);
 void				cd_prev(t_env **env, char *buf);
-void				cd_home(t_env **env, char *buf);
+void				cd_home(t_env **env, char *buf, char *b);
 void				cd_name(t_env **env, char *cd, char *user, char *buf);
 void				print_octal(int nb);
 int					check_octal3(char *str, int i, char **ta, int *t);
@@ -577,8 +576,7 @@ char				**prop_2(t_comp *data, struct dirent *file, int i,
 					DIR *rep);
 char				**prop_rac(char *path, struct dirent *file, DIR *rep,
 					int nb);
-					void	build_exit(char **cut, t_env *env, t_cmd **ex);
-					t_env	*exec_fct(char **cut, t_env *env, t_cmd **ex, t_exec *s);
-					
-					
+void				build_exit(char **cut, t_env *env, t_cmd **ex);
+t_env				*exec_fct(char **cut, t_env *env, t_cmd **ex, t_exec *s);
+
 #endif

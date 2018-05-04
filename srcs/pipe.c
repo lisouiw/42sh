@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 04:17:40 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 04:21:32 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	end_last_pipe(t_exec **s)
 	while ((*s)->fd > 2)
 		close((*s)->fd--);
 	wait(&status);
-		g_ok = WEXITSTATUS(status);
+	g_ok = WEXITSTATUS(status);
 	while (--(*s)->pipe)
 		waitpid(0, &status, WNOHANG | WUNTRACED);
 }
