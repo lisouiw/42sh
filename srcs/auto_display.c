@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   auto_display.c                                     :+:      :+:    :+:   */
+/*   displace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 11:42:29 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:42:30 by mallard          ###   ########.fr       */
+/*   Created: 2017/10/25 23:35:20 by paoroste          #+#    #+#             */
+/*   Updated: 2018/05/04 02:24:32 by paoroste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_comp42.h"
+#include "ft_comp42.h"
 
 void				ft_left(t_data *list)
 {
@@ -64,17 +64,12 @@ void				s_winch(int i)
 
 t_stop				*ft_set_mssg(t_data *list)
 {
-	int				buf;
-
 	if (list == NULL)
-		ft_putstr_fd("\n42sh: No occurence ", 0);
+		tputs(tgetstr("bl", NULL), 1, ft_put);
 	else if (list->how_prop > 175)
-		ft_putstr_fd("\n42sh: Refine your search ", 0);
-	else if (!(out_size(list)))
-		ft_putstr_fd("\n42sh: Window too small ", 0);
+		tputs(tgetstr("vb", NULL), 1, ft_put);
 	if (list != NULL)
 		free_data(list);
-	read(0, &buf, sizeof(int));
 	return (NULL);
 }
 
