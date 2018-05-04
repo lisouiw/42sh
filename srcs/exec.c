@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 03:28:23 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:49:15 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,13 @@
 
 t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 {
-	char	*cmd;
-
 	if (ft_strcmp("echo", cut[0]) == 0 || ft_strcmp("env", cut[0]) == 0 ||
 		ft_strcmp("setenv", cut[0]) == 0 ||
 			(env && ft_strcmp("unsetenv", cut[0]) == 0)
 				|| ft_strcmp("cd", cut[0]) == 0)
 		env = exec_fct_nf_build(cut, env, s);
 	else if (ft_strcmp(cut[0], "exit") == 0)
-	{
-		if (cut[0] && cut[1] && cut[2])
-		{
-			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
-			g_ok = 1;
-		}
-		else
-		{
-			if (cut[1])
-				cmd = ft_strdup(cut[1]);
-			free_tab(cut);
-			free_list(&env);
-			free_all_ex(ex);
-			free_for_exit(cmd, 0);
-		}
-	}
+		build_exit(cut, env, ex);
 	else
 		b_other_nf(cut, env, s);
 	return (env);
@@ -54,21 +37,7 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 			|| ft_strcmp("cd", cut[0]) == 0)
 		env = exec_fct_build(cut, env, s);
 	else if (ft_strcmp(cut[0], "exit") == 0)
-	{
-		if (cut[0] && cut[1] && cut[2])
-		{
-			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
-			g_ok = 1;
-		}
-		else
-		{
-			if (cut[1])
-				cmd = ft_strdup(cut[1]);
-			free_tab(cut);
-			free_list(&env);
-			free_for_exit(cmd, 0);
-		}
-	}
+		build_exit(cut, env, ex);
 	else
 		b_other(cut, env);
 	return (env);
