@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:40:39 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:31:06 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void	end_last_pipe(t_exec **s)
 	signal(SIGCHLD, SIG_DFL);
 	while ((*s)->fd > 2)
 		close((*s)->fd--);
+	waitpid(0, &status, WNOHANG | WUNTRACED);
+	g_ok = WEXITSTATUS(status);
 	while (--(*s)->pipe)
 		waitpid(0, &status, WNOHANG | WUNTRACED);
 	wait(&status);
-	g_ok = WEXITSTATUS(status);
 }
 
 void	end_pipe(t_cmd **ex, t_exec **s, int pp)
@@ -76,11 +77,9 @@ void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 
 t_env	*pipe_fct(t_exec *s, t_cmd **ex, t_env *env)
 {
-	int		i;
 	int		pp;
 	pid_t	pid;
 
-	i = 0;
 	pp = 1;
 	s->in = 0;
 	g_kill = 0;
