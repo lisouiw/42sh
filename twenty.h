@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:37:22 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:27:25 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:39:26 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ typedef struct		s_exec
 	int				in;
 	int				out;
 	int				err;
-	int				ok;
 	int				cmd;
 	int				pipe;
 	int				fd;
@@ -247,7 +246,7 @@ char				**list_to_tab(t_env *env, char **tab_env);
 void				print_tab(char **ta, int i);
 t_env				*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s);
 t_env				*exec_fct(char **cut, t_env *env, t_exec *s);
-void				b_other(char **cut, t_env *env, t_exec *s);
+void				b_other(char **cut, t_env *env);
 void				b_other_nf(char **cut, t_env *env, t_exec *s);
 int					give_path_nf(t_env *env, char **cut, int i, char **tab_env);
 void				free_cut1(t_edit **ed, t_edit *tmp);

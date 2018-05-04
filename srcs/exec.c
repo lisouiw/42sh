@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 01:16:35 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:37:06 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
 		if (cut[0] && cut[1] && cut[2])
+		{
 			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
+			g_ok = 1;
+		}
 		else
 		{
 			if (cut[1])
@@ -54,7 +57,10 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 	else if (ft_strcmp(cut[0], "exit") == 0)
 	{
 		if (cut[0] && cut[1] && cut[2])
+		{
 			ft_putstr_fd("42sh: exit: too many arguments\n", 2);
+			g_ok = 1;
+		}
 		else
 		{
 			if (cut[1])
@@ -65,11 +71,11 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 		}
 	}
 	else
-		b_other(cut, env, s);
+		b_other(cut, env);
 	return (env);
 }
 
-void	b_other(char **cut, t_env *env, t_exec *s)
+void	b_other(char **cut, t_env *env)
 {
 	char	**tab_env;
 	pid_t	pid;
@@ -85,13 +91,14 @@ void	b_other(char **cut, t_env *env, t_exec *s)
 			{
 				ft_putstr_fd("sh: command not found: ", 2);
 				ft_putendl_fd(cut[0], 2);
+				g_ok = 1;
 				exit(1);
 			}
 		}
 		else
 		{
 			waitpid(-1, &status, 0);
-			s->ok = WEXITSTATUS(status);
+			g_ok = WEXITSTATUS(status);
 		}
 	}
 	free_tab(tab_env);

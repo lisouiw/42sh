@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:16 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:29:49 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:38:01 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,7 @@ t_env	*exec_fct_build(char **cut, t_env *env, t_exec *s)
 	else if (env && ft_strcmp("unsetenv", cut[0]) == 0)
 		b_unset(cut, &env, 0);
 	else if (ft_strcmp("cd", cut[0]) == 0)
-	{
-		printf("[%i]\n", g_ok);
 		b_cd(&cut[1], &env, 0);
-		g_ok = (g_ok == 2) ? 0 : 1;
-		printf("[%i]\n", g_ok);
-	}
 	return (env);
 }
 

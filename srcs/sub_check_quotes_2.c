@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sub_check_quotes_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:55:22 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:55:23 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 02:36:38 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int				check_quote(char *cmd, char c, int i)
 	if (!cmd[i])
 	{
 		ft_putstr_fd("42sh: lacking closing )\n", 2);
+		g_ok = 1;
 		return (-1);
 	}
 	if (insert(cmd, j, 0) == -1)
@@ -65,6 +66,7 @@ int				check_quote(char *cmd, char c, int i)
 		ft_putstr_fd("42sh: ", 2);
 		ft_putstr_fd(cmd + j - 1, 2);
 		ft_putstr_fd(": bad substitution\n", 2);
+		g_ok = 1;
 		return (-1);
 	}
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:56:56 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 01:53:02 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:39:46 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ t_env	*launchcmd(t_cmd *ex, t_env *env)
 	{
 		if (pipe_on(ex))
 			env = pipe_fct(&s, &ex, env);
-		else if (ex->type == 4 && s.ok == 1)
+		else if (ex->type == 4 && g_ok == 1)
 			move_on(&ex, 4);
-		else if (ex->type == 5 && s.ok == 0)
+		else if (ex->type == 5 && g_ok == 0)
 			move_on(&ex, 5);
 		else if (ex->type == 0 && !(ex->next->type >= 6 &&
 			ex->next->type <= 11))

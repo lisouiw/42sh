@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:53:48 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 01:05:52 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 02:40:39 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	end_last_pipe(t_exec **s)
 	while (--(*s)->pipe)
 		waitpid(0, &status, WNOHANG | WUNTRACED);
 	wait(&status);
-	(*s)->ok = WEXITSTATUS(status);
+	g_ok = WEXITSTATUS(status);
 }
 
 void	end_pipe(t_cmd **ex, t_exec **s, int pp)
@@ -66,7 +66,7 @@ void	pipe_exec(t_exec **s, t_cmd **ex, t_env *env, int pp)
 	if ((*ex)->type >= 6 && (*ex)->type <= 11)
 	{
 		redirection_no_cmd(ex, &env, *s);
-		exit((*s)->ok);
+		exit(g_ok);
 	}
 	else if ((*ex)->next->type >= 6 && (*ex)->next->type <= 11)
 		redirection(ex, &env, *s);
