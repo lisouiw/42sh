@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:58 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 03:26:56 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:56:48 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	set_new_env(char **cut, t_env *env, t_exec *s)
 	while (cut[++i] && ft_strchr(cut[i], '='))
 		b_export(cut[i], &env);
 	if (cut[i])
-		env = exec_fct(&cut[i], env, s);
+		env = exec_fct(&cut[i], env, NULL, s);
 	else
 		ecriture_info(env);
 }

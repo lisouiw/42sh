@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:56:56 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:39:46 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:58:37 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_env	*exec_fct_re(t_cmd **ex, t_env *env, t_exec *s)
 	arr = translate(env, ex);
 	if (arr)
 	{
-		env = exec_fct(arr, env, s);
+		env = exec_fct(arr, env, ex, s);
 		free_tab(arr);
 	}
 	*ex = (*ex)->next;

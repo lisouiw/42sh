@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 03:51:00 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:56:37 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 	return (env);
 }
 
-t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
+t_env	*exec_fct(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 {
 	char	*cmd;
 
@@ -37,7 +37,7 @@ t_env	*exec_fct(char **cut, t_env *env, t_exec *s)
 			|| ft_strcmp("cd", cut[0]) == 0)
 		env = exec_fct_build(cut, env, s);
 	else if (ft_strcmp(cut[0], "exit") == 0)
-		build_exit(cut, env, NULL);
+		build_exit(cut, env, ex);
 	else
 		b_other(cut, env);
 	return (env);

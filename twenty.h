@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:37:22 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:39:26 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:56:10 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,6 @@ int					give_path(t_env *env, char **cut, int i, char **tab_env);
 char				**list_to_tab(t_env *env, char **tab_env);
 void				print_tab(char **ta, int i);
 t_env				*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s);
-t_env				*exec_fct(char **cut, t_env *env, t_exec *s);
 void				b_other(char **cut, t_env *env);
 void				b_other_nf(char **cut, t_env *env, t_exec *s);
 int					give_path_nf(t_env *env, char **cut, int i, char **tab_env);
@@ -578,5 +577,8 @@ char				**prop_2(t_comp *data, struct dirent *file, int i,
 					DIR *rep);
 char				**prop_rac(char *path, struct dirent *file, DIR *rep,
 					int nb);
-
+					void	build_exit(char **cut, t_env *env, t_cmd **ex);
+					t_env	*exec_fct(char **cut, t_env *env, t_cmd **ex, t_exec *s);
+					
+					
 #endif
