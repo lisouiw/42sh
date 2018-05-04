@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:48:53 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/03 11:48:56 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 02:52:34 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,15 @@ char	*join_cmd_nw(char *cmd, t_edit *ed, t_froz *fz)
 			tmp = ft_strjoin(cmd, "\0");
 		else
 		{
+			tmp = NULL;
 			nw = ed_str(ed, NULL, fz->nb[0] - giv_last(fz));
 			nw = ft_strjoin_free(fz->mode[3] == 20 ? " " : "\n", nw, 2);
-			tmp = (fz->mode[3] == 20) ? ft_strjoin_free(ft_strsub(cmd, 0, \
-				ft_strlen(cmd) - 2), nw, 3) : ft_strjoin_free(cmd, nw, 2);
+			if (fz->mode[3] == 20 && cmd && nw && nw[0] != '\0' && nw[0] != ' ')
+				tmp = ft_strjoin_free(ft_strsub(cmd, 0, ft_strlen(cmd) - 2), nw, 3);
+			else if (cmd && nw && nw[0] != '\0')
+				tmp = ft_strjoin_free(cmd, nw, 2);
+			else
+				tmp = ft_strdup(" ");
 		}
 		free(cmd);
 		return (tmp);
