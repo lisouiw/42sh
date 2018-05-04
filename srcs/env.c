@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:51 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 03:35:16 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 04:22:07 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,16 @@ void	b_export(char *cut, t_env **env)
 void	b_unset(char **cut, t_env **env, int i)
 {
 	t_env	*kp;
-	t_env	*tmp;
 	t_env	*sup;
 
 	while (cut[++i] && (kp = *env))
 	{
 		if (ft_strcmp(kp->name, cut[i]) == 61)
 		{
-			tmp = *env;
 			*env = (*env)->next;
-			free(tmp->name);
-			free(tmp->ctn);
-			free(tmp);
+			free(kp->name);
+			free(kp->ctn);
+			free(kp);
 		}
 		else
 			while (kp && kp->next != NULL)
