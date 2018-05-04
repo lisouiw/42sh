@@ -6,7 +6,7 @@
 /*   By: mallard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:48:53 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:52:34 by mallard          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:43:17 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ char	*join_cmd_nw(char *cmd, t_edit *ed, t_froz *fz)
 	char *tmp;
 
 	nw = NULL;
-	if (cmd == NULL)
-		cmd = ed_str(ed, NULL, fz->nb[0] - giv_last(fz));
-	else
+	if (cmd)
 	{
 		if (fz->mode[3] != 20 && ed->rpz[0] == 1 && ed->rpz[1] == 1)
 			tmp = ft_strjoin(cmd, "\0");
@@ -48,7 +46,8 @@ char	*join_cmd_nw(char *cmd, t_edit *ed, t_froz *fz)
 			nw = ed_str(ed, NULL, fz->nb[0] - giv_last(fz));
 			nw = ft_strjoin_free(fz->mode[3] == 20 ? " " : "\n", nw, 2);
 			if (fz->mode[3] == 20 && cmd && nw && nw[0] != '\0' && nw[0] != ' ')
-				tmp = ft_strjoin_free(ft_strsub(cmd, 0, ft_strlen(cmd) - 2), nw, 3);
+				tmp = ft_strjoin_free(ft_strsub(cmd, 0, ft_strlen(cmd) - 2)\
+				, nw, 3);
 			else if (cmd && nw && nw[0] != '\0')
 				tmp = ft_strjoin_free(cmd, nw, 2);
 			else
@@ -57,7 +56,7 @@ char	*join_cmd_nw(char *cmd, t_edit *ed, t_froz *fz)
 		free(cmd);
 		return (tmp);
 	}
-	return (cmd);
+	return (ed_str(ed, NULL, fz->nb[0] - giv_last(fz)));
 }
 
 char	*join_cmd(char *cmd, t_edit *ed, t_froz *fz)
