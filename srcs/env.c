@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:51 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:28:27 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:35:16 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	b_unset(char **cut, t_env **env, int i)
 			free(tmp);
 		}
 		else
-		{
 			while (kp && kp->next != NULL)
 			{
 				if (ft_strcmp(kp->next->name, cut[i]) == 61)
@@ -82,7 +81,6 @@ void	b_unset(char **cut, t_env **env, int i)
 				}
 				kp = kp->next;
 			}
-		}
 	}
 }
 

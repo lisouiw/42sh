@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:45:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:37:06 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:28:23 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_env	*exec_fct_nf(char **cut, t_env *env, t_cmd **ex, t_exec *s)
 {
 	char	*cmd;
 
-	cmd = NULL;
 	if (ft_strcmp("echo", cut[0]) == 0 || ft_strcmp("env", cut[0]) == 0 ||
 		ft_strcmp("setenv", cut[0]) == 0 ||
 			(env && ft_strcmp("unsetenv", cut[0]) == 0)

@@ -6,13 +6,13 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:24 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:38:54 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:29:57 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../twenty.h"
 
-void	cd_prev(t_env **env, char *buf)
+void		cd_prev(t_env **env, char *buf)
 {
 	t_env	*tmp;
 	char	*b;
@@ -71,7 +71,7 @@ void		cd_home(t_env **env, char *buf)
 	g_ok = 1;
 }
 
-void	cd_name(t_env **env, char *cd, char *user, char *buf)
+void		cd_name(t_env **env, char *cd, char *user, char *buf)
 {
 	char	*b;
 	t_env	*tmp;
@@ -96,9 +96,9 @@ void	cd_name(t_env **env, char *cd, char *user, char *buf)
 	free(user);
 }
 
-void	cd_simple(t_env **env, char *cd, char *buf, char *real)
+void		cd_simple(t_env **env, char *cd, char *buf, char *real)
 {
-	char		*b;
+	char	*b;
 
 	if (chdir(cd) == 0)
 	{

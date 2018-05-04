@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:44:58 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:30:06 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:26:56 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int		env_flags_check(char **cut)
 		return (4);
 	}
 	ft_putstr_fd("env: ", 2);
-	ft_putstr_fd(cut[1], 2);	
-	ft_putendl_fd(": No such file or directory", 2);	
+	ft_putstr_fd(cut[1], 2);
+	ft_putendl_fd(": No such file or directory", 2);
 	return (5);
 }
 

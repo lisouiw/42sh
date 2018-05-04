@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:52:18 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 00:51:59 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:25:36 by mallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_num	*init_shell(t_froz **fz, t_env **env, t_edit **ed, t_his **hs)
 {
 	struct ttysize	ts;
 
+	*env = NULL;
 	if ((*env = give_env(NULL)) == NULL)
 	{
 		ft_putstr_fd("Need An Environment\n", 2);
