@@ -35,9 +35,12 @@ static int	check_dir(char *cd, char *real)
 
 static int	check_home(char **cd2, int *tab1, char *buf, t_env **env)
 {
+	char	*b;
+
+	b = NULL;
 	if ((!(cd2[tab1[0]]) || ft_strcmp(cd2[tab1[0]], "~") == 0))
 	{
-		cd_home(env, buf);
+		cd_home(env, buf, b);
 		return (1);
 	}
 	if ((cd2[tab1[0]] && cd2[tab1[0]][0] && cd2[tab1[0]][0] == '.'
@@ -62,10 +65,13 @@ static char	*ini_cd(char **cd2, int *tab1, t_env **env, char *cd)
 
 static int	b_cd2(char *cd, t_env **env, char *buf, char *way)
 {
+	char	*b;
+
+	b = NULL;
 	if (cd && ft_strcmp(cd, "-") == 0)
 		cd_prev(env, buf);
 	else if ((!(cd) || ft_strcmp(cd, "~") == 0))
-		cd_home(env, buf);
+		cd_home(env, buf, b);
 	else if (cd[0] == '~')
 		cd_name(env, cd, NULL, buf);
 	else

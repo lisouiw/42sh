@@ -41,9 +41,8 @@ void		cd_prev(t_env **env, char *buf)
 		ft_putendl_fd("sh: cd: OLDPWD not set", 2);
 }
 
-void		cd_home(t_env **env, char *buf)
+void		cd_home(t_env **env, char *buf, char *b)
 {
-	char	*b;
 	t_env	*tmp;
 
 	tmp = *env;
