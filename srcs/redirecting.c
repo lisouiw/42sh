@@ -6,7 +6,7 @@
 /*   By: ltran <ltran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:54:10 by mallard           #+#    #+#             */
-/*   Updated: 2018/05/04 02:41:09 by ltran            ###   ########.fr       */
+/*   Updated: 2018/05/04 03:25:56 by ltran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	redirection_no_cmd(t_cmd **ex, t_env **env, t_exec *s)
 	s->out = dup(1);
 	if (redirection_check_create(*ex, *env))
 		redirecting_exec(ex, env, NULL, s);
+	else
+		g_ok = 1;
 	dup2(s->out, 1);
 	dup2(s->in, 0);
 	while ((*ex)->type >= 6 && (*ex)->type <= 11)
